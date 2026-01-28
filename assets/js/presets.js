@@ -1,12 +1,19 @@
 const presets = {
     "neet": {
         id: "neet",
-        name: "NEET UG 2024",
+        name: "NEET Exam",
         widthMm: 35,
         heightMm: 45,
         maxKb: 200,
-        minKb: 10,
         guidelines: ["White background", "80% face coverage", "No glasses"]
+    },
+    "ssc": {
+        id: "ssc",
+        name: "SSC CGL / CHSL",
+        widthMm: 35,
+        heightMm: 45,
+        maxKb: 50,
+        guidelines: ["No cap", "No spectacles", "Frontal view"]
     },
     "indian-passport": {
         id: "indian-passport",
@@ -14,7 +21,6 @@ const presets = {
         widthMm: 51,
         heightMm: 51,
         maxKb: 300,
-        guidelines: ["Square 2x2 inch", "White background", "Full face visible"]
+        guidelines: ["White background", "Square size (2x2 inch)", "Clear face"]
     }
-    // Add more here...
 };
