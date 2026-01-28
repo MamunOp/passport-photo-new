@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
     
-    <!-- Professional Libraries -->
+    <!-- Professional Processing Libraries -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/heic2any@0.0.4/dist/heic2any.min.js"></script>
@@ -45,42 +45,35 @@
 </head>
 <body class="mesh-bg text-slate-900 dark:text-slate-100 min-h-screen">
 
-    <!-- Header Navigation -->
     <nav class="fixed top-0 w-full z-[100] border-b border-slate-200 dark:border-white/5 bg-white/80 dark:bg-slate-950/80 backdrop-blur-xl">
         <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
             <a href="index.html" class="flex items-center gap-2 font-bold text-blue-600 dark:text-blue-400 group text-xs uppercase tracking-widest">
-                <i data-lucide="arrow-left" class="w-4 h-4 group-hover:-translate-x-1 transition"></i> Back
+                <i data-lucide="arrow-left" class="w-4 h-4"></i> Home
             </a>
             <span class="font-black italic uppercase tracking-tighter">EXAM<span class="text-blue-500">PHOTO</span></span>
         </div>
     </nav>
 
-    <!-- 1. HERO & TOOL SECTION -->
+    <!-- 1. HERO & TOOL -->
     <main class="pt-24 pb-12 px-6 max-w-4xl mx-auto">
         <div class="text-center mb-10">
-            <div class="inline-flex items-center gap-2 bg-blue-500/10 border border-blue-500/20 px-4 py-1.5 rounded-full text-blue-600 dark:text-blue-400 text-[10px] font-black mb-4 uppercase tracking-widest">
-                <span class="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></span> AS PER NTA LATEST GUIDELINES
-            </div>
-            <h1 class="text-4xl md:text-6xl font-black tracking-tighter mb-4 leading-tight">NEET Postcard Size Photo Maker</h1>
-            <p class="text-slate-500 dark:text-slate-400 text-lg italic">Official 4" x 6" Crop, Resize, Name & Date Stamp</p>
+            <h1 class="text-4xl md:text-6xl font-black tracking-tighter mb-4 leading-tight">NEET Postcard Maker</h1>
+            <p class="text-slate-500 dark:text-slate-400 text-lg italic uppercase tracking-tighter">Official 4x6 Size • NTA 2026 Compliant</p>
         </div>
 
         <div class="tool-card p-6 md:p-10 rounded-[2.5rem] shadow-2xl space-y-8 relative">
-            <!-- Universal Loader Overlay -->
             <div id="loader" class="absolute inset-0 z-50 bg-slate-950/90 rounded-[2.5rem] flex flex-col items-center justify-center space-y-4 hidden">
                 <div class="spinner"></div>
                 <p class="text-xs font-black text-white uppercase tracking-[0.2em]">Processing Image...</p>
             </div>
 
-            <!-- Upload/Crop Area -->
+            <!-- Upload Area -->
             <div id="upload-wrapper" class="relative border-2 border-dashed border-slate-300 dark:border-white/10 rounded-[2rem] p-4 text-center bg-white/50 dark:bg-black/20 overflow-hidden">
                 <div id="upload-prompt" class="py-16">
                     <input type="file" id="fileInput" class="absolute inset-0 opacity-0 cursor-pointer" accept="image/*, .heic, .heif">
-                    <div class="w-16 h-16 bg-blue-500/10 text-blue-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                        <i data-lucide="camera" class="w-8 h-8"></i>
-                    </div>
+                    <i data-lucide="camera" class="w-12 h-12 mx-auto mb-3 text-blue-500"></i>
                     <p class="font-black text-sm uppercase tracking-widest">Select Photo</p>
-                    <p class="text-[10px] text-slate-500 mt-2 font-bold opacity-60 uppercase">Supports JPG/PNG/HEIC and High MB Photos</p>
+                    <p class="text-[10px] text-slate-500 mt-2 font-bold opacity-60 uppercase tracking-tight">JPG, PNG & HEIC Supported</p>
                 </div>
                 
                 <div id="crop-wrapper" class="crop-container">
@@ -91,11 +84,11 @@
                 </div>
             </div>
 
-            <!-- Inputs (Date Formatting Fixed) -->
+            <!-- Inputs -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div class="space-y-2">
-                    <label class="text-[10px] font-black uppercase tracking-widest text-slate-500 ml-2">Name on Photo</label>
-                    <input type="text" id="nameInput" placeholder="CANDIDATE NAME" class="w-full bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 p-4 rounded-2xl outline-none focus:ring-2 ring-blue-500 font-bold uppercase">
+                    <label class="text-[10px] font-black uppercase tracking-widest text-slate-500 ml-2">Candidate Name</label>
+                    <input type="text" id="nameInput" placeholder="FULL NAME" class="w-full bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 p-4 rounded-2xl outline-none focus:ring-2 ring-blue-500 font-bold uppercase">
                 </div>
                 <div class="space-y-2">
                     <label class="text-[10px] font-black uppercase tracking-widest text-slate-500 ml-2">Date of Photo</label>
@@ -103,43 +96,51 @@
                 </div>
             </div>
 
-            <!-- Compression Slider -->
+            <!-- Compression -->
             <div class="space-y-4 pt-4 border-t border-slate-200 dark:border-white/5">
                 <div class="flex justify-between items-center px-2">
-                    <label class="text-[10px] font-black uppercase tracking-widest text-slate-500">File Compression</label>
+                    <label class="text-[10px] font-black uppercase tracking-widest text-slate-500">Resize & Compress (KB)</label>
                     <span id="size-estimate" class="text-xs font-black text-blue-600 dark:text-blue-400">Est: -- KB</span>
                 </div>
                 <input type="range" id="qualitySlider" min="10" max="100" value="85" class="w-full h-1.5 bg-slate-200 dark:bg-white/10 rounded-lg appearance-none cursor-pointer accent-blue-600">
             </div>
 
             <button id="downloadBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-black py-5 rounded-2xl transition shadow-xl shadow-blue-500/20 uppercase tracking-widest text-xs flex items-center justify-center gap-2">
-                <i data-lucide="download-cloud" class="w-5 h-5"></i> Download
+                <i data-lucide="download-cloud" class="w-5 h-5"></i> Generate Official 4x6 JPG
             </button>
         </div>
     </main>
 
-    <!-- 2. PROCESS STEPS SECTION -->
-    <section class="max-w-7xl mx-auto px-6 py-12">
+    <!-- 2. HOW TO USE SECTION (5 Steps Including Resize) -->
+    <section class="max-w-7xl mx-auto px-6 py-20 border-t border-slate-200 dark:border-white/5">
+        <div class="text-center mb-12">
+            <h2 class="text-2xl md:text-3xl font-black uppercase tracking-tighter italic">How to Resize & Create NEET Postcard?</h2>
+        </div>
         <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
-            <div class="tool-card p-6 rounded-3xl text-center">
-                <div class="font-black text-blue-500 mb-2">01</div>
-                <h4 class="text-[10px] font-black uppercase tracking-widest">Upload</h4>
+            <div class="tool-card p-6 rounded-3xl text-center space-y-3">
+                <div class="w-10 h-10 bg-blue-500/10 text-blue-500 rounded-xl flex items-center justify-center mx-auto"><i data-lucide="upload"></i></div>
+                <h4 class="font-bold text-[10px] uppercase tracking-widest">01. Upload</h4>
+                <p class="text-[9px] text-slate-500">Pick any heavy JPG or iPhone HEIC file.</p>
             </div>
-            <div class="tool-card p-6 rounded-3xl text-center text-slate-400">
-                <div class="font-black mb-2">02</div>
-                <h4 class="text-[10px] font-black uppercase tracking-widest">Crop</h4>
+            <div class="tool-card p-6 rounded-3xl text-center space-y-3">
+                <div class="w-10 h-10 bg-indigo-500/10 text-indigo-500 rounded-xl flex items-center justify-center mx-auto"><i data-lucide="crop"></i></div>
+                <h4 class="font-bold text-[10px] uppercase tracking-widest">02. Crop</h4>
+                <p class="text-[9px] text-slate-500">Auto-lock to 4:6 aspect ratio for NTA.</p>
             </div>
-            <div class="tool-card p-6 rounded-3xl text-center">
-                <div class="font-black text-blue-500 mb-2">03</div>
-                <h4 class="text-[10px] font-black uppercase tracking-widest">Name/Date</h4>
+            <div class="tool-card p-6 rounded-3xl text-center space-y-3">
+                <div class="w-10 h-10 bg-purple-500/10 text-purple-500 rounded-xl flex items-center justify-center mx-auto"><i data-lucide="type"></i></div>
+                <h4 class="font-bold text-[10px] uppercase tracking-widest">03. Stamp</h4>
+                <p class="text-[9px] text-slate-500">Add mandatory Name & Date of photo.</p>
             </div>
-            <div class="tool-card p-6 rounded-3xl text-center text-slate-400">
-                <div class="font-black mb-2">04</div>
-                <h4 class="text-[10px] font-black uppercase tracking-widest">Adjust KB</h4>
+            <div class="tool-card p-6 rounded-3xl text-center space-y-3 border-blue-500/20 bg-blue-500/5">
+                <div class="w-10 h-10 bg-green-500/10 text-green-500 rounded-xl flex items-center justify-center mx-auto"><i data-lucide="maximize"></i></div>
+                <h4 class="font-bold text-[10px] uppercase tracking-widest text-blue-500">04. Resize</h4>
+                <p class="text-[9px] text-slate-500">Slide to compress image under 200KB.</p>
             </div>
-            <div class="tool-card p-6 rounded-3xl text-center bg-blue-600 text-white">
-                <div class="font-black mb-2 italic">05</div>
-                <h4 class="text-[10px] font-black uppercase tracking-widest">Success</h4>
+            <div class="tool-card p-6 rounded-3xl text-center space-y-3 bg-blue-600 text-white">
+                <div class="w-10 h-10 bg-white/20 text-white rounded-xl flex items-center justify-center mx-auto"><i data-lucide="download"></i></div>
+                <h4 class="font-bold text-[10px] uppercase tracking-widest">05. Save</h4>
+                <p class="text-[9px] text-white/70">Instant high-quality JPG download.</p>
             </div>
         </div>
     </section>
@@ -148,31 +149,30 @@
     <section class="max-w-7xl mx-auto px-6 py-20 border-t border-slate-200 dark:border-white/5">
         <div class="grid lg:grid-cols-2 gap-16 items-start">
             <div>
-                <h2 class="text-3xl font-black mb-8 leading-tight italic uppercase">NEET Postcard Photo Resize Guidelines 2027</h2>
-                <div class="space-y-8">
+                <h2 class="text-3xl font-black mb-8 leading-tight uppercase italic">NTA Specifications 2026</h2>
+                <div class="space-y-6">
                     <div class="flex gap-4">
-                        <div class="w-10 h-10 shrink-0 bg-blue-500 text-white rounded-full flex items-center justify-center font-black">1</div>
+                        <div class="w-10 h-10 shrink-0 bg-blue-500 text-white rounded-full flex items-center justify-center font-black italic">01</div>
                         <div>
-                            <h4 class="font-bold uppercase tracking-tight mb-1">Standard 4x6 Ratio</h4>
-                            <p class="text-sm text-slate-500">Must be printed in 4" width and 6" height. Portrait only.</p>
+                            <h4 class="font-bold uppercase tracking-tight mb-1">Standard 4x6 Dimensions</h4>
+                            <p class="text-sm text-slate-500">Postcard must be 4 inches width x 6 inches height. Resolution should be 300 DPI.</p>
                         </div>
                     </div>
                     <div class="flex gap-4">
-                        <div class="w-10 h-10 shrink-0 bg-blue-500 text-white rounded-full flex items-center justify-center font-black">2</div>
+                        <div class="w-10 h-10 shrink-0 bg-blue-500 text-white rounded-full flex items-center justify-center font-black italic">02</div>
                         <div>
-                            <h4 class="font-bold uppercase tracking-tight mb-1">Face Visibility</h4>
-                            <p class="text-sm text-slate-500">80% face coverage. Ears must be clearly visible. Plain white background.</p>
+                            <h4 class="font-bold uppercase tracking-tight mb-1">Background & Face</h4>
+                            <p class="text-sm text-slate-500">White background is mandatory. 80% face coverage with visible ears.</p>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- Technical Table -->
             <div class="tool-card p-8 rounded-[2.5rem] bg-blue-500/5">
-                <h3 class="text-xl font-bold mb-6 italic">NEET Postcard Format & Size</h3>
-                <div class="space-y-4 text-xs font-bold uppercase tracking-widest">
-                    <div class="flex justify-between border-b border-white/10 pb-2"><span>Format</span> <span class="text-blue-500">JPG/JPEG</span></div>
-                    <div class="flex justify-between border-b border-white/10 pb-2"><span>Resolution</span> <span class="text-blue-500">1200x1800 PX</span></div>
-                    <div class="flex justify-between"><span>File Size</span> <span class="text-blue-500">10KB - 200KB</span></div>
+                <h3 class="text-xl font-bold mb-6 italic uppercase tracking-tighter">Technical Summary</h3>
+                <div class="space-y-4 text-[10px] font-black uppercase tracking-[0.2em] text-slate-500">
+                    <div class="flex justify-between border-b border-white/10 pb-2"><span>Format</span> <span class="text-blue-500 italic">JPG / JPEG</span></div>
+                    <div class="flex justify-between border-b border-white/10 pb-2"><span>KB Size</span> <span class="text-blue-500 italic">10KB - 200KB</span></div>
+                    <div class="flex justify-between"><span>Resolution</span> <span class="text-blue-500 italic">1200x1800 px</span></div>
                 </div>
             </div>
         </div>
@@ -180,44 +180,44 @@
 
     <!-- 4. FAQ SECTION -->
     <section class="max-w-4xl mx-auto px-6 py-20 border-t border-slate-200 dark:border-white/5">
-        <h2 class="text-3xl font-black mb-10 text-center uppercase italic">Aspirant FAQs</h2>
+        <h2 class="text-3xl font-black mb-10 text-center uppercase italic">Candidate Help</h2>
         <div class="space-y-4">
             <details class="group tool-card p-6 rounded-2xl cursor-pointer">
                 <summary class="flex justify-between items-center font-bold list-none">
-                    Is white background mandatory for NEET?
+                    Is white background mandatory for the postcard photo?
                     <i data-lucide="chevron-down" class="group-open:rotate-180 transition"></i>
                 </summary>
-                <p class="mt-4 text-sm text-slate-500">Yes. NTA rejects photos with blue or colored backgrounds.</p>
+                <p class="mt-4 text-sm text-slate-500 leading-relaxed">Yes, NTA rejects photos with any colored background. Our tool ensures your 4x6 output matches official standards.</p>
             </details>
             <details class="group tool-card p-6 rounded-2xl cursor-pointer">
                 <summary class="flex justify-between items-center font-bold list-none">
-                    How to get 200KB exact size?
+                    Does this tool support high MB photos?
                     <i data-lucide="chevron-down" class="group-open:rotate-180 transition"></i>
                 </summary>
-                <p class="mt-4 text-sm text-slate-500">Adjust the quality slider in the tool; our KB estimator shows real-time size.</p>
+                <p class="mt-4 text-sm text-slate-500 leading-relaxed">Yes. You can upload photos up to 15MB. The tool will process them in the background and let you resize them to under 200KB.</p>
             </details>
         </div>
     </section>
 
     <!-- 5. MORE TOOLS SECTION -->
     <section class="max-w-7xl mx-auto px-6 py-20 border-t border-slate-200 dark:border-white/5">
-        <h2 class="text-xl font-black mb-10 text-center uppercase tracking-widest opacity-50">Other Official Tools</h2>
+        <h2 class="text-xl font-black mb-10 text-center uppercase tracking-[0.3em] opacity-30">Other Tools</h2>
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
             <a href="neet-passport.html" class="tool-card p-6 rounded-3xl text-center hover:border-blue-500 transition group">
                 <i data-lucide="user" class="w-6 h-6 mx-auto mb-2 text-indigo-500 group-hover:scale-110 transition"></i>
-                <p class="text-[9px] font-black uppercase tracking-widest">NEET Passport</p>
+                <h4 class="text-[9px] font-black uppercase tracking-widest">NEET Passport</h4>
             </a>
             <a href="ssc.html" class="tool-card p-6 rounded-3xl text-center hover:border-blue-500 transition group">
                 <i data-lucide="shield-check" class="w-6 h-6 mx-auto mb-2 text-green-500 group-hover:scale-110 transition"></i>
-                <p class="text-[9px] font-black uppercase tracking-widest">SSC CGL</p>
+                <h4 class="text-[9px] font-black uppercase tracking-widest">SSC CGL</h4>
             </a>
             <a href="upsc.html" class="tool-card p-6 rounded-3xl text-center hover:border-blue-500 transition group">
                 <i data-lucide="landmark" class="w-6 h-6 mx-auto mb-2 text-purple-500 group-hover:scale-110 transition"></i>
-                <p class="text-[9px] font-black uppercase tracking-widest">UPSC / IAS</p>
+                <h4 class="text-[9px] font-black uppercase tracking-widest">UPSC / IAS</h4>
             </a>
             <a href="signature.html" class="tool-card p-6 rounded-3xl text-center hover:border-blue-500 transition group">
                 <i data-lucide="pen-tool" class="w-6 h-6 mx-auto mb-2 text-blue-500 group-hover:scale-110 transition"></i>
-                <p class="text-[9px] font-black uppercase tracking-widest">Signature</p>
+                <h4 class="text-[9px] font-black uppercase tracking-widest">Signature</h4>
             </a>
         </div>
     </section>
@@ -225,10 +225,13 @@
     <!-- FOOTER -->
     <footer class="py-16 border-t border-slate-200 dark:border-white/10 text-center px-6">
         <div class="flex flex-wrap justify-center gap-6 text-[11px] font-black uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400 mb-8">
-            <a href="privacy.html">Privacy</a> <span class="opacity-20">|</span>
-            <a href="terms.html">Terms</a> <span class="opacity-20">|</span>
-            <a href="contact.html">Contact</a> <span class="opacity-20">|</span>
-            <a href="disclaimer.html">Disclaimer</a>
+            <a href="privacy.html" class="hover:text-blue-500 transition">Privacy Policy</a>
+            <span class="opacity-20">|</span>
+            <a href="terms.html" class="hover:text-blue-500 transition">Terms of Use</a>
+            <span class="opacity-20">|</span>
+            <a href="contact.html" class="hover:text-blue-500 transition">Contact Us</a>
+            <span class="opacity-20">|</span>
+            <a href="disclaimer.html" class="hover:text-blue-500 transition">Disclaimer</a>
         </div>
         <p class="text-slate-400 dark:text-slate-500 text-[10px] font-bold uppercase tracking-widest">
             © 2026 • ExamPhoto Pro • Made in India
@@ -253,7 +256,7 @@
 
         let cropper = null;
 
-        // Auto-Format Date Logic
+        // Auto-Date Formatting (e.g. 10201987 -> 10/20/1987)
         dateInput.addEventListener('input', (e) => {
             let v = e.target.value.replace(/\D/g, ''); 
             if (v.length > 8) v = v.substring(0, 8);
@@ -280,12 +283,13 @@
 
             loader.classList.remove('hidden');
 
+            // Handle HEIC Conversion
             if (file.name.toLowerCase().endsWith(".heic") || file.name.toLowerCase().endsWith(".heif")) {
                 try {
                     const blob = await heic2any({ blob: file, toType: "image/jpeg", quality: 0.7 });
                     file = Array.isArray(blob) ? blob[0] : blob;
                 } catch (err) {
-                    alert("Convert error. Use JPG.");
+                    alert("Error processing HEIC. Use JPG/PNG.");
                     loader.classList.add('hidden');
                     return;
                 }
@@ -352,10 +356,10 @@
         });
 
         document.getElementById('downloadBtn').addEventListener('click', () => {
-            if (!cropper) return alert("Upload a photo!");
+            if (!cropper) return alert("Upload a photo first!");
             const q = qualitySlider.value / 100;
             const link = document.createElement('a');
-            link.download = `NEET_4x6_Postcard.jpg`;
+            link.download = `NEET_4x6_Postcard_Official.jpg`;
             link.href = finalCanvas.toDataURL('image/jpeg', q);
             link.click();
         });
