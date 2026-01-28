@@ -44,4 +44,117 @@
             <!-- THE TOOL -->
             <div class="glass-card p-8 rounded-[2.5rem] shadow-2xl">
                 <div class="space-y-6">
-                    <div class="relative border-2 border-dashed border-white/1
+                    <div class="relative border-2 border-dashed border-white/10 rounded-3xl p-10 text-center hover:border-blue-500 transition cursor-pointer bg-white/5">
+                        <input type="file" id="fileInput" class="absolute inset-0 opacity-0 cursor-pointer" accept="image/*">
+                        <i data-lucide="image-plus" class="w-12 h-12 mx-auto mb-4 text-blue-500"></i>
+                        <p class="font-bold">Upload Candidate Photo</p>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <input type="text" id="nameInput" placeholder="Candidate Name" class="w-full bg-white/5 border border-white/10 p-4 rounded-xl outline-none focus:border-blue-500">
+                        <input type="text" id="dateInput" placeholder="Date: DD/MM/YYYY" class="w-full bg-white/5 border border-white/10 p-4 rounded-xl outline-none focus:border-blue-500">
+                    </div>
+
+                    <button id="downloadBtn" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-black py-5 rounded-2xl transition shadow-lg shadow-blue-500/20 uppercase tracking-widest text-sm">
+                        Download 4x6 Photo
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Live Preview (Only shows after upload) -->
+    <div id="previewArea" class="hidden text-center pb-20">
+        <p class="text-xs font-bold tracking-[0.3em] text-slate-500 mb-6 uppercase">Live Preview</p>
+        <canvas id="mainCanvas" class="mx-auto rounded-lg shadow-2xl border-4 border-white/10"></canvas>
+    </div>
+
+    <!-- 3. Guidelines Section -->
+    <section class="max-w-4xl mx-auto px-6 py-20 border-t border-white/5">
+        <h2 class="text-3xl font-black mb-8">Official NTA Guidelines</h2>
+        <div class="grid md:grid-cols-2 gap-6 text-slate-400 text-sm">
+            <ul class="space-y-3">
+                <li class="flex items-center gap-2"><i data-lucide="check" class="text-green-500 w-4"></i> Size: 4" x 6" (Postcard)</li>
+                <li class="flex items-center gap-2"><i data-lucide="check" class="text-green-500 w-4"></i> Background: White Only</li>
+                <li class="flex items-center gap-2"><i data-lucide="check" class="text-green-500 w-4"></i> Format: JPG/JPEG</li>
+            </ul>
+            <ul class="space-y-3">
+                <li class="flex items-center gap-2"><i data-lucide="check" class="text-green-500 w-4"></i> Name & Date stamp mandatory</li>
+                <li class="flex items-center gap-2"><i data-lucide="check" class="text-green-500 w-4"></i> 80% face coverage</li>
+                <li class="flex items-center gap-2"><i data-lucide="check" class="text-green-500 w-4"></i> File Size: 10KB to 200KB</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- 4. FAQ Section -->
+    <section class="max-w-4xl mx-auto px-6 py-20 border-t border-white/5">
+        <h2 class="text-3xl font-black mb-8">FAQs</h2>
+        <div class="space-y-4">
+            <details class="glass-card p-6 rounded-2xl cursor-pointer">
+                <summary class="font-bold">Is the name and date stamp compulsory?</summary>
+                <p class="mt-4 text-slate-500">Yes, NTA requires your name and the date the photo was taken at the bottom.</p>
+            </details>
+            <details class="glass-card p-6 rounded-2xl cursor-pointer">
+                <summary class="font-bold">What is the aspect ratio?</summary>
+                <p class="mt-4 text-slate-500">The aspect ratio is 4:6 (portrait). Our tool locks this automatically.</p>
+            </details>
+        </div>
+    </section>
+
+    <script>
+        const canvas = document.getElementById('mainCanvas');
+        const ctx = canvas.getContext('2d');
+        const fileInput = document.getElementById('fileInput');
+        let activeImg = null;
+
+        // 4x6 Ratio (300 DPI = 1200x1800 px)
+        const W = 1200;
+        const H = 1800;
+
+        fileInput.addEventListener('change', (e) => {
+            const reader = new FileReader();
+            reader.onload = (f) => {
+                activeImg = new Image();
+                activeImg.onload = draw;
+                activeImg.src = f.target.result;
+                document.getElementById('previewArea').classList.remove('hidden');
+            };
+            reader.readAsDataURL(e.target.files[0]);
+        });
+
+        function draw() {
+            if(!activeImg) return;
+            canvas.width = W;
+            canvas.height = H;
+            ctx.fillStyle = "white";
+            ctx.fillRect(0,0,W,H);
+
+            const ratio = Math.max(W / activeImg.width, H / activeImg.height);
+            const x = (W - activeImg.width * ratio) / 2;
+            const y = (H * 0.4) - (activeImg.height * ratio) / 2; // Position photo slightly up
+            
+            ctx.drawImage(activeImg, x, y, activeImg.width * ratio, activeImg.height * ratio);
+
+            // Stamp
+            ctx.fillStyle = "white";
+            ctx.fillRect(0, H - 300, W, 300);
+            ctx.fillStyle = "black";
+            ctx.textAlign = "center";
+            ctx.font = "bold 80px sans-serif";
+            ctx.fillText(document.getElementById('nameInput').value.toUpperCase() || "NAME OF CANDIDATE", W/2, H - 170);
+            ctx.font = "60px sans-serif";
+            ctx.fillText(document.getElementById('dateInput').value || "DATE OF PHOTO", W/2, H - 70);
+        }
+
+        document.getElementById('nameInput').addEventListener('input', draw);
+        document.getElementById('dateInput').addEventListener('input', draw);
+        document.getElementById('downloadBtn').addEventListener('click', () => {
+            const link = document.createElement('a');
+            link.download = 'neet-postcard-photo.jpg';
+            link.href = canvas.toDataURL('image/jpeg', 0.9);
+            link.click();
+        });
+        lucide.createIcons();
+    </script>
+</body>
+</html>
