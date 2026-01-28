@@ -37,4 +37,39 @@ window.PRESETS = {
   },
 
   ssc: {
-    id: "ssc
+    id: "ssc",
+    name: "SSC",
+    year: "2026",
+    widthMm: 35,
+    heightMm: 45,
+    maxKb: 100,
+    minKb: 10,
+    format: "jpg",
+    guidelines: [
+      "Background: plain light/white",
+      "Clear face, no blur",
+      "JPG/JPEG format",
+      "Keep photo under KB limit"
+    ],
+    keywords: [
+      "ssc photo resizer",
+      "ssc passport photo size",
+      "ssc photo size kb",
+      "ssc photo resize online",
+      "ssc photo jpg size",
+      "passport size photo for ssc"
+    ],
+    faq: [
+      ["What is the SSC photo size?", "SSC forms usually require passport size photo. Use this page to generate the correct size and KB."],
+      ["What is the SSC photo size in KB?", "Many SSC portals require a KB limit. Use the KB slider to meet it."],
+      ["Which format is accepted?", "JPG/JPEG is commonly accepted. This tool exports JPG."],
+      ["Can I upload a selfie?", "Avoid selfies if possible. Use a proper front-facing photo with clean background."],
+      ["How to reduce KB without losing too much quality?", "Use the KB slider and keep image sharp and well-lit."],
+      ["Why does SSC portal reject photos?", "Wrong dimensions, file size too high, blur, dark background."],
+      ["Can I wear glasses?", "If allowed, avoid glare and keep eyes visible."],
+      ["Is white background compulsory?", "Safer to use plain white/light background."],
+      ["How do I resize SSC photo online?", "Upload, drag/zoom to crop, set KB, download."],
+      ["Do I need to select SSC again inside tool?", "No. SSC page auto-applies SSC preset."]
+    ]
+  }
+};
