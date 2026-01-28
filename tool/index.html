@@ -2,164 +2,128 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <title>Photo Resizer Tool</title>
     
-    <!-- Libraries -->
+    <!-- CSS for the Cropper and Design -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css">
     <style>
-        /* Mobile-First CSS */
-        body { font-family: sans-serif; margin: 0; padding: 20px; background: #f4f4f9; color: #333; }
-        .container { max-width: 500px; margin: 0 auto; background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-        h1 { font-size: 1.2rem; text-align: center; }
-        
-        .step { display: none; text-align: center; }
-        .step.active { display: block; }
-
-        .upload-area { border: 2px dashed #007bff; padding: 40px 20px; border-radius: 8px; cursor: pointer; }
-        .img-container { width: 100%; max-height: 400px; margin-top: 20px; }
+        body { font-family: -apple-system, sans-serif; background: #f0f2f5; margin: 0; padding: 15px; }
+        .card { background: white; border-radius: 15px; padding: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); max-width: 500px; margin: auto; }
+        .btn { background: #007bff; color: white; border: none; padding: 15px; width: 100%; border-radius: 8px; font-weight: bold; cursor: pointer; margin-top: 10px; }
+        #image-container { width: 100%; height: 350px; background: #eee; margin-top: 15px; overflow: hidden; display: none; }
         img { max-width: 100%; }
-
-        button { 
-            background: #007bff; color: white; border: none; padding: 12px 24px; 
-            border-radius: 6px; font-weight: bold; width: 100%; margin-top: 20px; cursor: pointer;
-        }
-        
-        .validation-card { background: #e8f4fd; padding: 15px; border-radius: 8px; margin: 20px 0; text-align: left; }
-        .status-ok { color: green; font-weight: bold; }
-        .status-error { color: red; font-weight: bold; }
-
-        /* Ad Placeholder */
-        .ad-placeholder { background: #eee; height: 100px; margin: 20px 0; display: flex; align-items: center; justify-content: center; font-size: 12px; color: #888; border: 1px solid #ddd; }
+        .status { padding: 10px; border-radius: 5px; margin-top: 10px; font-size: 14px; background: #e7f3ff; }
+        .hidden { display: none; }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <h1 id="tool-title">Photo Resizer</h1>
-
-    <!-- Step 1: Upload -->
-    <div id="step-1" class="step active">
-        <div class="upload-area" onclick="document.getElementById('imageInput').click()">
-            <p>📸 Tap to Upload Photo</p>
-            <input type="file" id="imageInput" accept="image/*" hidden>
-        </div>
-        <div class="ad-placeholder">Ad Space (Below Tool)</div>
+<div class="card">
+    <h2 id="tool-name">Resizer Tool</h2>
+    
+    <!-- STEP 1: UPLOAD -->
+    <div id="ui-step-1">
+        <p>Step 1: Upload your photo from gallery</p>
+        <input type="file" id="fileInput" accept="image/*" hidden>
+        <button class="btn" onclick="document.getElementById('fileInput').click()">SELECT PHOTO</button>
     </div>
 
-    <!-- Step 2: Crop -->
-    <div id="step-2" class="step">
-        <div class="img-container">
-            <img id="cropperImage">
+    <!-- STEP 2: CROP -->
+    <div id="ui-step-2" class="hidden">
+        <p>Step 2: Drag and Zoom to fit face</p>
+        <div id="image-container">
+            <img id="imageToCrop">
         </div>
-        <button id="cropBtn">Next: Adjust Size & KB</button>
+        <button class="btn" id="cropBtn">NEXT: OPTIMIZE SIZE</button>
     </div>
 
-    <!-- Step 3: Result -->
-    <div id="step-3" class="step">
-        <div class="validation-card">
-            <p id="sizeLabel">Dimensions: --</p>
-            <p id="kbLabel">File Size: --</p>
-            <div id="validationStatus"></div>
+    <!-- STEP 3: DOWNLOAD -->
+    <div id="ui-step-3" class="hidden">
+        <div class="status">
+            <p id="sizeInfo">Final Size: --</p>
+            <p>✅ Format: JPG</p>
         </div>
-        <button id="downloadBtn">Download JPG</button>
-        <button onclick="location.reload()" style="background:#666; margin-top:10px;">Start Over</button>
+        <button class="btn" id="downloadBtn" style="background: #28a745;">DOWNLOAD PHOTO</button>
+        <button class="btn" onclick="location.reload()" style="background: #6c757d;">START AGAIN</button>
     </div>
+
+    <!-- Ad Placeholder -->
+    <div style="text-align:center; color:#ccc; margin-top:20px; font-size:10px;">ADVERTISEMENT</div>
 </div>
 
-<!-- Load Scripts -->
+<!-- SCRIPTS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
 <script src="../assets/js/presets.js"></script>
 
 <script>
-    const urlParams = new URLSearchParams(window.location.search);
-    const presetId = urlParams.get('id') || 'neet'; // Default to NEET if no ID
+    // 1. Get Settings from URL (e.g., ?id=neet)
+    const params = new URLSearchParams(window.location.search);
+    const presetId = params.get('id') || 'indian-passport';
     const config = presets[presetId];
+    
+    document.getElementById('tool-name').innerText = config.name;
 
     let cropper;
-    const imageInput = document.getElementById('imageInput');
-    const cropperImg = document.getElementById('cropperImage');
+    const fileInput = document.getElementById('fileInput');
+    const imageToCrop = document.getElementById('imageToCrop');
 
-    if (config) {
-        document.getElementById('tool-title').innerText = "Resize for " + config.name;
-    }
-
-    // 1. Handle Upload
-    imageInput.onchange = (e) => {
+    // 2. Handle File Selection
+    fileInput.onchange = (e) => {
         const file = e.target.files[0];
-        if (!file) return;
-
         const reader = new FileReader();
         reader.onload = (event) => {
-            cropperImg.src = event.target.result;
-            showStep(2);
+            imageToCrop.src = event.target.result;
+            document.getElementById('ui-step-1').classList.add('hidden');
+            document.getElementById('ui-step-2').classList.remove('hidden');
+            document.getElementById('image-container').style.display = 'block';
             
-            // Initialize Cropper
-            if (cropper) cropper.destroy();
-            cropper = new Cropper(cropperImg, {
+            cropper = new Cropper(imageToCrop, {
                 aspectRatio: config.widthMm / config.heightMm,
-                viewMode: 1,
-                autoCropArea: 1
+                viewMode: 1
             });
         };
         reader.readAsDataURL(file);
     };
 
-    // 2. Process Image
+    // 3. Handle Cropping & KB Compression
     document.getElementById('cropBtn').onclick = () => {
-        if (!cropper) return;
-
-        // Convert MM to PX (using 300 DPI)
+        // Convert MM to PX (approx 300 DPI)
         const targetW = Math.round((config.widthMm / 25.4) * 300);
         const targetH = Math.round((config.heightMm / 25.4) * 300);
 
         const canvas = cropper.getCroppedCanvas({ width: targetW, height: targetH });
 
-        // KB Compression Logic
-        compressToKb(canvas, config.maxKb);
-    };
-
-    function compressToKb(canvas, maxKb) {
+        // Logic to compress until it's under maxKb
         let quality = 0.9;
-        function tryCompress() {
+        function compress() {
             canvas.toBlob((blob) => {
                 const sizeKb = blob.size / 1024;
-                if (sizeKb > maxKb && quality > 0.1) {
+                if (sizeKb > config.maxKb && quality > 0.1) {
                     quality -= 0.1;
-                    tryCompress();
+                    compress();
                 } else {
-                    finishStep(blob, sizeKb, canvas.width, canvas.height);
+                    showDownload(blob, sizeKb);
                 }
             }, 'image/jpeg', quality);
         }
-        tryCompress();
-    }
+        compress();
+    };
 
-    function finishStep(blob, sizeKb, w, h) {
-        showStep(3);
-        document.getElementById('sizeLabel').innerText = `Dimensions: ${config.widthMm}mm x ${config.heightMm}mm (${w}px x ${h}px)`;
-        document.getElementById('kbLabel').innerText = `File Size: ${sizeKb.toFixed(2)} KB`;
-        
-        const statusDiv = document.getElementById('validationStatus');
-        if (sizeKb <= config.maxKb) {
-            statusDiv.innerHTML = "<p class='status-ok'>✅ Meets all requirements</p>";
-        } else {
-            statusDiv.innerHTML = "<p class='status-error'>⚠️ Still over ${config.maxKb}KB. Try a simpler background.</p>";
-        }
+    function showDownload(blob, sizeKb) {
+        document.getElementById('ui-step-2').classList.add('hidden');
+        document.getElementById('ui-step-3').classList.remove('hidden');
+        document.getElementById('sizeInfo').innerText = `Final Size: ${sizeKb.toFixed(1)} KB`;
 
         const url = URL.createObjectURL(blob);
         document.getElementById('downloadBtn').onclick = () => {
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `${config.id}-photo.jpg`;
-            a.click();
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `${config.id}-photo.jpg`;
+            link.click();
         };
     }
-
-    function showStep(stepNum) {
-        document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
-        document.getElementById('step-' + stepNum).classList.add('active');
-    }
 </script>
+
 </body>
 </html>
