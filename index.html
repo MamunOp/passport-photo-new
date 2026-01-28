@@ -1,134 +1,128 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ExamPhoto Pro | Official Photo Resizer for NEET, SSC, UPSC & Govt Exams</title>
-    <meta name="description" content="Fastest online tool to generate exam-ready photos. Resize for NEET Postcard, SSC Passport, and UPSC with Name and Date. 100% Free and Secure.">
-    
-    <!-- Tailwind for Styling -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    
-    <style>
-        .exam-card:hover { transform: translateY(-5px); transition: all 0.3s ease; }
-        .gradient-bg { background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%); }
-    </style>
-</head>
-<body class="bg-slate-50 text-slate-900 font-sans">
-
-    <!-- Navigation -->
-    <nav class="bg-white border-b sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-            <div class="flex items-center gap-2">
-                <div class="bg-blue-600 p-2 rounded-lg text-white">
-                    <i class="fa-solid fa-camera"></i>
-                </div>
-                <span class="font-black text-xl tracking-tighter uppercase">Exam<span class="text-blue-600">Photo</span></span>
-            </div>
-            <div class="hidden md:flex gap-6 font-medium text-slate-600">
-                <a href="#exams" class="hover:text-blue-600">Exams</a>
-                <a href="#how-it-works" class="hover:text-blue-600">How it Works</a>
-                <a href="#safety" class="hover:text-blue-600">Privacy</a>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <header class="gradient-bg py-20 px-6 text-center text-white">
-        <h1 class="text-4xl md:text-6xl font-black mb-6">Resize Photos for <br>Govt Exams Instantly</h1>
-        <p class="text-blue-100 text-lg md:text-xl max-w-2xl mx-auto mb-10">
-            Automatically adjust dimensions, file size (KB), and add Name/Date as per latest 2025-26 guidelines.
-        </p>
-        <a href="#exams" class="bg-white text-blue-600 px-8 py-4 rounded-full font-bold text-lg shadow-xl hover:bg-slate-100 transition">Select Your Exam</a>
-    </header>
-
-    <!-- Popular Exams Grid -->
-    <section id="exams" class="max-w-7xl mx-auto py-20 px-6">
-        <div class="text-center mb-16">
-            <h2 class="text-3xl font-black mb-4">Choose Your Exam Tool</h2>
-            <p class="text-slate-500">Select the exam you are applying for to get the exact dimensions.</p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <!-- Card 1: NEET Postcard -->
-            <a href="neet-postcard.html" class="exam-card bg-white p-8 rounded-3xl border border-slate-200 shadow-sm hover:shadow-xl hover:border-blue-400">
-                <div class="w-14 h-14 bg-red-50 text-red-500 rounded-2xl flex items-center justify-center text-2xl mb-6">
-                    <i class="fa-solid fa-file-image"></i>
-                </div>
-                <h3 class="text-xl font-bold mb-2">NEET Postcard</h3>
-                <p class="text-slate-500 text-sm mb-4">Official 4"x6" size with mandatory Name and Date overlay.</p>
-                <span class="text-blue-600 font-bold text-sm italic">Start Now →</span>
-            </a>
-
-            <!-- Card 2: NEET Passport -->
-            <a href="neet-passport.html" class="exam-card bg-white p-8 rounded-3xl border border-slate-200 shadow-sm hover:shadow-xl hover:border-blue-400">
-                <div class="w-14 h-14 bg-blue-50 text-blue-500 rounded-2xl flex items-center justify-center text-2xl mb-6">
-                    <i class="fa-solid fa-user-tie"></i>
-                </div>
-                <h3 class="text-xl font-bold mb-2">NEET Passport</h3>
-                <p class="text-slate-500 text-sm mb-4">3.5 x 4.5 cm passport size for NEET application form.</p>
-                <span class="text-blue-600 font-bold text-sm italic">Start Now →</span>
-            </a>
-
-            <!-- Card 3: SSC All Exams -->
-            <a href="ssc-resizer.html" class="exam-card bg-white p-8 rounded-3xl border border-slate-200 shadow-sm hover:shadow-xl hover:border-blue-400">
-                <div class="w-14 h-14 bg-green-50 text-green-500 rounded-2xl flex items-center justify-center text-2xl mb-6">
-                    <i class="fa-solid fa-building-columns"></i>
-                </div>
-                <h3 class="text-xl font-bold mb-2">SSC CGL/CHSL</h3>
-                <p class="text-slate-500 text-sm mb-4">Perfect 20KB-50KB resizer. No spectacles/cap check.</p>
-                <span class="text-blue-600 font-bold text-sm italic">Start Now →</span>
-            </a>
-
-            <!-- Card 4: Signature Resizer -->
-            <a href="signature-resizer.html" class="exam-card bg-white p-8 rounded-3xl border border-slate-200 shadow-sm hover:shadow-xl hover:border-blue-400">
-                <div class="w-14 h-14 bg-amber-50 text-amber-500 rounded-2xl flex items-center justify-center text-2xl mb-6">
-                    <i class="fa-solid fa-pen-nib"></i>
-                </div>
-                <h3 class="text-xl font-bold mb-2">Signature</h3>
-                <p class="text-slate-500 text-sm mb-4">Crop and resize signature to 10KB-20KB accurately.</p>
-                <span class="text-blue-600 font-bold text-sm italic">Start Now →</span>
-            </a>
-        </div>
-    </section>
-
-    <!-- Why Section -->
-    <section id="safety" class="bg-slate-100 py-20 px-6">
-        <div class="max-w-5xl mx-auto grid md:grid-cols-3 gap-12 text-center">
+<!-- About Us Section -->
+    <section id="about" class="max-w-7xl mx-auto py-20 px-6 border-t border-slate-100">
+        <div class="grid md:grid-cols-2 gap-12 items-center">
             <div>
-                <i class="fa-solid fa-shield-halved text-4xl text-blue-600 mb-4"></i>
-                <h4 class="text-lg font-bold mb-2">100% Secure</h4>
-                <p class="text-slate-500 text-sm">Photos are processed in your browser. We never upload them to our server.</p>
+                <h2 class="text-3xl font-black mb-6 text-slate-900">Why We Built ExamPhoto Pro</h2>
+                <div class="space-y-4 text-slate-600 leading-relaxed text-lg">
+                    <p>
+                        Every year, thousands of students face the stress of "Form Rejection" simply because their photograph didn't meet the strict guidelines of NTA, SSC, or UPSC. 
+                    </p>
+                    <p>
+                        We realized that professional photo studios are expensive and mobile apps often ruin the image quality. <strong>ExamPhoto Pro</strong> was created to give students a free, professional-grade tool that ensures 100% compliance with government norms.
+                    </p>
+                    <p>
+                        Our technology is unique: <strong>Your photos never leave your device.</strong> All cropping and resizing happen locally in your browser, making this the most secure way to handle your personal identity documents.
+                    </p>
+                </div>
             </div>
-            <div>
-                <i class="fa-solid fa-bolt text-4xl text-blue-600 mb-4"></i>
-                <h4 class="text-lg font-bold mb-2">Super Fast</h4>
-                <p class="text-slate-500 text-sm">Generate your exam-ready photo in less than 10 seconds.</p>
-            </div>
-            <div>
-                <i class="fa-solid fa-check-double text-4xl text-blue-600 mb-4"></i>
-                <h4 class="text-lg font-bold mb-2">NTA/SSC Compliant</h4>
-                <p class="text-slate-500 text-sm">Always updated with the latest government notification sizes.</p>
+            <div class="bg-blue-600 rounded-[2.5rem] p-10 text-white shadow-2xl relative overflow-hidden">
+                <div class="relative z-10">
+                    <h3 class="text-2xl font-bold mb-4">Our Commitment</h3>
+                    <ul class="space-y-4">
+                        <li class="flex gap-3 items-start">
+                            <i class="fa-solid fa-circle-check mt-1 text-blue-200"></i>
+                            <span>Always free for students. No hidden charges.</span>
+                        </li>
+                        <li class="flex gap-3 items-start">
+                            <i class="fa-solid fa-circle-check mt-1 text-blue-200"></i>
+                            <span>Updated with 2025-2026 latest exam notifications.</span>
+                        </li>
+                        <li class="flex gap-3 items-start">
+                            <i class="fa-solid fa-circle-check mt-1 text-blue-200"></i>
+                            <span>No watermark on downloaded images.</span>
+                        </li>
+                    </ul>
+                </div>
+                <!-- Decorative Circle -->
+                <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-blue-500 rounded-full opacity-50"></div>
             </div>
         </div>
     </section>
 
-    <!-- SEO Keywords Section -->
-    <footer class="bg-slate-900 text-slate-400 py-16 px-6">
-        <div class="max-w-7xl mx-auto border-b border-slate-800 pb-10 mb-10">
-            <h5 class="text-white font-bold mb-6 uppercase tracking-widest text-sm">Popular Online Tools</h5>
-            <div class="flex flex-wrap gap-4 text-xs">
-                <a href="neet-postcard.html" class="hover:text-white">NEET Postcard Photo Maker</a> |
-                <a href="ssc-resizer.html" class="hover:text-white">SSC Photo Resizer Online</a> |
-                <a href="upsc-resizer.html" class="hover:text-white">UPSC Photo Name Date Adder</a> |
-                <a href="signature-resizer.html" class="hover:text-white">Signature Compressor 10kb to 20kb</a> |
-                <a href="#" class="hover:text-white">Passport Size Photo Maker Online</a>
+    <!-- General Guidelines Table (Great for SEO) -->
+    <section id="guidelines" class="bg-white py-20 px-6">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-3xl font-black mb-10 text-center">Standard Exam Photo Requirements</h2>
+            <div class="overflow-x-auto rounded-3xl border border-slate-200 shadow-sm">
+                <table class="w-full text-left border-collapse">
+                    <thead class="bg-slate-50">
+                        <tr>
+                            <th class="p-5 font-bold text-slate-700">Exam Name</th>
+                            <th class="p-5 font-bold text-slate-700">Dimensions</th>
+                            <th class="p-5 font-bold text-slate-700">File Size (KB)</th>
+                            <th class="p-5 font-bold text-slate-700">Special Note</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-slate-600 divide-y divide-slate-100">
+                        <tr>
+                            <td class="p-5 font-bold">NEET Postcard</td>
+                            <td class="p-5">4 x 6 Inch</td>
+                            <td class="p-5">10 KB - 200 KB</td>
+                            <td class="p-5 italic text-sm">Name & Date mandatory at bottom</td>
+                        </tr>
+                        <tr>
+                            <td class="p-5 font-bold">SSC (CGL/CHSL)</td>
+                            <td class="p-5">3.5 x 4.5 cm</td>
+                            <td class="p-5">20 KB - 50 KB</td>
+                            <td class="p-5 italic text-sm">No glasses/cap, 3 months old max</td>
+                        </tr>
+                        <tr>
+                            <td class="p-5 font-bold">UPSC</td>
+                            <td class="p-5">350 x 350 px</td>
+                            <td class="p-5">20 KB - 300 KB</td>
+                            <td class="p-5 italic text-sm">Name & Date should be visible</td>
+                        </tr>
+                        <tr>
+                            <td class="p-5 font-bold">JEE Main</td>
+                            <td class="p-5">3.5 x 4.5 cm</td>
+                            <td class="p-5">10 KB - 200 KB</td>
+                            <td class="p-5 italic text-sm">80% face coverage, white background</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
-        <p class="text-center text-sm">&copy; 2026 ExamPhoto Pro. Made for Students.</p>
-    </footer>
+    </section>
 
-</body>
-</html>
+    <!-- FAQ Section -->
+    <section id="faq" class="max-w-4xl mx-auto py-20 px-6">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-black mb-4">Frequently Asked Questions</h2>
+            <p class="text-slate-500">Everything you need to know about exam photo registration.</p>
+        </div>
+        
+        <div class="space-y-4">
+            <!-- FAQ 1 -->
+            <details class="group bg-white rounded-2xl border border-slate-200 transition-all hover:border-blue-300">
+                <summary class="p-6 cursor-pointer font-bold list-none flex justify-between items-center text-slate-700 group-open:text-blue-600">
+                    Why did my photo get rejected by the exam portal?
+                    <i class="fa-solid fa-chevron-down group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="px-6 pb-6 text-slate-600 text-sm border-t border-slate-50 pt-4">
+                    Common reasons include blurry faces, non-white backgrounds, incorrect file sizes (too small/large), and wearing spectacles or caps. Use our tool to ensure the aspect ratio is perfect every time.
+                </div>
+            </details>
+
+            <!-- FAQ 2 -->
+            <details class="group bg-white rounded-2xl border border-slate-200 transition-all hover:border-blue-300">
+                <summary class="p-6 cursor-pointer font-bold list-none flex justify-between items-center text-slate-700 group-open:text-blue-600">
+                    Is it safe to upload my photo here?
+                    <i class="fa-solid fa-chevron-down group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="px-6 pb-6 text-slate-600 text-sm border-t border-slate-50 pt-4">
+                    Yes! Unlike other websites, we do not upload your photo to a server. All editing happens inside your own browser (Chrome/Safari). Your privacy is our priority.
+                </div>
+            </details>
+
+            <!-- FAQ 3 -->
+            <details class="group bg-white rounded-2xl border border-slate-200 transition-all hover:border-blue-300">
+                <summary class="p-6 cursor-pointer font-bold list-none flex justify-between items-center text-slate-700 group-open:text-blue-600">
+                    How do I add my name and date to my NEET photo?
+                    <i class="fa-solid fa-chevron-down group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="px-6 pb-6 text-slate-600 text-sm border-t border-slate-50 pt-4">
+                    Select the "NEET" tool from our homepage, upload your photo, and enter your details in the text boxes. Our tool will automatically overlay them in the official format before you download.
+                </div>
+            </details>
+        </div>
+    </section>
