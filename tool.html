@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" class="dark"> <!-- Force dark to test initially -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ExamPhoto Pro | All-In-One Official Photo Suite</title>
+    <title>Photo Resizer | ExamPhoto Pro</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -11,472 +11,167 @@
     <script>
         tailwind.config = {
             darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        brand: {
-                            50: '#eff6ff',
-                            500: '#3b82f6',
-                            600: '#2563eb',
-                            950: '#020617',
-                        }
-                    }
-                }
-            }
+            theme: { extend: { colors: { brand: { 500: '#3b82f6' } } } }
         }
     </script>
 
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; transition: background-color 0.3s ease; }
-        
-        /* Light/Dark Mesh Backgrounds */
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #020617; color: white; }
         .mesh-bg {
-            background-color: #f8fafc;
-            background-image: radial-gradient(at 0% 0%, hsla(210, 100%, 93%, 1) 0, transparent 50%), 
-                              radial-gradient(at 100% 0%, hsla(230, 100%, 93%, 1) 0, transparent 50%);
-        }
-        .dark .mesh-bg {
-            background-color: #020617;
             background-image: radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), 
                               radial-gradient(at 100% 0%, hsla(225,39%,20%,1) 0, transparent 50%);
         }
-
         .tool-card {
-            background: rgba(255, 255, 255, 0.6);
+            background: rgba(255, 255, 255, 0.03);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(0, 0, 0, 0.05);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .dark .tool-card {
-            background: rgba(255, 255, 255, 0.02);
             border: 1px solid rgba(255, 255, 255, 0.08);
-        }
-        .tool-card:hover {
-            background: rgba(255, 255, 255, 0.9);
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.1);
-        }
-        .dark .tool-card:hover {
-            background: rgba(255, 255, 255, 0.06);
-            box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.5);
         }
     </style>
 </head>
-<body class="mesh-bg text-slate-900 dark:text-slate-100">
+<body class="mesh-bg min-h-screen">
 
-    <!-- Theme Toggle -->
-    <button onclick="toggleTheme()" class="fixed bottom-6 right-6 z-[100] p-4 bg-white dark:bg-slate-800 rounded-full shadow-2xl border border-slate-200 dark:border-slate-700 hover:scale-110 transition-all">
-        <i data-lucide="sun" class="hidden dark:block text-yellow-400"></i>
-        <i data-lucide="moon" class="block dark:hidden text-indigo-600"></i>
-    </button>
-
-    <!-- Header -->
-    <nav class="fixed top-0 w-full z-[100] border-b border-slate-200 dark:border-white/5 bg-white/80 dark:bg-slate-950/80 backdrop-blur-xl">
-        <div class="max-w-7xl mx-auto px-6 h-16 md:h-20 flex items-center justify-between">
-            <div class="flex items-center gap-3">
-                <div class="w-8 h-8 md:w-10 md:h-10 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl flex items-center justify-center shadow-lg">
-                    <i data-lucide="aperture" class="text-white w-5 h-5 md:w-6 md:h-6"></i>
+    <nav class="border-b border-white/5 bg-slate-950/80 backdrop-blur-xl sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-2 group text-slate-400 hover:text-white transition">
+                <i data-lucide="arrow-left" class="w-5 h-5"></i>
+                <span class="font-bold text-sm uppercase tracking-widest">Back</span>
+            </a>
+            <div class="flex items-center gap-2">
+                <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
+                    <i data-lucide="aperture" class="text-white w-5 h-5"></i>
                 </div>
-                <span class="font-black text-xl md:text-2xl tracking-tighter uppercase italic dark:text-white">Exam<span class="text-blue-500 italic-none">Photo</span></span>
-            </div>
-            <div class="hidden md:flex gap-8 text-xs font-black uppercase tracking-widest text-slate-500 dark:text-slate-400">
-                <a href="#tools" class="hover:text-blue-600 dark:hover:text-white transition">All Tools</a>
-                <a href="#guidelines" class="hover:text-blue-600 dark:hover:text-white transition">Guidelines</a>
-                <a href="#about" class="hover:text-blue-600 dark:hover:text-white transition">About</a>
-                <a href="#faq" class="hover:text-blue-600 dark:hover:text-white transition">Help</a>
+                <span class="font-black italic text-xl">EXAM<span class="text-blue-500">PHOTO</span></span>
             </div>
         </div>
     </nav>
 
-    <!-- Hero -->
-    <header class="pt-32 md:pt-48 pb-12 md:pb-20 px-6 text-center">
-        <div class="inline-flex items-center gap-2 bg-blue-500/10 border border-blue-500/20 px-4 py-1.5 rounded-full text-blue-600 dark:text-blue-400 text-xs font-bold mb-6">
-            <span class="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></span>
-            AS PER OFFICIAL GUIDELINES OF EXAM BODIES
-        </div>
-        <h1 class="text-4xl md:text-7xl lg:text-8xl font-black tracking-tighter mb-6 leading-tight text-slate-900 dark:text-white">
-            One Click. <br class="md:hidden"> <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-500">Perfect Photos.</span>
-        </h1>
-        <p class="text-slate-600 dark:text-slate-400 text-base md:text-xl max-w-2xl mx-auto leading-relaxed">
-            One Platform. Every Exam Requirement. <br>Secure, instant, and 100% Free.
-        </p>
-    </header>
-
-    <!-- THE UNIFIED EXAM GRID -->
-    <section id="tools" class="max-w-7xl mx-auto px-6 py-12 md:py-20">
-        <div class="text-center mb-12">
-            <h2 class="text-3xl md:text-4xl font-black text-slate-900 dark:text-white">Official Exam Tools</h2>
-            <p class="text-slate-500 dark:text-slate-500 mt-2 text-sm md:text-base">Select your exam to start resizing</p>
+    <main class="max-w-4xl mx-auto px-6 pt-12">
+        <div class="text-center mb-10">
+            <h1 id="exam-title" class="text-4xl font-black mb-4">Exam Resizer</h1>
+            <p id="exam-desc" class="text-slate-400 italic text-sm"></p>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            
-            <!-- Tool 1: NEET Postcard -->
-            <a href="tool.html?exam=neet-postcard" class="tool-card p-8 rounded-[2rem] flex flex-col justify-between group">
-                <div>
-                    <div class="w-12 h-12 bg-blue-500/10 text-blue-600 dark:text-blue-500 rounded-2xl flex items-center justify-center mb-6">
-                        <i data-lucide="image"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2">NEET Postcard</h3>
-                    <p class="text-slate-500 dark:text-slate-400 text-sm">Official 4" x 6" size with mandatory Name & Date stamp.</p>
+        <div class="grid lg:grid-cols-2 gap-8">
+            <div class="space-y-6">
+                <!-- Upload -->
+                <div class="tool-card rounded-[2rem] p-8 text-center border-2 border-dashed border-white/10 hover:border-blue-500 transition cursor-pointer relative">
+                    <input type="file" id="fileInput" class="absolute inset-0 opacity-0 cursor-pointer">
+                    <i data-lucide="upload" class="w-10 h-10 mx-auto mb-4 text-blue-500"></i>
+                    <p class="font-bold">Select Candidate Photo</p>
+                    <p class="text-xs text-slate-500 mt-1">Supports JPG, PNG, JPEG</p>
                 </div>
-                <div class="mt-8 flex items-center justify-between font-bold text-xs uppercase tracking-widest text-blue-600 dark:text-blue-500">
-                    Launch Tool <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-2 transition"></i>
-                </div>
-            </a>
 
-            <!-- Tool 2: NEET Passport -->
-            <a href="tool.html?exam=neet-passport" class="tool-card p-8 rounded-[2rem] flex flex-col justify-between group">
-                <div>
-                    <div class="w-12 h-12 bg-indigo-500/10 text-indigo-600 dark:text-indigo-500 rounded-2xl flex items-center justify-center mb-6">
-                        <i data-lucide="user"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2">NEET Passport</h3>
-                    <p class="text-slate-500 dark:text-slate-400 text-sm">3.5 x 4.5 cm | White background with Name & Date.</p>
+                <!-- Inputs -->
+                <div id="stamp-controls" class="hidden tool-card rounded-[2rem] p-6 space-y-4">
+                    <h3 class="text-xs font-black tracking-[0.2em] text-blue-500 uppercase">Stamp Details</h3>
+                    <input type="text" id="nameInput" placeholder="FULL NAME" class="w-full bg-white/5 border border-white/10 p-4 rounded-xl outline-none focus:border-blue-500">
+                    <input type="text" id="dateInput" placeholder="DATE OF PHOTO (DD/MM/YYYY)" class="w-full bg-white/5 border border-white/10 p-4 rounded-xl outline-none focus:border-blue-500">
                 </div>
-                <div class="mt-8 flex items-center justify-between font-bold text-xs uppercase tracking-widest text-indigo-600 dark:text-indigo-500">
-                    Launch Tool <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-2 transition"></i>
-                </div>
-            </a>
 
-            <!-- Tool 3: SSC CGL/CHSL -->
-            <a href="tool.html?exam=ssc" class="tool-card p-8 rounded-[2rem] flex flex-col justify-between group">
-                <div>
-                    <div class="w-12 h-12 bg-green-500/10 text-green-600 dark:text-green-500 rounded-2xl flex items-center justify-center mb-6">
-                        <i data-lucide="shield-check"></i>
+                <!-- Quality -->
+                <div class="tool-card rounded-[2rem] p-6">
+                    <div class="flex justify-between mb-4">
+                        <h3 class="text-xs font-black tracking-[0.2em] text-green-500 uppercase">Compression</h3>
+                        <span id="kb-label" class="text-xs font-bold text-slate-500">Target: High Qualty</span>
                     </div>
-                    <h3 class="text-xl font-bold mb-2">SSC CGL/CHSL</h3>
-                    <p class="text-slate-500 dark:text-slate-400 text-sm">20-50KB restriction with auto-compression tech.</p>
-                </div>
-                <div class="mt-8 flex items-center justify-between font-bold text-xs uppercase tracking-widest text-green-600 dark:text-green-500">
-                    Launch Tool <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-2 transition"></i>
-                </div>
-            </a>
-
-            <!-- Tool 4: UPSC CSE -->
-            <a href="tool.html?exam=upsc" class="tool-card p-8 rounded-[2rem] flex flex-col justify-between group">
-                <div>
-                    <div class="w-12 h-12 bg-purple-500/10 text-purple-600 dark:text-purple-500 rounded-2xl flex items-center justify-center mb-6">
-                        <i data-lucide="landmark"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2">UPSC / IAS</h3>
-                    <p class="text-slate-500 dark:text-slate-400 text-sm">550x550px square format with Name & Date stamps.</p>
-                </div>
-                <div class="mt-8 flex items-center justify-between font-bold text-xs uppercase tracking-widest text-purple-600 dark:text-purple-500">
-                    Launch Tool <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-2 transition"></i>
-                </div>
-            </a>
-
-            <!-- Tool 5: JEE Mains -->
-            <a href="tool.html?exam=jee" class="tool-card p-8 rounded-[2rem] flex flex-col justify-between group">
-                <div>
-                    <div class="w-12 h-12 bg-red-500/10 text-red-600 dark:text-red-500 rounded-2xl flex items-center justify-center mb-6">
-                        <i data-lucide="zap"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2">JEE Mains</h3>
-                    <p class="text-slate-500 dark:text-slate-400 text-sm">80% face coverage check for NTA JEE applicants.</p>
-                </div>
-                <div class="mt-8 flex items-center justify-between font-bold text-xs uppercase tracking-widest text-red-600 dark:text-red-500">
-                    Launch Tool <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-2 transition"></i>
-                </div>
-            </a>
-
-            <!-- Tool 6: IBPS / SBI Banking -->
-            <a href="tool.html?exam=banking" class="tool-card p-8 rounded-[2rem] flex flex-col justify-between group">
-                <div>
-                    <div class="w-12 h-12 bg-orange-500/10 text-orange-600 dark:text-orange-500 rounded-2xl flex items-center justify-center mb-6">
-                        <i data-lucide="piggy-bank"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2">IBPS / SBI</h3>
-                    <p class="text-slate-500 dark:text-slate-400 text-sm">4.5 x 3.5 cm portrait for all banking applications.</p>
-                </div>
-                <div class="mt-8 flex items-center justify-between font-bold text-xs uppercase tracking-widest text-orange-600 dark:text-orange-500">
-                    Launch Tool <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-2 transition"></i>
-                </div>
-            </a>
-
-            <!-- Tool 7: NDA / Defense -->
-            <a href="tool.html?exam=defense" class="tool-card p-8 rounded-[2rem] flex flex-col justify-between group">
-                <div>
-                    <div class="w-12 h-12 bg-slate-500/10 text-slate-600 dark:text-slate-400 rounded-2xl flex items-center justify-center mb-6">
-                        <i data-lucide="shield"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2">NDA / CDS</h3>
-                    <p class="text-slate-500 dark:text-slate-400 text-sm">Compliant with UPSC defense recruitment rules.</p>
-                </div>
-                <div class="mt-8 flex items-center justify-between font-bold text-xs uppercase tracking-widest text-slate-600 dark:text-slate-400">
-                    Launch Tool <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-2 transition"></i>
-                </div>
-            </a>
-
-            <!-- Tool 8: Signature Tool -->
-            <a href="tool.html?exam=signature" class="tool-card p-8 rounded-[2rem] flex flex-col justify-between group bg-blue-600/5 border-blue-500/20">
-                <div>
-                    <div class="w-12 h-12 bg-blue-600 text-white rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-blue-500/20">
-                        <i data-lucide="pen-tool"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2">Signature</h3>
-                    <p class="text-slate-500 dark:text-slate-400 text-sm">Resize signature to exactly 10KB - 20KB limit.</p>
-                </div>
-                <div class="mt-8 flex items-center justify-between font-bold text-xs uppercase tracking-widest text-blue-600 dark:text-blue-400">
-                    Launch Tool <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-2 transition"></i>
-                </div>
-            </a>
-
-            <!-- Tool 9: CUET UG/PG -->
-            <a href="tool.html?exam=cuet" class="tool-card p-8 rounded-[2rem] flex flex-col justify-between group">
-                <div>
-                    <div class="w-12 h-12 bg-slate-500/10 text-slate-600 dark:text-slate-400 rounded-2xl flex items-center justify-center mb-6">
-                        <i data-lucide="graduation-cap"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2">CUET UG/PG</h3>
-                    <p class="text-slate-500 dark:text-slate-400 text-sm">NTA standard compliant photo resizer for CUET.</p>
-                </div>
-                <div class="mt-8 flex items-center justify-between font-bold text-xs uppercase tracking-widest text-slate-600 dark:text-slate-400">
-                    Launch Tool <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-2 transition"></i>
-                </div>
-            </a>
-
-        </div>
-    </section>
-
-    <!-- SEO Guidelines Content -->
-    <section id="guidelines" class="max-w-7xl mx-auto px-6 py-16 md:py-24 border-t border-slate-200 dark:border-white/5">
-        <div class="grid lg:grid-cols-2 gap-12 md:gap-20">
-            
-            <!-- Left Side: Text Content -->
-            <div class="text-center lg:text-left">
-                <h2 class="text-3xl md:text-5xl font-black text-slate-900 dark:text-white mb-6 leading-tight">
-                    General Guidelines for <br class="hidden md:block"> 
-                    Exam Photos <span class="text-blue-600 dark:text-blue-500">2026</span>
-                </h2>
-                <p class="text-slate-600 dark:text-slate-400 text-base md:text-lg leading-relaxed mb-10 max-w-xl mx-auto lg:mx-0">
-                    A small mistake in your exam photo can lead to form rejection. Follow these common standards used by most Indian exam authorities.
-                </p>
-                
-                <!-- Guidelines List -->
-                <div class="space-y-6">
-                    <!-- Point 01 -->
-                    <div class="tool-card p-6 md:p-0 md:bg-transparent md:border-none md:backdrop-blur-none rounded-3xl flex flex-col md:flex-row gap-4 md:gap-6 items-center lg:items-start">
-                        <div class="text-blue-600 dark:text-blue-500 font-black text-4xl md:text-2xl opacity-50 md:opacity-100">01</div>
-                        <div>
-                            <h4 class="text-slate-900 dark:text-white font-bold text-xl uppercase tracking-tight mb-2">Plain White Background</h4>
-                            <p class="text-slate-600 dark:text-slate-400 text-sm md:text-base">90% of national exams (NTA, UPSC, IBPS) now require a plain white background. Colored or busy backgrounds are a major cause of rejection.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="hidden md:block h-[1px] w-full bg-slate-200 dark:bg-white/5 my-4"></div>
-
-                    <!-- Point 02 -->
-                    <div class="tool-card p-6 md:p-0 md:bg-transparent md:border-none md:backdrop-blur-none rounded-3xl flex flex-col md:flex-row gap-4 md:gap-6 items-center lg:items-start">
-                        <div class="text-blue-600 dark:text-blue-500 font-black text-4xl md:text-2xl opacity-50 md:opacity-100">02</div>
-                        <div>
-                            <h4 class="text-slate-900 dark:text-white font-bold text-xl uppercase tracking-tight mb-2">Size, Format & KB</h4>
-                            <p class="text-slate-600 dark:text-slate-400 text-sm md:text-base">Exam forms accept photos strictly in JPG/JPEG format. Always resize your image using an exam photo resizer to avoid upload errors.</p>
-                        </div>
-                    </div>
+                    <input type="range" id="qualitySlider" min="10" max="100" value="90" class="w-full h-1.5 bg-white/10 rounded-lg appearance-none cursor-pointer accent-blue-500">
                 </div>
             </div>
 
-            <!-- FAQ Accordion (All 9 items) -->
-            <div id="faq" class="space-y-4">
-                <h3 class="text-2xl font-black mb-8 italic text-slate-900 dark:text-white">Frequently Asked Questions (FAQ)</h3>
-                
-                <details class="group tool-card p-6 rounded-3xl overflow-hidden cursor-pointer">
-                    <summary class="flex justify-between items-center font-bold text-lg list-none dark:text-white">
-                        1. What is an exam photo resizer?
-                        <i data-lucide="chevron-down" class="group-open:rotate-180 transition"></i>
-                    </summary>
-                    <p class="mt-4 text-slate-500 dark:text-slate-400 leading-relaxed">An exam photo resizer is an online tool that helps you resize your photo to the correct passport size and file size (KB) required for exams like NEET, SSC, UPSC, JEE, and GATE.</p>
-                </details>
-
-                <details class="group tool-card p-6 rounded-3xl overflow-hidden cursor-pointer">
-                    <summary class="flex justify-between items-center font-bold text-lg list-none dark:text-white">
-                        2. Can I resize my exam photo online for free?
-                        <i data-lucide="chevron-down" class="group-open:rotate-180 transition"></i>
-                    </summary>
-                    <p class="mt-4 text-slate-500 dark:text-slate-400 leading-relaxed">Yes. This exam photo resizer online is completely free. You can upload, resize, and download your exam photo without signup or payment.</p>
-                </details>
-
-                <details class="group tool-card p-6 rounded-3xl overflow-hidden cursor-pointer">
-                    <summary class="flex justify-between items-center font-bold text-lg list-none dark:text-white">
-                        3. Which exams are supported by this photo resizer?
-                        <i data-lucide="chevron-down" class="group-open:rotate-180 transition"></i>
-                    </summary>
-                    <p class="mt-4 text-slate-500 dark:text-slate-400 leading-relaxed">This tool supports popular Indian exams such as NEET, JEE, SSC, UPSC, and GATE. Each exam has its own page with the correct photo rules applied automatically.</p>
-                </details>
-
-                <details class="group tool-card p-6 rounded-3xl overflow-hidden cursor-pointer">
-                    <summary class="flex justify-between items-center font-bold text-lg list-none dark:text-white">
-                        4. Does this tool create passport size photos for exams?
-                        <i data-lucide="chevron-down" class="group-open:rotate-180 transition"></i>
-                    </summary>
-                    <p class="mt-4 text-slate-500 dark:text-slate-400 leading-relaxed">Yes. It helps you create a passport size photo for exams with the correct dimensions, background, and format accepted by exam portals.</p>
-                </details>
-
-                <details class="group tool-card p-6 rounded-3xl overflow-hidden cursor-pointer">
-                    <summary class="flex justify-between items-center font-bold text-lg list-none dark:text-white">
-                        5. Can I control the photo size in KB?
-                        <i data-lucide="chevron-down" class="group-open:rotate-180 transition"></i>
-                    </summary>
-                    <p class="mt-4 text-slate-500 dark:text-slate-400 leading-relaxed">Yes. The tool allows you to reduce or adjust photo size in KB, which helps avoid rejection during exam form upload.</p>
-                </details>
-
-                <details class="group tool-card p-6 rounded-3xl overflow-hidden cursor-pointer">
-                    <summary class="flex justify-between items-center font-bold text-lg list-none dark:text-white">
-                        6. What photo format does this exam photo resizer provide?
-                        <i data-lucide="chevron-down" class="group-open:rotate-180 transition"></i>
-                    </summary>
-                    <p class="mt-4 text-slate-500 dark:text-slate-400 leading-relaxed">The tool downloads the final photo in JPG/JPEG/PNG format, which is commonly accepted by most exam application forms.</p>
-                </details>
-
-                <details class="group tool-card p-6 rounded-3xl overflow-hidden cursor-pointer">
-                    <summary class="flex justify-between items-center font-bold text-lg list-none dark:text-white">
-                        7. Can I use a mobile photo for exam applications?
-                        <i data-lucide="chevron-down" class="group-open:rotate-180 transition"></i>
-                    </summary>
-                    <p class="mt-4 text-slate-500 dark:text-slate-400 leading-relaxed">Yes. You can use a mobile camera photo as long as it is clear, well-lit, and resized properly using this exam photo resizer.</p>
-                </details>
-
-                <details class="group tool-card p-6 rounded-3xl overflow-hidden cursor-pointer">
-                    <summary class="flex justify-between items-center font-bold text-lg list-none dark:text-white">
-                        8. Why do exam forms reject photos?
-                        <i data-lucide="chevron-down" class="group-open:rotate-180 transition"></i>
-                    </summary>
-                    <p class="mt-4 text-slate-500 dark:text-slate-400 leading-relaxed">Exam photos are usually rejected due to wrong photo size, high KB, incorrect format, blurry image, or non-white background. This tool helps fix these issues.</p>
-                </details>
-
-                <details class="group tool-card p-6 rounded-3xl overflow-hidden cursor-pointer">
-                    <summary class="flex justify-between items-center font-bold text-lg list-none dark:text-white">
-                        9. Is this exam photo resizer safe to use?
-                        <i data-lucide="chevron-down" class="group-open:rotate-180 transition"></i>
-                    </summary>
-                    <p class="mt-4 text-slate-500 dark:text-slate-400 leading-relaxed"> Yes. Your photo is processed only in your browser. We do not upload or store your images on any server.</p>
-                </details>
-            </div>
-        </div>
-    </section>
-
-    <!-- ABOUT US SECTION -->
-    <section id="about" class="max-w-7xl mx-auto px-6 py-12 md:py-20">
-        <div class="grid lg:grid-cols-2 gap-12 md:gap-16 items-center">
-            <div class="text-center lg:text-left relative">
-                <div class="absolute -top-20 -left-20 w-64 h-64 bg-blue-600/10 rounded-full blur-[100px]"></div>
-                <h2 class="text-3xl md:text-5xl font-black mb-6 leading-tight dark:text-white">Empowering Aspirants <br><span class="text-blue-600 dark:text-blue-500">With Precision.</span></h2>
-                <p class="text-slate-600 dark:text-slate-400 text-base md:text-lg leading-relaxed mb-10 max-w-xl mx-auto lg:mx-0">
-                    ExamPhoto Pro was founded to eliminate form rejection. We believe that professional photo tools should be free, fast, and private.
-                </p>
-                <div class="flex justify-center lg:justify-start gap-8 md:gap-12">
-                    <div>
-                        <div class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white">100%</div>
-                        <div class="text-xs uppercase tracking-widest text-slate-500 font-bold mt-1">Accuracy</div>
-                    </div>
-                    <div>
-                        <div class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white">Secure</div>
-                        <div class="text-xs uppercase tracking-widest text-slate-500 font-bold mt-1">Private</div>
-                    </div>
-                    <div>
-                        <div class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white">Free</div>
-                        <div class="text-xs uppercase tracking-widest text-slate-500 font-bold mt-1">Forever</div>
-                    </div>
+            <!-- Preview -->
+            <div class="tool-card rounded-[2.5rem] p-4 flex flex-col">
+                <div id="canvas-wrapper" class="bg-black/20 rounded-2xl flex items-center justify-center overflow-hidden min-h-[350px]">
+                    <p id="placeholder" class="text-slate-600 font-bold uppercase tracking-widest text-xs">Preview Area</p>
+                    <canvas id="mainCanvas" class="hidden max-w-full h-auto shadow-2xl"></canvas>
                 </div>
-            </div>
-            
-            <div class="grid grid-cols-2 gap-4 max-w-md mx-auto lg:max-w-none">
-                <div class="tool-card p-6 rounded-3xl flex flex-col items-center text-center">
-                    <i data-lucide="zap" class="w-8 h-8 text-yellow-500 mb-4"></i>
-                    <h4 class="font-bold text-sm dark:text-white">Instant</h4>
-                </div>
-                <div class="tool-card p-6 rounded-3xl mt-4 md:mt-8 flex flex-col items-center text-center">
-                    <i data-lucide="shield-check" class="w-8 h-8 text-green-500 mb-4"></i>
-                    <h4 class="font-bold text-sm dark:text-white">Safe</h4>
-                </div>
-                <div class="tool-card p-6 rounded-3xl flex flex-col items-center text-center">
-                    <i data-lucide="refresh-ccw" class="w-8 h-8 text-blue-500 mb-4"></i>
-                    <h4 class="font-bold text-sm dark:text-white">Updated</h4>
-                </div>
-                <div class="tool-card p-6 rounded-3xl mt-4 md:mt-8 flex flex-col items-center text-center">
-                    <i data-lucide="monitor" class="w-8 h-8 text-purple-500 mb-4"></i>
-                    <h4 class="font-bold text-sm dark:text-white">Online</h4>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- PRIVACY POLICY SECTION -->
-    <section id="privacy" class="max-w-7xl mx-auto px-6 py-12 md:py-20">
-        <div class="tool-card bg-gradient-to-br from-blue-600/5 to-purple-600/5 dark:from-blue-600/10 dark:to-purple-600/10 p-8 md:p-16 rounded-[2rem] border-blue-500/20 text-center lg:text-left relative overflow-hidden">
-            <div class="max-w-3xl relative z-10 mx-auto lg:mx-0">
-                <div class="flex items-center justify-center lg:justify-start gap-3 text-blue-600 dark:text-blue-400 font-bold mb-4 text-xs uppercase tracking-widest">
-                    <i data-lucide="lock" class="w-4 h-4"></i> Privacy Protection
-                </div>
-                <h2 class="text-3xl md:text-4xl font-black mb-6 dark:text-white">Local Browser Processing</h2>
-                <p class="text-slate-600 dark:text-slate-400 text-base md:text-lg mb-8 leading-relaxed">
-                    Most exam forms are rejected due to small photo mistakes. ExamPhoto Pro handles everything locally in your browser. Your images are never uploaded to our servers.
-                </p>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-tight">
-                    <div class="flex items-center justify-center lg:justify-start gap-2"><i data-lucide="check" class="w-4 h-4 text-green-500"></i> No Database Storage</div>
-                    <div class="flex items-center justify-center lg:justify-start gap-2"><i data-lucide="check" class="w-4 h-4 text-green-500"></i> Auto face centering</div>
-                    <div class="flex items-center justify-center lg:justify-start gap-2"><i data-lucide="check" class="w-4 h-4 text-green-500"></i> Local Image Processing</div>
-                    <div class="flex items-center justify-center lg:justify-start gap-2"><i data-lucide="check" class="w-4 h-4 text-green-500"></i> Ready for uploads</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CONTACT US SECTION -->
-    <section id="contact" class="max-w-7xl mx-auto px-6 py-12 md:py-20 mb-10">
-        <div class="grid lg:grid-cols-2 gap-12 md:gap-20 items-center">
-            <div class="text-center lg:text-left">
-                <h2 class="text-3xl md:text-5xl font-black mb-6 uppercase tracking-tight dark:text-white">Get in Touch</h2>
-                <p class="text-slate-600 dark:text-slate-400 text-base md:text-lg mb-10 max-w-lg mx-auto lg:mx-0">Found a bug or have a suggestion? Reach out to us.</p>
-                <div class="flex items-center justify-center lg:justify-start gap-4">
-                    <i data-lucide="mail" class="text-blue-600 dark:text-blue-500"></i>
-                    <span class="text-lg font-bold dark:text-white">hello@examphoto.pro</span>
-                </div>
-            </div>
-
-            <form class="tool-card p-8 md:p-10 rounded-[2rem] space-y-4 max-w-xl mx-auto w-full">
-                <div class="grid md:grid-cols-2 gap-4">
-                    <input type="text" placeholder="Name" class="bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 p-4 rounded-xl outline-none focus:border-blue-500 transition w-full text-sm dark:text-white">
-                    <input type="email" placeholder="Email" class="bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 p-4 rounded-xl outline-none focus:border-blue-500 transition w-full text-sm dark:text-white">
-                </div>
-                <textarea placeholder="Message" rows="4" class="bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 p-4 rounded-xl outline-none focus:border-blue-500 transition w-full text-sm dark:text-white"></textarea>
-                <button type="submit" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-black py-4 rounded-xl transition shadow-lg shadow-blue-500/20 uppercase text-xs tracking-widest">
-                    Send Message
+                <button id="downloadBtn" class="hidden mt-4 w-full bg-blue-600 hover:bg-blue-500 text-white font-black py-4 rounded-xl transition uppercase tracking-widest text-xs">
+                    Download Final Photo
                 </button>
-            </form>
+            </div>
         </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="py-12 border-t border-slate-200 dark:border-white/5 text-center px-6">
-        <p class="text-slate-500 dark:text-slate-600 font-black tracking-[0.2em] text-[10px] md:text-xs mb-4 uppercase">THE COMPLETE EXAM PHOTO SUITE</p>
-        <p class="text-slate-400 text-xs md:text-sm italic font-medium">&copy; EXAMPHOTO PRO. Created by Mubasir.</p>
-    </footer>
+    </main>
 
     <script>
-        // Initialize Icons
-        lucide.createIcons();
+        const examConfigs = {
+            'neet-postcard': { title: 'NEET Postcard', desc: '4"x6" Postcard Size with Stamp', width: 480, height: 720, stamp: true },
+            'neet-passport': { title: 'NEET Passport', desc: '3.5 x 4.5 cm Passport Photo', width: 413, height: 531, stamp: true },
+            'ssc': { title: 'SSC Exam', desc: '20KB - 50KB Official Resize', width: 413, height: 531, stamp: false },
+            'upsc': { title: 'UPSC / IAS', desc: '550x550 Square with Name/Date', width: 550, height: 550, stamp: true },
+            'jee': { title: 'JEE Mains', desc: '80% Face Coverage Standard', width: 413, height: 531, stamp: false },
+            'signature': { title: 'Signature Resizer', desc: '10KB - 20KB Target Size', width: 400, height: 150, stamp: false }
+        };
 
-        // Theme Toggle Logic
-        function toggleTheme() {
-            const html = document.documentElement;
-            if (html.classList.contains('dark')) {
-                html.classList.remove('dark');
-                localStorage.setItem('theme', 'light');
-            } else {
-                html.classList.add('dark');
-                localStorage.setItem('theme', 'dark');
+        const params = new URLSearchParams(window.location.search);
+        const type = params.get('exam') || 'neet-passport';
+        const config = examConfigs[type] || examConfigs['neet-passport'];
+
+        document.getElementById('exam-title').innerText = config.title;
+        document.getElementById('exam-desc').innerText = config.desc;
+        if(config.stamp) document.getElementById('stamp-controls').classList.remove('hidden');
+
+        const canvas = document.getElementById('mainCanvas');
+        const ctx = canvas.getContext('2d');
+        const fileInput = document.getElementById('fileInput');
+        let imgObj = null;
+
+        fileInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if(!file) return;
+            const reader = new FileReader();
+            reader.onload = (event) => {
+                imgObj = new Image();
+                imgObj.onload = render;
+                imgObj.src = event.target.result;
+            };
+            reader.readAsDataURL(file);
+        });
+
+        function render() {
+            if(!imgObj) return;
+            canvas.classList.remove('hidden');
+            document.getElementById('placeholder').classList.add('hidden');
+            document.getElementById('downloadBtn').classList.remove('hidden');
+
+            canvas.width = config.width;
+            canvas.height = config.height;
+
+            // Draw and crop to fit
+            const ratio = Math.max(canvas.width / imgObj.width, canvas.height / imgObj.height);
+            const x = (canvas.width - imgObj.width * ratio) / 2;
+            const y = (canvas.height - imgObj.height * ratio) / 2;
+            ctx.fillStyle = "white";
+            ctx.fillRect(0,0, canvas.width, canvas.height);
+            ctx.drawImage(imgObj, x, y, imgObj.width * ratio, imgObj.height * ratio);
+
+            if(config.stamp) {
+                const sH = canvas.height * 0.2;
+                ctx.fillStyle = "white";
+                ctx.fillRect(0, canvas.height - sH, canvas.width, sH);
+                ctx.strokeStyle = "#eee";
+                ctx.strokeRect(0, canvas.height - sH, canvas.width, sH);
+                
+                ctx.fillStyle = "black";
+                ctx.textAlign = "center";
+                ctx.font = `bold ${canvas.width * 0.07}px sans-serif`;
+                ctx.fillText(document.getElementById('nameInput').value.toUpperCase() || "NAME HERE", canvas.width/2, canvas.height - sH/1.7);
+                ctx.font = `${canvas.width * 0.05}px sans-serif`;
+                ctx.fillText(document.getElementById('dateInput').value || "DD/MM/YYYY", canvas.width/2, canvas.height - sH/5);
             }
         }
 
-        // Apply saved preference on load
-        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            document.documentElement.classList.add('dark');
-        } else {
-            document.documentElement.classList.remove('dark');
-        }
+        document.getElementById('nameInput').addEventListener('input', render);
+        document.getElementById('dateInput').addEventListener('input', render);
+        document.getElementById('qualitySlider').addEventListener('input', render);
+
+        document.getElementById('downloadBtn').addEventListener('click', () => {
+            const q = document.getElementById('qualitySlider').value / 100;
+            const link = document.createElement('a');
+            link.download = 'exam-photo.jpg';
+            link.href = canvas.toDataURL('image/jpeg', q);
+            link.click();
+        });
+
+        lucide.createIcons();
     </script>
 </body>
 </html>
