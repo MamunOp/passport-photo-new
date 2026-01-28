@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photo Resizer Tool - Professional Edition</title>
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css">
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="logo"><strong>ExamPhotoMaker</strong></div>
+    <div id="exam-label">Official Specification Tool</div>
+</nav>
+
+<div class="tool-grid">
+    <!-- Sidebar -->
+    <aside class="settings-panel">
+        <h2 id="exam-name">Loading Exam...</h2>
+        <hr>
+        <div class="rule-tag">
+            <small>Required Dimensions</small>
+            <b id="spec-size">--</b>
+        </div>
+        <div class="rule-tag">
+            <small>File Size Limit</small>
+            <b id="spec-kb">--</b>
+        </div>
+        <div class="rule-tag">
+            <small>Format</small>
+            <b>JPG / JPEG</b>
+        </div>
+        
+        <button id="downloadBtn" class="btn-main" disabled>Download & Validate</button>
+        <div id="status"></div>
+    </aside>
+
+    <!-- Main Workspace -->
+    <main class="preview-panel">
+        <div id="uploadBox" class="upload-box">
+            <div style="font-size: 3rem;">📸</div>
+            <h3>Click to Upload or Drag & Drop</h3>
+            <p>Your photo will be automatically resized to official requirements</p>
+        </div>
+        <input type="file" id="fileInput" hidden accept="image/jpeg, image/png">
+        
+        <div class="cropper-container">
+            <img id="previewImg" style="display:none; max-width: 100%;">
+        </div>
+    </main>
+</div>
+
+<!-- Libraries -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
+<script src="/assets/js/presets.js"></script>
+<script src="/assets/js/app.js"></script>
+</body>
+</html>
