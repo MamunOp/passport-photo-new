@@ -1,33 +1,39 @@
-:root {
-    --primary: #003366; --accent: #27ae60; --bg: #f0f2f5; --white: #ffffff;
+:root{
+  --bg:#0b1220; --card:#111a2e; --text:#e8eefc; --muted:#a9b7d0;
+  --brand:#4f8cff; --border:rgba(255,255,255,.08);
+  --shadow: 0 12px 30px rgba(0,0,0,.35);
+  --radius:18px;
 }
-body { font-family: 'Segoe UI', sans-serif; background: var(--bg); margin: 0; color: #333; }
-.navbar { background: var(--primary); color: white; padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; border-bottom: 3px solid #ff9900; }
-
-/* Tool Layout */
-.tool-grid { display: grid; grid-template-columns: 350px 1fr; gap: 20px; padding: 20px 5%; max-width: 1400px; margin: auto; }
-
-/* Sidebar/Settings */
-.settings-panel { background: var(--white); padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); height: fit-content; }
-.rule-tag { background: #eef2f7; padding: 10px; border-radius: 5px; margin-bottom: 10px; border-left: 4px solid var(--primary); }
-.rule-tag small { color: #666; display: block; }
-.rule-tag b { color: var(--primary); font-size: 1.1rem; }
-
-/* Canvas Area */
-.preview-panel { background: var(--white); padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); text-align: center; min-height: 500px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-.upload-box { border: 2px dashed #ccc; padding: 50px; width: 80%; cursor: pointer; border-radius: 10px; transition: 0.3s; }
-.upload-box:hover { border-color: var(--primary); background: #f9f9f9; }
-
-/* Image Cropper sizing */
-.cropper-container { max-width: 100%; max-height: 60vh; margin-top: 20px; }
-
-/* Buttons */
-.btn-main { background: var(--accent); color: white; border: none; padding: 15px 30px; border-radius: 5px; font-size: 1.1rem; cursor: pointer; font-weight: bold; width: 100%; margin-top: 20px; }
-.btn-main:disabled { background: #ccc; cursor: not-allowed; }
-
-/* Status Labels */
-.status-badge { display: inline-block; padding: 5px 15px; border-radius: 20px; font-size: 0.8rem; font-weight: bold; margin-top: 10px; }
-.status-success { background: #d4edda; color: #155724; }
-.status-error { background: #f8d7da; color: #721c24; }
-
-@media (max-width: 900px) { .tool-grid { grid-template-columns: 1fr; } }
+*{box-sizing:border-box}
+body{
+  margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  background: radial-gradient(1200px 500px at 20% 0%, rgba(79,140,255,.25), transparent 60%),
+              radial-gradient(900px 400px at 80% 10%, rgba(120,88,255,.18), transparent 65%),
+              var(--bg);
+  color:var(--text);
+}
+a{color:inherit; text-decoration:none}
+.container{max-width:1100px; margin:0 auto; padding:22px}
+.nav{
+  display:flex; justify-content:space-between; align-items:center;
+  padding:14px 0; gap:14px;
+}
+.brand{
+  display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:.2px;
+}
+.badge{font-size:12px; color:var(--muted); padding:4px 10px; border:1px solid var(--border); border-radius:999px}
+.hero{
+  margin-top:14px; padding:26px; background:rgba(255,255,255,.03);
+  border:1px solid var(--border); border-radius:var(--radius); box-shadow:var(--shadow);
+}
+.h1{font-size:34px; line-height:1.15; margin:0 0 10px}
+.p{margin:0; color:var(--muted); max-width:70ch}
+.grid{
+  display:grid; grid-template-columns:repeat(12,1fr); gap:16px; margin-top:18px;
+}
+.card{
+  grid-column: span 6;
+  background:rgba(255,255,255,.03);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:18px;
