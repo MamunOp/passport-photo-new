@@ -520,3 +520,21 @@
     </script>
 </body>
 </html>
+<script>
+    // Initialize Icons - MUST be in all files
+    lucide.createIcons();
+
+    // Theme Toggle
+    function toggleTheme() {
+        const html = document.documentElement;
+        html.classList.toggle('dark');
+        localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+    }
+
+    // Apply Theme Immediately to prevent "Flash" of light mode
+    if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+    } else {
+        document.documentElement.classList.remove('dark');
+    }
+</script>
