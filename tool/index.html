@@ -2,128 +2,28 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <title>Photo Resizer Tool</title>
-    
-    <!-- CSS for the Cropper and Design -->
+    <link rel="stylesheet" href="/assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css">
-    <style>
-        body { font-family: -apple-system, sans-serif; background: #f0f2f5; margin: 0; padding: 15px; }
-        .card { background: white; border-radius: 15px; padding: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); max-width: 500px; margin: auto; }
-        .btn { background: #007bff; color: white; border: none; padding: 15px; width: 100%; border-radius: 8px; font-weight: bold; cursor: pointer; margin-top: 10px; }
-        #image-container { width: 100%; height: 350px; background: #eee; margin-top: 15px; overflow: hidden; display: none; }
-        img { max-width: 100%; }
-        .status { padding: 10px; border-radius: 5px; margin-top: 10px; font-size: 14px; background: #e7f3ff; }
-        .hidden { display: none; }
-    </style>
+    <title>Photo Processor</title>
 </head>
 <body>
-
-<div class="card">
-    <h2 id="tool-name">Resizer Tool</h2>
-    
-    <!-- STEP 1: UPLOAD -->
-    <div id="ui-step-1">
-        <p>Step 1: Upload your photo from gallery</p>
-        <input type="file" id="fileInput" accept="image/*" hidden>
-        <button class="btn" onclick="document.getElementById('fileInput').click()">SELECT PHOTO</button>
-    </div>
-
-    <!-- STEP 2: CROP -->
-    <div id="ui-step-2" class="hidden">
-        <p>Step 2: Drag and Zoom to fit face</p>
-        <div id="image-container">
-            <img id="imageToCrop">
+    <div class="tool-container">
+        <h1 id="tool-title">Photo Maker</h1>
+        <div id="rules-summary"></div>
+        
+        <input type="file" id="upload" accept="image/jpeg, image/jpg">
+        
+        <div class="crop-area">
+            <img id="image-to-crop" src="" style="display:none;">
         </div>
-        <button class="btn" id="cropBtn">NEXT: OPTIMIZE SIZE</button>
+
+        <button id="download-btn" style="display:none;">Download & Validate</button>
+        
+        <div id="validation-box"></div>
     </div>
 
-    <!-- STEP 3: DOWNLOAD -->
-    <div id="ui-step-3" class="hidden">
-        <div class="status">
-            <p id="sizeInfo">Final Size: --</p>
-            <p>✅ Format: JPG</p>
-        </div>
-        <button class="btn" id="downloadBtn" style="background: #28a745;">DOWNLOAD PHOTO</button>
-        <button class="btn" onclick="location.reload()" style="background: #6c757d;">START AGAIN</button>
-    </div>
-
-    <!-- Ad Placeholder -->
-    <div style="text-align:center; color:#ccc; margin-top:20px; font-size:10px;">ADVERTISEMENT</div>
-</div>
-
-<!-- SCRIPTS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
-<script src="../assets/js/presets.js"></script>
-
-<script>
-    // 1. Get Settings from URL (e.g., ?id=neet)
-    const params = new URLSearchParams(window.location.search);
-    const presetId = params.get('id') || 'indian-passport';
-    const config = presets[presetId];
-    
-    document.getElementById('tool-name').innerText = config.name;
-
-    let cropper;
-    const fileInput = document.getElementById('fileInput');
-    const imageToCrop = document.getElementById('imageToCrop');
-
-    // 2. Handle File Selection
-    fileInput.onchange = (e) => {
-        const file = e.target.files[0];
-        const reader = new FileReader();
-        reader.onload = (event) => {
-            imageToCrop.src = event.target.result;
-            document.getElementById('ui-step-1').classList.add('hidden');
-            document.getElementById('ui-step-2').classList.remove('hidden');
-            document.getElementById('image-container').style.display = 'block';
-            
-            cropper = new Cropper(imageToCrop, {
-                aspectRatio: config.widthMm / config.heightMm,
-                viewMode: 1
-            });
-        };
-        reader.readAsDataURL(file);
-    };
-
-    // 3. Handle Cropping & KB Compression
-    document.getElementById('cropBtn').onclick = () => {
-        // Convert MM to PX (approx 300 DPI)
-        const targetW = Math.round((config.widthMm / 25.4) * 300);
-        const targetH = Math.round((config.heightMm / 25.4) * 300);
-
-        const canvas = cropper.getCroppedCanvas({ width: targetW, height: targetH });
-
-        // Logic to compress until it's under maxKb
-        let quality = 0.9;
-        function compress() {
-            canvas.toBlob((blob) => {
-                const sizeKb = blob.size / 1024;
-                if (sizeKb > config.maxKb && quality > 0.1) {
-                    quality -= 0.1;
-                    compress();
-                } else {
-                    showDownload(blob, sizeKb);
-                }
-            }, 'image/jpeg', quality);
-        }
-        compress();
-    };
-
-    function showDownload(blob, sizeKb) {
-        document.getElementById('ui-step-2').classList.add('hidden');
-        document.getElementById('ui-step-3').classList.remove('hidden');
-        document.getElementById('sizeInfo').innerText = `Final Size: ${sizeKb.toFixed(1)} KB`;
-
-        const url = URL.createObjectURL(blob);
-        document.getElementById('downloadBtn').onclick = () => {
-            const link = document.createElement('a');
-            link.href = url;
-            link.download = `${config.id}-photo.jpg`;
-            link.click();
-        };
-    }
-</script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
+    <script src="/assets/js/presets.js"></script>
+    <script src="/assets/js/app.js"></script>
 </body>
 </html>
