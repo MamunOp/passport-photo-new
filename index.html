@@ -3,180 +3,213 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ExamPhoto Pro | The Ultimate Exam Photo Suite</title>
+    <title>ExamPhoto Pro | 20+ Official Exam Photo Resizers</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
     
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #030712; }
-        .mesh-gradient {
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #020617; }
+        .mesh-bg {
             background-image: radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), 
-                              radial-gradient(at 50% 0%, hsla(225,39%,30%,1) 0, transparent 50%), 
-                              radial-gradient(at 100% 0%, hsla(339,49%,30%,1) 0, transparent 50%);
+                              radial-gradient(at 50% 0%, hsla(225,39%,20%,1) 0, transparent 50%), 
+                              radial-gradient(at 100% 0%, hsla(339,49%,20%,1) 0, transparent 50%);
         }
-        .glass-card {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-        }
-        .bento-item:hover {
-            border-color: rgba(96, 165, 250, 0.5);
-            background: rgba(255, 255, 255, 0.06);
-        }
+        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.08); }
+        .exam-card:hover { border-color: rgba(59, 130, 246, 0.5); background: rgba(255, 255, 255, 0.05); transform: translateY(-2px); }
     </style>
 </head>
-<body class="text-white selection:bg-blue-500/30">
+<body class="text-slate-200 selection:bg-blue-500/30">
 
-    <!-- Sticky Glass Navbar -->
-    <nav class="fixed top-6 left-1/2 -translate-x-1/2 z-[100] w-[90%] max-w-4xl">
-        <div class="glass-card px-8 py-4 rounded-full flex items-center justify-between">
+    <!-- Navbar -->
+    <nav class="fixed top-0 w-full z-[100] border-b border-white/5 bg-slate-950/80 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
             <div class="flex items-center gap-2">
-                <div class="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
-                    <i data-lucide="camera" class="w-5 h-5 text-white"></i>
+                <div class="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/20">
+                    <i data-lucide="aperture" class="text-white w-6 h-6"></i>
                 </div>
-                <span class="font-extrabold text-xl tracking-tight">EXAM<span class="text-blue-500">PHOTO</span></span>
+                <span class="font-black text-2xl tracking-tighter">EXAM<span class="text-blue-500">PHOTO</span></span>
             </div>
-            <div class="hidden md:flex gap-8 text-sm font-semibold text-gray-400">
-                <a href="#exams" class="hover:text-white transition">Exams</a>
+            <div class="hidden lg:flex items-center gap-8 text-sm font-bold text-slate-400">
+                <a href="#featured" class="hover:text-white transition">Featured</a>
+                <a href="#all-exams" class="hover:text-white transition">All Exams</a>
                 <a href="#guidelines" class="hover:text-white transition">Guidelines</a>
-                <a href="#faq" class="hover:text-white transition">FAQ</a>
+                <button class="bg-white text-black px-6 py-2.5 rounded-full hover:bg-blue-500 hover:text-white transition">Get Started</button>
             </div>
-            <button class="bg-blue-600 hover:bg-blue-500 px-6 py-2 rounded-full text-sm font-bold transition shadow-lg shadow-blue-500/20">
-                Launch Tool
-            </button>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <main class="mesh-gradient min-h-screen pt-40 pb-20 px-6">
-        <div class="max-w-6xl mx-auto text-center">
-            <div class="inline-flex items-center gap-2 bg-blue-500/10 border border-blue-500/20 px-4 py-1.5 rounded-full text-blue-400 text-xs font-bold mb-8 uppercase tracking-widest">
-                <span class="relative flex h-2 w-2">
-                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
-                    <span class="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
-                </span>
-                Updated for 2025-26 Sessions
-            </div>
-            <h1 class="text-5xl md:text-8xl font-extrabold tracking-tighter mb-8 leading-[1.1]">
-                Your Exam Photo, <br> <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400">Perfectly Compliant.</span>
+    <header class="mesh-bg pt-44 pb-20 px-6 text-center">
+        <div class="max-w-4xl mx-auto">
+            <h1 class="text-5xl md:text-8xl font-extrabold tracking-tight mb-8">
+                The Master <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-500">Exam Suite.</span>
             </h1>
-            <p class="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto mb-12 leading-relaxed">
-                NTA, SSC, and UPSC have strict photo rules. Don't risk rejection. Use our AI-powered resizer to meet official dimensions in seconds.
+            <p class="text-slate-400 text-lg md:text-xl leading-relaxed mb-12">
+                Pixel-perfect resizing for 15+ National & State Exams. <br class="hidden md:block"> Automatically compliant with NTA, SSC, UPSC, and Banking standards.
             </p>
         </div>
+    </header>
 
-        <!-- Bento Grid for Exams -->
-        <section id="exams" class="max-w-6xl mx-auto mt-20">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 auto-rows-[240px]">
-                
-                <!-- NEET Card (Large) -->
-                <a href="neet-postcard.html" class="md:col-span-2 md:row-span-2 glass-card rounded-[2.5rem] p-10 bento-item transition-all flex flex-col justify-between group">
-                    <div>
-                        <i data-lucide="scroll-text" class="w-12 h-12 text-blue-500 mb-6"></i>
-                        <h2 class="text-4xl font-bold mb-4">NEET 2026 Suite</h2>
-                        <p class="text-gray-400 text-lg max-w-sm">Generate both Postcard (4x6) and Passport photos with mandatory Name & Date overlays.</p>
-                    </div>
-                    <div class="flex items-center gap-2 font-bold text-blue-400 group-hover:translate-x-2 transition-transform">
-                        Open NEET Tool <i data-lucide="arrow-right"></i>
-                    </div>
-                </a>
-
-                <!-- SSC Card -->
-                <a href="ssc-resizer.html" class="glass-card rounded-[2.5rem] p-8 bento-item transition-all flex flex-col justify-between group">
-                    <i data-lucide="shield-check" class="w-10 h-10 text-green-500"></i>
-                    <div>
-                        <h3 class="text-2xl font-bold mb-2">SSC CGL/CHSL</h3>
-                        <p class="text-gray-400 text-sm">20KB-50KB size strict limit optimization.</p>
-                    </div>
-                </a>
-
-                <!-- UPSC Card -->
-                <a href="upsc-resizer.html" class="glass-card rounded-[2.5rem] p-8 bento-item transition-all flex flex-col justify-between group">
-                    <i data-lucide="award" class="w-10 h-10 text-purple-500"></i>
-                    <div>
-                        <h3 class="text-2xl font-bold mb-2">UPSC CSE</h3>
-                        <p class="text-gray-400 text-sm">Official square format with bottom text.</p>
-                    </div>
-                </a>
-
-                <!-- Signature Card (Wide) -->
-                <a href="signature.html" class="md:col-span-3 glass-card rounded-[2.5rem] p-8 bento-item transition-all flex items-center justify-between group">
-                    <div class="flex items-center gap-6">
-                        <div class="w-16 h-16 bg-amber-500/10 rounded-2xl flex items-center justify-center">
-                            <i data-lucide="pen-tool" class="w-8 h-8 text-amber-500"></i>
-                        </div>
-                        <div>
-                            <h3 class="text-2xl font-bold">Signature Resizer</h3>
-                            <p class="text-gray-400">Crop and compress signatures to exactly 10-20KB.</p>
-                        </div>
-                    </div>
-                    <i data-lucide="chevron-right" class="w-8 h-8 text-gray-600 group-hover:text-white transition"></i>
-                </a>
-            </div>
-        </section>
-
-        <!-- Dynamic Guidelines Section -->
-        <section id="guidelines" class="max-w-6xl mx-auto py-32">
-            <div class="grid md:grid-cols-2 gap-20">
+    <!-- Featured Exams (The Bento) -->
+    <section id="featured" class="max-w-7xl mx-auto px-6 py-10">
+        <h2 class="text-xs font-black uppercase tracking-[0.3em] text-blue-500 mb-8">Most Popular Tools</h2>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 auto-rows-[250px]">
+            
+            <!-- NEET POSTCARD (Giant Box) -->
+            <a href="tool.html?exam=neet-postcard" class="md:col-span-2 md:row-span-2 glass rounded-[2.5rem] p-10 exam-card flex flex-col justify-between group">
+                <i data-lucide="image" class="w-14 h-14 text-blue-500"></i>
                 <div>
-                    <h2 class="text-4xl font-black mb-8 leading-tight">Official Guideline <br><span class="text-gray-500">Database 2025</span></h2>
-                    <p class="text-gray-400 mb-8">We monitor official NTA and SSC gazettes daily to ensure our dimensions are pixel-perfect.</p>
-                    <div class="space-y-4">
-                        <div class="flex items-center gap-4 p-4 glass-card rounded-2xl">
-                            <i data-lucide="info" class="text-blue-500"></i>
-                            <span class="text-sm font-semibold italic">NTA NEET: White background, 80% face coverage.</span>
-                        </div>
-                        <div class="flex items-center gap-4 p-4 glass-card rounded-2xl">
-                            <i data-lucide="info" class="text-green-500"></i>
-                            <span class="text-sm font-semibold italic">SSC: No spectacles, no caps, both ears visible.</span>
-                        </div>
-                    </div>
+                    <h3 class="text-4xl font-black mb-4">NEET 4x6</h3>
+                    <p class="text-slate-400">Postcard size generator with automated name & date stamps for 2026.</p>
                 </div>
-                <div class="glass-card rounded-[2.5rem] overflow-hidden">
-                    <div class="bg-white/5 p-6 border-b border-white/10 font-bold">Live Dimension Check</div>
-                    <div class="p-6 space-y-4">
-                        <div class="flex justify-between border-b border-white/5 pb-2"><span>Postcard Size</span><span class="text-blue-400">4" x 6"</span></div>
-                        <div class="flex justify-between border-b border-white/5 pb-2"><span>Passport Size</span><span class="text-blue-400">3.5 x 4.5 cm</span></div>
-                        <div class="flex justify-between border-b border-white/5 pb-2"><span>SSC Max Size</span><span class="text-blue-400">50 KB</span></div>
-                    </div>
+            </a>
+
+            <!-- SSC BOX -->
+            <a href="tool.html?exam=ssc" class="md:col-span-2 glass rounded-[2.5rem] p-8 exam-card flex items-center justify-between group">
+                <div>
+                    <h3 class="text-2xl font-bold mb-2">SSC CGL / CHSL</h3>
+                    <p class="text-slate-400 text-sm italic">3.5 x 4.5 cm | 20KB-50KB</p>
+                </div>
+                <i data-lucide="shield-check" class="w-12 h-12 text-green-500 opacity-50"></i>
+            </a>
+
+            <!-- UPSC BOX -->
+            <a href="tool.html?exam=upsc" class="glass rounded-[2.5rem] p-8 exam-card flex flex-col justify-between">
+                <i data-lucide="landmark" class="w-8 h-8 text-purple-500"></i>
+                <h3 class="text-xl font-bold">UPSC CSE</h3>
+            </a>
+
+            <!-- Signature BOX -->
+            <a href="tool.html?exam=signature" class="glass rounded-[2.5rem] p-8 exam-card flex flex-col justify-between bg-gradient-to-br from-blue-600/10 to-transparent">
+                <i data-lucide="pen-tool" class="w-8 h-8 text-amber-500"></i>
+                <h3 class="text-xl font-bold">Signature</h3>
+            </a>
+        </div>
+    </section>
+
+    <!-- All Exams Library (10+ More Exams) -->
+    <section id="all-exams" class="max-w-7xl mx-auto px-6 py-20">
+        <div class="flex items-end justify-between mb-12 border-b border-white/5 pb-6">
+            <h2 class="text-3xl font-black italic">Exams Library <span class="text-blue-500 text-sm not-italic ml-2 uppercase">Total 16 Tools</span></h2>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <!-- Medical / Engineering -->
+            <a href="#" class="glass p-6 rounded-2xl exam-card flex items-center gap-4">
+                <div class="w-10 h-10 bg-red-500/10 rounded-lg flex items-center justify-center text-red-500"><i data-lucide="heart-pulse"></i></div>
+                <div><h4 class="font-bold text-sm">JEE Mains</h4><p class="text-xs text-slate-500">3.5 x 4.5 cm</p></div>
+            </a>
+            <a href="#" class="glass p-6 rounded-2xl exam-card flex items-center gap-4">
+                <div class="w-10 h-10 bg-red-500/10 rounded-lg flex items-center justify-center text-red-500"><i data-lucide="settings"></i></div>
+                <div><h4 class="font-bold text-sm">GATE 2026</h4><p class="text-xs text-slate-500">3.5 x 4.5 cm</p></div>
+            </a>
+
+            <!-- Banking -->
+            <a href="#" class="glass p-6 rounded-2xl exam-card flex items-center gap-4">
+                <div class="w-10 h-10 bg-indigo-500/10 rounded-lg flex items-center justify-center text-indigo-500"><i data-lucide="piggy-bank"></i></div>
+                <div><h4 class="font-bold text-sm">IBPS PO/Clerk</h4><p class="text-xs text-slate-500">4.5 x 3.5 cm</p></div>
+            </a>
+            <a href="#" class="glass p-6 rounded-2xl exam-card flex items-center gap-4">
+                <div class="w-10 h-10 bg-indigo-500/10 rounded-lg flex items-center justify-center text-indigo-500"><i data-lucide="briefcase"></i></div>
+                <div><h4 class="font-bold text-sm">SBI Clerk</h4><p class="text-xs text-slate-500">Standard Passport</p></div>
+            </a>
+
+            <!-- Defense / State -->
+            <a href="#" class="glass p-6 rounded-2xl exam-card flex items-center gap-4">
+                <div class="w-10 h-10 bg-orange-500/10 rounded-lg flex items-center justify-center text-orange-500"><i data-lucide="shield"></i></div>
+                <div><h4 class="font-bold text-sm">NDA / CDS</h4><p class="text-xs text-slate-500">UPSC Standard</p></div>
+            </a>
+            <a href="#" class="glass p-6 rounded-2xl exam-card flex items-center gap-4">
+                <div class="w-10 h-10 bg-orange-500/10 rounded-lg flex items-center justify-center text-orange-500"><i data-lucide="flag"></i></div>
+                <div><h4 class="font-bold text-sm">State PSC (UP/BR)</h4><p class="text-xs text-slate-500">Multi-size</p></div>
+            </a>
+
+            <!-- Teaching / NET -->
+            <a href="#" class="glass p-6 rounded-2xl exam-card flex items-center gap-4">
+                <div class="w-10 h-10 bg-emerald-500/10 rounded-lg flex items-center justify-center text-emerald-500"><i data-lucide="graduation-cap"></i></div>
+                <div><h4 class="font-bold text-sm">UGC NET</h4><p class="text-xs text-slate-500">NTA Standard</p></div>
+            </a>
+            <a href="#" class="glass p-6 rounded-2xl exam-card flex items-center gap-4">
+                <div class="w-10 h-10 bg-emerald-500/10 rounded-lg flex items-center justify-center text-emerald-500"><i data-lucide="book-open"></i></div>
+                <div><h4 class="font-bold text-sm">CUET (UG/PG)</h4><p class="text-xs text-slate-500">NTA Standard</p></div>
+            </a>
+
+             <!-- More Exams for SEO -->
+             <a href="#" class="glass p-6 rounded-2xl exam-card flex items-center gap-4">
+                <div class="w-10 h-10 bg-pink-500/10 rounded-lg flex items-center justify-center text-pink-500"><i data-lucide="users"></i></div>
+                <div><h4 class="font-bold text-sm">RRB NTPC</h4><p class="text-xs text-slate-500">35 x 45 mm</p></div>
+            </a>
+            <a href="#" class="glass p-6 rounded-2xl exam-card flex items-center gap-4">
+                <div class="w-10 h-10 bg-blue-500/10 rounded-lg flex items-center justify-center text-blue-500"><i data-lucide="file-text"></i></div>
+                <div><h4 class="font-bold text-sm">CAT 2025</h4><p class="text-xs text-slate-500">Passport White</p></div>
+            </a>
+            <a href="#" class="glass p-6 rounded-2xl exam-card flex items-center gap-4">
+                <div class="w-10 h-10 bg-yellow-500/10 rounded-lg flex items-center justify-center text-yellow-500"><i data-lucide="zap"></i></div>
+                <div><h4 class="font-bold text-sm">CLAT</h4><p class="text-xs text-slate-500">Passport Size</p></div>
+            </a>
+            <a href="#" class="glass p-6 rounded-2xl exam-card flex items-center gap-4">
+                <div class="w-10 h-10 bg-slate-500/10 rounded-lg flex items-center justify-center text-slate-400"><i data-lucide="plus-square"></i></div>
+                <div><h4 class="font-bold text-sm">Custom Resize</h4><p class="text-xs text-slate-500">Any Pixel/CM</p></div>
+            </a>
+        </div>
+    </section>
+
+    <!-- SEO Articles & Guidelines Section -->
+    <section id="guidelines" class="max-w-7xl mx-auto px-6 py-20 bg-white/5 rounded-[3rem] border border-white/5 mb-20">
+        <div class="grid lg:grid-cols-3 gap-16">
+            <!-- Article 1 -->
+            <div class="lg:col-span-2">
+                <h2 class="text-4xl font-black mb-8">Official Photo Guidelines <span class="text-blue-500">2026</span></h2>
+                <div class="prose prose-invert prose-blue text-slate-400 max-w-none space-y-6">
+                    <p>When applying for national exams like <strong>NEET (National Eligibility cum Entrance Test)</strong> or <strong>SSC CGL</strong>, your photograph is the primary way the authority identifies you. Using an incorrect size can lead to immediate disqualification.</p>
+                    
+                    <h3 class="text-xl font-bold text-white mt-8">NEET Postcard Photo Requirements:</h3>
+                    <ul class="list-disc pl-5 space-y-2">
+                        <li>The photograph must be <strong>4"x6" (Postcard Size)</strong>.</li>
+                        <li>It must be in color with a <strong>white background</strong>.</li>
+                        <li>The candidate's <strong>name and date</strong> of taking the photo must be printed at the bottom.</li>
+                        <li>80% face coverage with visible ears.</li>
+                    </ul>
+
+                    <h3 class="text-xl font-bold text-white mt-8">SSC & Banking Photo Standards:</h3>
+                    <p>For SSC, the photo should not be more than three months old from the date of publication of the Notice of Examination. The photograph should be without cap, spectacles, and both ears should be visible.</p>
                 </div>
             </div>
-        </section>
 
-        <!-- Top-Class FAQ -->
-        <section id="faq" class="max-w-3xl mx-auto py-20 px-6">
-            <h2 class="text-4xl font-black mb-12 text-center">Questions?</h2>
-            <div class="space-y-4">
-                <details class="group glass-card rounded-3xl overflow-hidden">
-                    <summary class="p-8 cursor-pointer list-none flex justify-between items-center font-bold text-lg">
-                        Is my data safe?
-                        <i data-lucide="plus" class="group-open:rotate-45 transition"></i>
-                    </summary>
-                    <div class="p-8 pt-0 text-gray-400 leading-relaxed">
-                        We use client-side Canvas technology. Your photos never touch our server. The processing happens entirely within your browser for 100% privacy.
-                    </div>
+            <!-- FAQ Section -->
+            <div class="space-y-6">
+                <h3 class="text-2xl font-black mb-6 italic underline decoration-blue-500">FAQs</h3>
+                <details class="group glass p-5 rounded-2xl">
+                    <summary class="font-bold cursor-pointer list-none flex justify-between">Why use 4x6 for NEET? <i data-lucide="plus" class="group-open:rotate-45 transition"></i></summary>
+                    <p class="text-sm text-slate-500 mt-4 leading-relaxed">NTA requires a larger postcard-sized photo (4"x6") to be pasted on the proforma during the examination for physical verification of the candidate.</p>
                 </details>
-                <details class="group glass-card rounded-3xl overflow-hidden">
-                    <summary class="p-8 cursor-pointer list-none flex justify-between items-center font-bold text-lg">
-                        How to get 80% face coverage?
-                        <i data-lucide="plus" class="group-open:rotate-45 transition"></i>
-                    </summary>
-                    <div class="p-8 pt-0 text-gray-400 leading-relaxed">
-                        Our tool includes a professional cropper. Simply zoom in until your head fills the majority of the crop box, leaving just a small margin at the top.
-                    </div>
+                <details class="group glass p-5 rounded-2xl">
+                    <summary class="font-bold cursor-pointer list-none flex justify-between">How to reduce KB size? <i data-lucide="plus" class="group-open:rotate-45 transition"></i></summary>
+                    <p class="text-sm text-slate-500 mt-4 leading-relaxed">Our tool automatically compresses your image to stay between 20KB to 50KB for SSC and up to 200KB for NEET, maintaining high clarity.</p>
+                </details>
+                <details class="group glass p-5 rounded-2xl">
+                    <summary class="font-bold cursor-pointer list-none flex justify-between">Are these tools free? <i data-lucide="plus" class="group-open:rotate-45 transition"></i></summary>
+                    <p class="text-sm text-slate-500 mt-4 leading-relaxed">Yes, ExamPhoto Pro is 100% free for all students. No registration required.</p>
                 </details>
             </div>
-        </section>
+        </div>
+    </section>
 
-    </main>
-
-    <footer class="py-12 text-center border-t border-white/5 text-gray-500 text-sm">
-        <p>&copy; 2026 EXAMPHOTO PRO. Developed for Students by Exam Experts.</p>
+    <!-- Footer -->
+    <footer class="text-center py-20 border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-wrap justify-center gap-6 text-xs font-bold text-slate-600 mb-10 uppercase tracking-widest">
+                <a href="#">Privacy Policy</a>
+                <a href="#">About Us</a>
+                <a href="#">Disclaimer</a>
+                <a href="#">Contact</a>
+            </div>
+            <p class="text-slate-500 text-sm italic">&copy; 2026 EXAMPHOTO PRO. All Rights Reserved.</p>
+        </div>
     </footer>
 
     <script>
-        // Initialize Lucide Icons
         lucide.createIcons();
     </script>
 </body>
