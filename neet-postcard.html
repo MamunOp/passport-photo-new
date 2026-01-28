@@ -3,17 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NEET Postcard Maker | Official 4x6 Crop & Resize</title>
+    <title>NEET Postcard Size Maker | Official 4x6 Resizer & Cropper</title>
     
+    <!-- Libraries -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
     
-    <!-- Professional Photo Processing Libraries -->
+    <!-- Photo Processing Power -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
-    <!-- HEIC Support (iPhone Photos) -->
     <script src="https://cdn.jsdelivr.net/npm/heic2any@0.0.4/dist/heic2any.min.js"></script>
+
+    <!-- Schema Markup for SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org/",
+      "@type": "SoftwareApplication",
+      "name": "NEET Postcard Photo Maker",
+      "operatingSystem": "Windows, macOS, Android, iOS",
+      "applicationCategory": "UtilitiesApplication",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR" }
+    }
+    </script>
 
     <script>
         tailwind.config = {
@@ -37,112 +49,184 @@
         .tool-card { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(0, 0, 0, 0.05); }
         .dark .tool-card { background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.08); }
         
-        .crop-container { width: 100%; max-height: 500px; overflow: hidden; border-radius: 1.5rem; display: none; background: #000; }
+        /* Fixed Cropper Blank Screen Issue */
+        .crop-container { width: 100%; max-height: 400px; overflow: hidden; border-radius: 1.5rem; display: none; background: #000; position: relative; }
         #imageToCrop { max-width: 100%; display: block; }
-        #finalCanvas { display: none; }
-
-        /* Loading Spinner */
-        #loader { display: none; }
-        .spinner { border: 3px solid rgba(255,255,255,0.1); border-top: 3px solid #3b82f6; border-radius: 50%; width: 24px; height: 24px; animate: spin 1s linear infinite; }
+        
+        .spinner { border: 3px solid rgba(255,255,255,0.1); border-top: 3px solid #3b82f6; border-radius: 50%; width: 30px; height: 30px; animation: spin 1s linear infinite; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     </style>
 </head>
 <body class="mesh-bg text-slate-900 dark:text-slate-100 min-h-screen">
 
+    <!-- Sticky Nav -->
     <nav class="fixed top-0 w-full z-[100] border-b border-slate-200 dark:border-white/5 bg-white/80 dark:bg-slate-950/80 backdrop-blur-xl">
         <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-            <a href="index.html" class="flex items-center gap-2 font-bold text-blue-600 dark:text-blue-400 group text-xs uppercase tracking-widest">
+            <a href="index.html" class="flex items-center gap-2 font-bold text-blue-600 dark:text-blue-400 text-xs uppercase tracking-widest">
                 <i data-lucide="arrow-left" class="w-4 h-4"></i> Home
             </a>
             <span class="font-black italic uppercase tracking-tighter">EXAM<span class="text-blue-500">PHOTO</span></span>
         </div>
     </nav>
 
-    <main class="pt-24 pb-12 px-6 max-w-3xl mx-auto">
+    <!-- 1 & 2: HERO & TOOL (Above the Fold) -->
+    <main class="pt-24 pb-12 px-6 max-w-4xl mx-auto">
         <div class="text-center mb-8">
-            <h1 class="text-3xl md:text-5xl font-black tracking-tighter mb-2">NEET Postcard Maker</h1>
-            <p class="text-slate-500 dark:text-slate-400 text-sm italic">Supports JPG, PNG, HEIC & High-MB Photos</p>
+            <h1 class="text-3xl md:text-5xl font-black tracking-tighter mb-2 leading-tight">NEET Postcard Maker</h1>
+            <p class="text-slate-500 dark:text-slate-400 text-sm italic">Official 4x6 Format • Supports HEIC & Large Photos</p>
         </div>
 
-        <div class="tool-card p-6 md:p-8 rounded-[2.5rem] shadow-2xl space-y-6">
-            
-            <!-- UPLOAD / CROP AREA -->
-            <div id="upload-wrapper" class="relative border-2 border-dashed border-slate-300 dark:border-white/10 rounded-3xl p-4 text-center bg-white/50 dark:bg-black/20 overflow-hidden">
-                
-                <!-- Loading Overlay -->
-                <div id="loader" class="absolute inset-0 z-50 bg-slate-900/80 flex flex-col items-center justify-center space-y-3">
-                    <div class="spinner"></div>
-                    <p class="text-xs font-bold text-white uppercase tracking-widest">Processing High Quality Image...</p>
-                </div>
+        <div class="tool-card p-6 md:p-10 rounded-[2.5rem] shadow-2xl space-y-8 relative">
+            <!-- Universal Loader -->
+            <div id="loader" class="absolute inset-0 z-50 bg-slate-900/90 rounded-[2.5rem] flex flex-col items-center justify-center space-y-4 hidden">
+                <div class="spinner"></div>
+                <p class="text-xs font-black text-white uppercase tracking-[0.2em]">Processing Image...</p>
+            </div>
 
-                <!-- Initial State -->
-                <div id="upload-prompt" class="py-16">
-                    <input type="file" id="fileInput" class="absolute inset-0 opacity-0 cursor-pointer" accept="image/jpeg, image/png, image/jpg, image/heic, image/heif">
-                    <i data-lucide="upload-cloud" class="w-12 h-12 mx-auto mb-3 text-blue-500"></i>
-                    <p class="font-black text-sm uppercase tracking-widest">Select Candidate Photo</p>
-                    <p class="text-[10px] text-slate-500 mt-2 italic font-medium">Supports iPhone (HEIC) & Heavy Photos</p>
+            <!-- Upload Area -->
+            <div id="upload-wrapper" class="relative border-2 border-dashed border-slate-300 dark:border-white/10 rounded-[2rem] p-4 text-center bg-white/50 dark:bg-black/20 overflow-hidden">
+                <div id="upload-prompt" class="py-12">
+                    <input type="file" id="fileInput" class="absolute inset-0 opacity-0 cursor-pointer" accept="image/*, .heic, .heif">
+                    <i data-lucide="camera" class="w-12 h-12 mx-auto mb-3 text-blue-500"></i>
+                    <p class="font-black text-sm uppercase tracking-widest">Select Photo</p>
+                    <p class="text-[10px] text-slate-500 mt-2 font-bold opacity-60">HEIC, PNG, JPG supported</p>
                 </div>
                 
-                <!-- Cropping State -->
-                <div id="crop-wrapper" class="crop-container relative">
+                <div id="crop-wrapper" class="crop-container">
                     <img id="imageToCrop" src="">
-                    <button onclick="resetTool()" class="absolute top-4 right-4 z-10 bg-red-500 text-white p-2 rounded-full shadow-xl hover:bg-red-600 transition">
-                        <i data-lucide="x" class="w-5 h-5"></i>
+                    <button onclick="resetTool()" class="absolute top-4 right-4 z-10 bg-red-500/90 text-white p-2 rounded-full shadow-2xl hover:bg-red-600 transition">
+                        <i data-lucide="refresh-cw" class="w-5 h-5"></i>
                     </button>
                 </div>
             </div>
 
-            <!-- Optional Inputs -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <input type="text" id="nameInput" placeholder="CANDIDATE NAME (OPTIONAL)" class="w-full bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 p-4 rounded-xl outline-none focus:ring-2 ring-blue-500 font-bold uppercase text-xs">
-                <input type="text" id="dateInput" placeholder="DATE OF PHOTO (OPTIONAL)" class="w-full bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 p-4 rounded-xl outline-none focus:ring-2 ring-blue-500 font-bold text-xs">
+            <!-- Inputs -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="space-y-2">
+                    <label class="text-[10px] font-black uppercase tracking-widest text-slate-500 ml-2">Name <span class="text-blue-500 font-bold">(Optional)</span></label>
+                    <input type="text" id="nameInput" placeholder="CANDIDATE NAME" class="w-full bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 p-4 rounded-2xl outline-none focus:ring-2 ring-blue-500 font-bold">
+                </div>
+                <div class="space-y-2">
+                    <label class="text-[10px] font-black uppercase tracking-widest text-slate-500 ml-2">Date <span class="text-blue-500 font-bold">(Optional)</span></label>
+                    <input type="text" id="dateInput" placeholder="DD/MM/YYYY" class="w-full bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 p-4 rounded-2xl outline-none focus:ring-2 ring-blue-500 font-bold">
+                </div>
             </div>
 
-            <!-- Quality & Est Size -->
-            <div class="space-y-4 bg-black/5 dark:bg-white/5 p-5 rounded-2xl">
-                <div class="flex justify-between items-center">
-                    <label class="text-[10px] font-black uppercase tracking-widest text-slate-500">File Compression</label>
+            <!-- Compression -->
+            <div class="space-y-4 pt-4 border-t border-slate-200 dark:border-white/5">
+                <div class="flex justify-between items-center px-2">
+                    <label class="text-[10px] font-black uppercase tracking-widest text-slate-500">Compression Quality</label>
                     <span id="size-estimate" class="text-xs font-black text-blue-600 dark:text-blue-400">Est: -- KB</span>
                 </div>
-                <input type="range" id="qualitySlider" min="10" max="100" value="80" class="w-full h-1.5 bg-slate-200 dark:bg-white/10 rounded-lg appearance-none cursor-pointer accent-blue-600">
+                <input type="range" id="qualitySlider" min="10" max="100" value="85" class="w-full h-1.5 bg-slate-200 dark:bg-white/10 rounded-lg appearance-none cursor-pointer accent-blue-600">
             </div>
 
             <button id="downloadBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-black py-5 rounded-2xl transition shadow-xl shadow-blue-500/20 uppercase tracking-widest text-xs flex items-center justify-center gap-2">
-                <i data-lucide="download-cloud" class="w-5 h-5"></i> Generate 4x6 Postcard
+                <i data-lucide="download-cloud" class="w-5 h-5"></i> Generate Official 4x6 JPG
             </button>
         </div>
     </main>
 
-    <!-- HOW TO USE -->
-    <section class="max-w-4xl mx-auto px-6 py-20 border-t border-slate-200 dark:border-white/5">
-        <h2 class="text-center font-black text-2xl uppercase italic mb-10">How to use NEET Tool</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div class="tool-card p-6 rounded-3xl">
-                <div class="text-blue-500 font-black mb-2">01.</div>
-                <p class="text-xs font-bold leading-relaxed text-slate-500">Upload any photo. Our tool supports heavy files and iPhone HEIC formats automatically.</p>
+    <!-- 3. HOW TO USE SECTION (Process Cards) -->
+    <section class="max-w-7xl mx-auto px-6 py-20 border-t border-slate-200 dark:border-white/5">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-black italic uppercase tracking-tighter">How to use this tool?</h2>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
+            <div class="tool-card p-6 rounded-3xl relative overflow-hidden group">
+                <div class="absolute -top-2 -right-2 text-6xl font-black opacity-5">1</div>
+                <i data-lucide="upload" class="w-8 h-8 text-blue-500 mb-4"></i>
+                <h4 class="font-bold text-sm mb-1 uppercase">Upload</h4>
+                <p class="text-[11px] text-slate-500">Supports HEIC & high MB files.</p>
             </div>
-            <div class="tool-card p-6 rounded-3xl">
-                <div class="text-blue-500 font-black mb-2">02.</div>
-                <p class="text-xs font-bold leading-relaxed text-slate-500">Crop your face within the locked 4:6 frame. Type Name/Date if required.</p>
+            <div class="tool-card p-6 rounded-3xl relative overflow-hidden group">
+                <div class="absolute -top-2 -right-2 text-6xl font-black opacity-5">2</div>
+                <i data-lucide="crop" class="w-8 h-8 text-indigo-500 mb-4"></i>
+                <h4 class="font-bold text-sm mb-1 uppercase">Crop</h4>
+                <p class="text-[11px] text-slate-500">Locked 4:6 aspect ratio.</p>
             </div>
-            <div class="tool-card p-6 rounded-3xl">
-                <div class="text-blue-500 font-black mb-2">03.</div>
-                <p class="text-xs font-bold leading-relaxed text-slate-500">Use the slider to keep file size under 200KB. Download your official JPG.</p>
+            <div class="tool-card p-6 rounded-3xl relative overflow-hidden group">
+                <div class="absolute -top-2 -right-2 text-6xl font-black opacity-5">3</div>
+                <i data-lucide="type" class="w-8 h-8 text-purple-500 mb-4"></i>
+                <h4 class="font-bold text-sm mb-1 uppercase">Stamps</h4>
+                <p class="text-[11px] text-slate-500">Optional Name/Date entry.</p>
+            </div>
+            <div class="tool-card p-6 rounded-3xl relative overflow-hidden group">
+                <div class="absolute -top-2 -right-2 text-6xl font-black opacity-5">4</div>
+                <i data-lucide="maximize" class="w-8 h-8 text-green-500 mb-4"></i>
+                <h4 class="font-bold text-sm mb-1 uppercase">Resize</h4>
+                <p class="text-[11px] text-slate-500">Compressed for 200KB limit.</p>
+            </div>
+            <div class="tool-card p-6 rounded-3xl relative overflow-hidden group">
+                <div class="absolute -top-2 -right-2 text-6xl font-black opacity-5">5</div>
+                <i data-lucide="download" class="w-8 h-8 text-blue-600 mb-4"></i>
+                <h4 class="font-bold text-sm mb-1 uppercase">Save</h4>
+                <p class="text-[11px] text-slate-500">Instant JPG download.</p>
             </div>
         </div>
     </section>
 
-    <!-- FOOTER -->
-    <footer class="py-12 border-t border-slate-200 dark:border-white/10 text-center px-6">
-        <div class="flex flex-wrap justify-center gap-6 text-[11px] font-black uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400 mb-6">
-            <a href="privacy.html" class="hover:text-blue-500 transition">Privacy</a>
-            <a href="terms.html" class="hover:text-blue-500 transition">Terms</a>
-            <a href="contact.html" class="hover:text-blue-500 transition">Contact</a>
+    <!-- 4. GUIDELINES (Detailed) -->
+    <section class="max-w-4xl mx-auto px-6 py-12 border-t border-slate-200 dark:border-white/5">
+        <h2 class="text-3xl font-black mb-10 text-center">NTA Photo Guidelines 2026</h2>
+        <div class="grid md:grid-cols-2 gap-8">
+            <div class="space-y-4">
+                <h3 class="font-black text-sm uppercase tracking-widest text-blue-500 flex items-center gap-2"><i data-lucide="alert-circle"></i> Technical</h3>
+                <ul class="text-sm space-y-3 text-slate-500">
+                    <li>• Dimension: 4"x6" (Portrait).</li>
+                    <li>• Resolution: 300 DPI (1200x1800 px).</li>
+                    <li>• File Limit: 10KB to 200KB.</li>
+                </ul>
+            </div>
+            <div class="space-y-4">
+                <h3 class="font-black text-sm uppercase tracking-widest text-indigo-500 flex items-center gap-2"><i data-lucide="eye"></i> Visibility</h3>
+                <ul class="text-sm space-y-3 text-slate-500">
+                    <li>• 80% face coverage is required.</li>
+                    <li>• Ears must be visible.</li>
+                    <li>• Background must be white.</li>
+                </ul>
+            </div>
         </div>
-        <p class="text-slate-400 dark:text-slate-500 text-[10px] font-bold">© 2026 • EXAMPHOTO PRO • India</p>
+    </section>
+
+    <!-- 5. FAQ (Accordion) -->
+    <section class="max-w-4xl mx-auto px-6 py-20 border-t border-slate-200 dark:border-white/5">
+        <h2 class="text-3xl font-black mb-12 text-center italic">FAQs</h2>
+        <div class="space-y-4">
+            <details class="group tool-card p-6 rounded-3xl cursor-pointer transition-all">
+                <summary class="flex justify-between items-center font-bold list-none">
+                    Is white background mandatory for NEET?
+                    <i data-lucide="chevron-down" class="group-open:rotate-180 transition"></i>
+                </summary>
+                <p class="mt-4 text-sm text-slate-500 opacity-80">Yes, NTA strictly mandates a white background for both passport and postcard photographs.</p>
+            </details>
+            <details class="group tool-card p-6 rounded-3xl cursor-pointer transition-all">
+                <summary class="flex justify-between items-center font-bold list-none">
+                    Can I use my iPhone HEIC photo?
+                    <i data-lucide="chevron-down" class="group-open:rotate-180 transition"></i>
+                </summary>
+                <p class="mt-4 text-sm text-slate-500 opacity-80">Yes! Our tool automatically converts HEIC to official JPG format in real-time.</p>
+            </details>
+        </div>
+    </section>
+
+    <!-- FOOTER (SEO) -->
+    <footer class="py-16 border-t border-slate-200 dark:border-white/10 text-center px-6 bg-slate-100/50 dark:bg-black/20">
+        <div class="flex flex-wrap justify-center gap-6 text-[11px] font-black uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400 mb-8">
+            <a href="privacy.html" class="hover:text-blue-500 transition">Privacy</a>
+            <span class="opacity-20">|</span>
+            <a href="terms.html" class="hover:text-blue-500 transition">Terms</a>
+            <span class="opacity-20">|</span>
+            <a href="contact.html" class="hover:text-blue-500 transition">Contact</a>
+            <span class="opacity-20">|</span>
+            <a href="disclaimer.html" class="hover:text-blue-500 transition">Disclaimer</a>
+        </div>
+        <p class="text-slate-400 dark:text-slate-500 text-[10px] font-bold uppercase tracking-widest">
+            © 2026 &bull; ExamPhoto Pro &bull; India
+        </p>
     </footer>
 
-    <canvas id="finalCanvas"></canvas>
+    <canvas id="finalCanvas" class="hidden"></canvas>
 
     <script>
         lucide.createIcons();
@@ -159,30 +243,28 @@
 
         let cropper = null;
 
-        // Reset Tool Function
         function resetTool() {
-            if(cropper) cropper.destroy();
+            if (cropper) cropper.destroy();
             fileInput.value = "";
             cropWrapper.style.display = 'none';
             uploadPrompt.style.display = 'block';
             sizeEstimate.innerText = "Est: -- KB";
         }
 
-        // Handle File Upload
         fileInput.addEventListener('change', async (e) => {
             let file = e.target.files[0];
             if (!file) return;
 
-            loader.style.display = 'flex';
+            loader.classList.remove('hidden');
 
-            // Check if HEIC
+            // Handle HEIC/HEIF
             if (file.name.toLowerCase().endsWith(".heic") || file.name.toLowerCase().endsWith(".heif")) {
                 try {
                     const blob = await heic2any({ blob: file, toType: "image/jpeg", quality: 0.7 });
-                    file = blob;
+                    file = Array.isArray(blob) ? blob[0] : blob;
                 } catch (err) {
-                    alert("Error converting HEIC image.");
-                    loader.style.display = 'none';
+                    alert("Conversion error. Try a JPG/PNG.");
+                    loader.classList.add('hidden');
                     return;
                 }
             }
@@ -192,7 +274,7 @@
                 imageToCrop.src = event.target.result;
                 uploadPrompt.style.display = 'none';
                 cropWrapper.style.display = 'block';
-                loader.style.display = 'none';
+                loader.classList.add('hidden');
 
                 if (cropper) cropper.destroy();
                 cropper = new Cropper(imageToCrop, {
@@ -209,13 +291,11 @@
         function updateLiveResult() {
             if (!cropper) return;
 
-            const W = 1200; // 4" @ 300 DPI
-            const H = 1800; // 6" @ 300 DPI
-            finalCanvas.width = W;
-            finalCanvas.height = H;
+            const W = 1200, H = 1800;
+            finalCanvas.width = W; finalCanvas.height = H;
 
             const croppedCanvas = cropper.getCroppedCanvas({ width: W, height: H, imageSmoothingQuality: 'high' });
-
+            
             ctx.fillStyle = "white";
             ctx.fillRect(0, 0, W, H);
             ctx.drawImage(croppedCanvas, 0, 0, W, H);
@@ -224,17 +304,17 @@
             const date = document.getElementById('dateInput').value.trim();
 
             if (name || date) {
-                const sH = H * 0.16;
+                const sH = H * 0.17;
                 ctx.fillStyle = "white";
                 ctx.fillRect(0, H - sH, W, sH);
                 ctx.fillStyle = "black";
                 ctx.textAlign = "center";
                 if (name) {
-                    ctx.font = "bold 80px sans-serif";
+                    ctx.font = "bold 85px sans-serif";
                     ctx.fillText(name.toUpperCase(), W/2, H - (sH/1.8));
                 }
                 if (date) {
-                    ctx.font = "60px sans-serif";
+                    ctx.font = "65px sans-serif";
                     ctx.fillText(date, W/2, H - (sH/5));
                 }
             }
@@ -253,11 +333,16 @@
             if (!cropper) return alert("Upload a photo first!");
             const q = qualitySlider.value / 100;
             const link = document.createElement('a');
-            link.download = `NEET_4x6_Postcard.jpg`;
+            link.download = `NEET_4x6_Postcard_2026.jpg`;
             link.href = finalCanvas.toDataURL('image/jpeg', q);
             link.click();
         });
 
+        // Theme Toggle
+        function toggleTheme() {
+            const isDark = document.documentElement.classList.toggle('dark');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        }
         if (localStorage.getItem('theme') === 'dark') document.documentElement.classList.add('dark');
     </script>
 </body>
