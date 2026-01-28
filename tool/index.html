@@ -4,26 +4,33 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css">
-    <title>Photo Processor</title>
+    <title>Photo Maker Tool</title>
 </head>
-<body>
-    <div class="tool-container">
-        <h1 id="tool-title">Photo Maker</h1>
-        <div id="rules-summary"></div>
+<body class="light-bg">
+
+<header>
+    <div class="container">
+        <span id="exam-label">Loading Tool...</span>
+    </div>
+</header>
+
+<div class="container">
+    <div class="tool-box">
+        <h2>Step 1: Upload Photo</h2>
+        <input type="file" id="upload" accept="image/jpeg">
         
-        <input type="file" id="upload" accept="image/jpeg, image/jpg">
-        
-        <div class="crop-area">
-            <img id="image-to-crop" src="" style="display:none;">
+        <div id="crop-wrapper" style="margin-top: 20px; display: none;">
+            <h2>Step 2: Crop Face Correctly</h2>
+            <img id="image-to-crop">
+            <button id="download-btn" class="cta-btn" style="margin-top: 20px; width:100%;">Download Validated Photo</button>
         </div>
 
-        <button id="download-btn" style="display:none;">Download & Validate</button>
-        
-        <div id="validation-box"></div>
+        <div id="validation-feedback"></div>
     </div>
+</div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
-    <script src="/assets/js/presets.js"></script>
-    <script src="/assets/js/app.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
+<script src="/assets/js/presets.js"></script>
+<script src="/assets/js/app.js"></script>
 </body>
 </html>
