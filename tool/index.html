@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photo Resizer Tool</title>
+    
+    <!-- Libraries -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css">
+    <style>
+        /* Mobile-First CSS */
+        body { font-family: sans-serif; margin: 0; padding: 20px; background: #f4f4f9; color: #333; }
+        .container { max-width: 500px; margin: 0 auto; background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        h1 { font-size: 1.2rem; text-align: center; }
+        
+        .step { display: none; text-align: center; }
+        .step.active { display: block; }
+
+        .upload-area { border: 2px dashed #007bff; padding: 40px 20px; border-radius: 8px; cursor: pointer; }
+        .img-container { width: 100%; max-height: 400px; margin-top: 20px; }
+        img { max-width: 100%; }
+
+        button { 
+            background: #007bff; color: white; border: none; padding: 12px 24px; 
+            border-radius: 6px; font-weight: bold; width: 100%; margin-top: 20px; cursor: pointer;
+        }
+        
+        .validation-card { background: #e8f4fd; padding: 15px; border-radius: 8px; margin: 20px 0; text-align: left; }
+        .status-ok { color: green; font-weight: bold; }
+        .status-error { color: red; font-weight: bold; }
+
+        /* Ad Placeholder */
+        .ad-placeholder { background: #eee; height: 100px; margin: 20px 0; display: flex; align-items: center; justify-content: center; font-size: 12px; color: #888; border: 1px solid #ddd; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1 id="tool-title">Photo Resizer</h1>
+
+    <!-- Step 1: Upload -->
+    <div id="step-1" class="step active">
+        <div class="upload-area" onclick="document.getElementById('imageInput').click()">
+            <p>📸 Tap to Upload Photo</p>
+            <input type="file" id="imageInput" accept="image/*" hidden>
+        </div>
+        <div class="ad-placeholder">Ad Space (Below Tool)</div>
+    </div>
+
+    <!-- Step 2: Crop -->
+    <div id="step-2" class="step">
+        <div class="img-container">
+            <img id="cropperImage">
+        </div>
+        <button id="cropBtn">Next: Adjust Size & KB</button>
+    </div>
+
+    <!-- Step 3: Result -->
+    <div id="step-3" class="step">
+        <div class="validation-card">
+            <p id="sizeLabel">Dimensions: --</p>
+            <p id="kbLabel">File Size: --</p>
+            <div id="validationStatus"></div>
+        </div>
+        <button id="downloadBtn">Download JPG</button>
+        <button onclick="location.reload()" style="background:#666; margin-top:10px;">Start Over</button>
+    </div>
+</div>
+
+<!-- Load Scripts -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
+<script src="../assets/js/presets.js"></script>
+
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const presetId = urlParams.get('id') || 'neet'; // Default to NEET if no ID
+    const config = presets[presetId];
+
+    let cropper;
+    const imageInput = document.getElementById('imageInput');
+    const cropperImg = document.getElementById('cropperImage');
+
+    if (config) {
+        document.getElementById('tool-title').innerText = "Resize for " + config.name;
+    }
+
+    // 1. Handle Upload
+    imageInput.onchange = (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = (event) => {
+            cropperImg.src = event.target.result;
+            showStep(2);
+            
+            // Initialize Cropper
+            if (cropper) cropper.destroy();
+            cropper = new Cropper(cropperImg, {
+                aspectRatio: config.widthMm / config.heightMm,
+                viewMode: 1,
+                autoCropArea: 1
+            });
+        };
+        reader.readAsDataURL(file);
+    };
+
+    // 2. Process Image
+    document.getElementById('cropBtn').onclick = () => {
+        if (!cropper) return;
+
+        // Convert MM to PX (using 300 DPI)
+        const targetW = Math.round((config.widthMm / 25.4) * 300);
+        const targetH = Math.round((config.heightMm / 25.4) * 300);
+
+        const canvas = cropper.getCroppedCanvas({ width: targetW, height: targetH });
+
+        // KB Compression Logic
+        compressToKb(canvas, config.maxKb);
+    };
+
+    function compressToKb(canvas, maxKb) {
+        let quality = 0.9;
+        function tryCompress() {
+            canvas.toBlob((blob) => {
+                const sizeKb = blob.size / 1024;
+                if (sizeKb > maxKb && quality > 0.1) {
+                    quality -= 0.1;
+                    tryCompress();
+                } else {
+                    finishStep(blob, sizeKb, canvas.width, canvas.height);
+                }
+            }, 'image/jpeg', quality);
+        }
+        tryCompress();
+    }
+
+    function finishStep(blob, sizeKb, w, h) {
+        showStep(3);
+        document.getElementById('sizeLabel').innerText = `Dimensions: ${config.widthMm}mm x ${config.heightMm}mm (${w}px x ${h}px)`;
+        document.getElementById('kbLabel').innerText = `File Size: ${sizeKb.toFixed(2)} KB`;
+        
+        const statusDiv = document.getElementById('validationStatus');
+        if (sizeKb <= config.maxKb) {
+            statusDiv.innerHTML = "<p class='status-ok'>✅ Meets all requirements</p>";
+        } else {
+            statusDiv.innerHTML = "<p class='status-error'>⚠️ Still over ${config.maxKb}KB. Try a simpler background.</p>";
+        }
+
+        const url = URL.createObjectURL(blob);
+        document.getElementById('downloadBtn').onclick = () => {
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${config.id}-photo.jpg`;
+            a.click();
+        };
+    }
+
+    function showStep(stepNum) {
+        document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+        document.getElementById('step-' + stepNum).classList.add('active');
+    }
+</script>
+</body>
+</html>
