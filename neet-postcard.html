@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NEET Postcard Size Photo Maker 2025-26 | ExamPhoto Pro</title>
+    <title>NEET Postcard Size Maker | ExamPhoto Pro</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -13,9 +13,7 @@
             darkMode: 'class',
             theme: {
                 extend: {
-                    colors: {
-                        brand: { 500: '#3b82f6', 600: '#2563eb', 950: '#020617' }
-                    }
+                    colors: { brand: { 500: '#3b82f6', 600: '#2563eb' } }
                 }
             }
         }
@@ -33,209 +31,231 @@
             background-image: radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), 
                               radial-gradient(at 100% 0%, hsla(225,39%,20%,1) 0, transparent 50%);
         }
-        .tool-card {
-            background: rgba(255, 255, 255, 0.6);
-            backdrop-filter: blur(10px);
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
             border: 1px solid rgba(0, 0, 0, 0.05);
         }
-        .dark .tool-card {
+        .dark .glass-card {
             background: rgba(255, 255, 255, 0.02);
             border: 1px solid rgba(255, 255, 255, 0.08);
         }
-        canvas { max-width: 100%; height: auto; border-radius: 1rem; }
+        canvas { 
+            max-width: 100%; 
+            height: auto !important; 
+            border-radius: 1rem; 
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
     </style>
 </head>
-<body class="mesh-bg text-slate-900 dark:text-slate-100">
+<body class="mesh-bg text-slate-900 dark:text-slate-100 min-h-screen">
 
-    <!-- Theme Toggle -->
-    <button onclick="toggleTheme()" class="fixed bottom-6 right-6 z-[100] p-4 bg-white dark:bg-slate-800 rounded-full shadow-2xl border border-slate-200 dark:border-slate-700 hover:scale-110 transition-all">
-        <i data-lucide="sun" class="hidden dark:block text-yellow-400"></i>
-        <i data-lucide="moon" class="block dark:hidden text-indigo-600"></i>
-    </button>
-
-    <!-- Navigation -->
+    <!-- Navbar -->
     <nav class="fixed top-0 w-full z-[100] border-b border-slate-200 dark:border-white/5 bg-white/80 dark:bg-slate-950/80 backdrop-blur-xl">
         <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
             <a href="index.html" class="flex items-center gap-2 font-bold text-blue-600 dark:text-blue-400 group">
-                <i data-lucide="arrow-left" class="w-5 h-5 group-hover:-translate-x-1 transition"></i>
-                Back to Home
+                <i data-lucide="arrow-left" class="w-4 h-4 group-hover:-translate-x-1 transition"></i>
+                <span class="text-sm uppercase tracking-widest font-black">Home</span>
             </a>
             <div class="flex items-center gap-2">
                 <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
                     <i data-lucide="aperture" class="text-white w-5 h-5"></i>
                 </div>
-                <span class="font-black italic uppercase tracking-tighter hidden sm:block">EXAM<span class="text-blue-500">PHOTO</span></span>
+                <span class="font-black italic uppercase tracking-tighter">EXAM<span class="text-blue-500">PHOTO</span></span>
             </div>
         </div>
     </nav>
 
-    <!-- 1 & 2: HERO & TOOL SECTION (Above the Fold) -->
+    <!-- Main Tool Interface -->
     <main class="pt-24 pb-12 px-6 max-w-7xl mx-auto">
-        <div class="grid lg:grid-cols-2 gap-12 items-center">
+        
+        <!-- Hero Title -->
+        <div class="text-center mb-10">
+            <h1 class="text-3xl md:text-5xl font-black tracking-tighter mb-3">NEET Postcard Maker</h1>
+            <p class="text-slate-500 dark:text-slate-400 text-sm md:text-base italic">Official 4" x 6" Postcard Size with Name & Date Stamp</p>
+        </div>
+
+        <div class="grid lg:grid-cols-2 gap-8 items-start">
             
-            <!-- Left Side: Hero Info -->
-            <div class="text-center lg:text-left">
-                <div class="inline-flex items-center gap-2 bg-blue-500/10 border border-blue-500/20 px-4 py-1.5 rounded-full text-blue-600 dark:text-blue-400 text-xs font-bold mb-6">
-                    OFFICIAL NTA SPECIFICATIONS
-                </div>
-                <h1 class="text-4xl md:text-6xl font-black tracking-tighter mb-6 leading-tight">
-                    NEET <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-500">Postcard Photo</span> Maker 2025–26
-                </h1>
-                <p class="text-slate-600 dark:text-slate-400 text-lg mb-8 leading-relaxed">
-                    Official 4"x6" size and format. Automatic background verification. <br class="hidden md:block"> 
-                    <span class="font-bold text-slate-900 dark:text-white">One click. Zero rejection.</span>
-                </p>
+            <!-- LEFT: Inputs -->
+            <div class="glass-card p-6 md:p-8 rounded-[2rem] space-y-6 order-2 lg:order-1">
                 
-                <div class="hidden lg:flex items-center gap-8 opacity-60">
-                    <div class="text-center">
-                        <div class="font-black text-xl">4" x 6"</div>
-                        <div class="text-[10px] uppercase tracking-widest font-bold">Size</div>
-                    </div>
-                    <div class="w-px h-8 bg-slate-300 dark:bg-white/10"></div>
-                    <div class="text-center">
-                        <div class="font-black text-xl">JPG</div>
-                        <div class="text-[10px] uppercase tracking-widest font-bold">Format</div>
-                    </div>
-                    <div class="w-px h-8 bg-slate-300 dark:bg-white/10"></div>
-                    <div class="text-center">
-                        <div class="font-black text-xl">10-200KB</div>
-                        <div class="text-[10px] uppercase tracking-widest font-bold">File Size</div>
+                <!-- Upload Section -->
+                <div class="relative border-2 border-dashed border-slate-300 dark:border-white/10 rounded-3xl p-8 text-center hover:border-blue-500 transition cursor-pointer bg-white/50 dark:bg-black/20">
+                    <input type="file" id="fileInput" class="absolute inset-0 opacity-0 cursor-pointer" accept="image/*">
+                    <div id="upload-prompt">
+                        <i data-lucide="upload" class="w-10 h-10 mx-auto mb-3 text-blue-500"></i>
+                        <p class="font-bold text-sm uppercase tracking-widest">Upload Photo</p>
                     </div>
                 </div>
-            </div>
 
-            <!-- Right Side: The Tool -->
-            <div class="tool-card p-6 md:p-8 rounded-[2.5rem] shadow-2xl relative overflow-hidden">
-                <div class="space-y-6">
-                    <!-- File Upload -->
-                    <div id="drop-zone" class="border-2 border-dashed border-slate-300 dark:border-white/10 rounded-3xl p-8 text-center hover:border-blue-500 transition cursor-pointer bg-white/50 dark:bg-black/20">
-                        <input type="file" id="fileInput" class="hidden" accept="image/*">
-                        <label for="fileInput" class="cursor-pointer">
-                            <i data-lucide="upload-cloud" class="w-12 h-12 mx-auto mb-4 text-blue-500"></i>
-                            <p class="font-bold text-lg">Upload Photo</p>
-                            <p class="text-xs text-slate-500 mt-1">Select candidate's passport photo</p>
-                        </label>
+                <!-- Text Inputs -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="space-y-2">
+                        <label class="text-[10px] font-black uppercase tracking-widest text-slate-500 ml-2">Name on Photo</label>
+                        <input type="text" id="nameInput" placeholder="CANDIDATE NAME" class="w-full bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 p-4 rounded-xl outline-none focus:ring-2 ring-blue-500">
                     </div>
-
-                    <!-- Inputs for Stamp -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div class="space-y-1">
-                            <label class="text-[10px] font-black uppercase tracking-widest text-slate-500 ml-2">Candidate Name</label>
-                            <input type="text" id="nameInput" placeholder="As per Aadhaar" class="w-full bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 p-4 rounded-2xl outline-none focus:ring-2 ring-blue-500 dark:text-white">
-                        </div>
-                        <div class="space-y-1">
-                            <label class="text-[10px] font-black uppercase tracking-widest text-slate-500 ml-2">Date of Photo</label>
-                            <input type="text" id="dateInput" placeholder="DD/MM/YYYY" class="w-full bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 p-4 rounded-2xl outline-none focus:ring-2 ring-blue-500 dark:text-white">
-                        </div>
+                    <div class="space-y-2">
+                        <label class="text-[10px] font-black uppercase tracking-widest text-slate-500 ml-2">Date of Photo</label>
+                        <input type="text" id="dateInput" placeholder="DD/MM/YYYY" class="w-full bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 p-4 rounded-xl outline-none focus:ring-2 ring-blue-500">
                     </div>
-
-                    <!-- KB Control -->
-                    <div class="space-y-3">
-                        <div class="flex justify-between items-center px-2">
-                            <label class="text-[10px] font-black uppercase tracking-widest text-slate-500">Compression Quality</label>
-                            <span id="kb-label" class="text-xs font-bold text-blue-600 dark:text-blue-400">Target: High Quality</span>
-                        </div>
-                        <input type="range" id="qualitySlider" min="10" max="100" value="90" class="w-full h-1.5 bg-slate-200 dark:bg-white/10 rounded-lg appearance-none cursor-pointer accent-blue-600">
-                    </div>
-
-                    <button id="downloadBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-black py-5 rounded-2xl transition-all shadow-xl shadow-blue-500/20 uppercase tracking-widest text-sm flex items-center justify-center gap-2">
-                        <i data-lucide="download" class="w-5 h-5"></i> Download 4x6 Result
-                    </button>
                 </div>
+
+                <!-- Quality Slider -->
+                <div class="space-y-4 pt-2">
+                    <div class="flex justify-between items-center">
+                        <label class="text-[10px] font-black uppercase tracking-widest text-slate-500 ml-2">Image Quality (KB Control)</label>
+                        <span id="qualityLabel" class="text-xs font-bold text-blue-500">90%</span>
+                    </div>
+                    <input type="range" id="qualitySlider" min="10" max="100" value="90" class="w-full h-1.5 bg-slate-200 dark:bg-white/10 rounded-lg appearance-none cursor-pointer accent-blue-600">
+                </div>
+
+                <!-- Download -->
+                <button id="downloadBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-black py-4 rounded-2xl transition shadow-xl shadow-blue-500/20 uppercase tracking-widest text-xs flex items-center justify-center gap-2">
+                    <i data-lucide="download" class="w-4 h-4"></i> Download JPG
+                </button>
             </div>
+
+            <!-- RIGHT: Preview -->
+            <div class="flex flex-col items-center order-1 lg:order-2">
+                <div id="preview-container" class="glass-card p-4 rounded-[2rem] w-full flex items-center justify-center min-h-[400px]">
+                    <p id="placeholder-text" class="text-slate-400 font-bold uppercase tracking-widest text-xs">Preview will appear here</p>
+                    <canvas id="mainCanvas" class="hidden"></canvas>
+                </div>
+                <p class="mt-4 text-[10px] font-black uppercase tracking-widest text-slate-500 italic">Official 4:6 Aspect Ratio</p>
+            </div>
+
         </div>
     </main>
 
-    <!-- Preview Section (Visible after upload) -->
-    <section id="preview-section" class="hidden max-w-xl mx-auto px-6 pb-20 text-center">
-        <h3 class="text-xs font-black uppercase tracking-[0.3em] text-slate-500 mb-8 italic">Live 4"x 6" Preview</h3>
-        <div class="inline-block p-4 tool-card rounded-[2.5rem] shadow-2xl">
-            <canvas id="mainCanvas"></canvas>
+    <!-- More Exam Tools Section -->
+    <section class="max-w-7xl mx-auto px-6 py-20 border-t border-slate-200 dark:border-white/5">
+        <h2 class="text-2xl font-black mb-8 italic uppercase tracking-tighter">More Exam Tools</h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <a href="neet-passport.html" class="glass-card p-6 rounded-3xl text-center hover:border-blue-500 transition">
+                <i data-lucide="user" class="w-6 h-6 mx-auto mb-2 text-indigo-500"></i>
+                <p class="text-[10px] font-black uppercase tracking-widest">NEET Passport</p>
+            </a>
+            <a href="ssc.html" class="glass-card p-6 rounded-3xl text-center hover:border-blue-500 transition">
+                <i data-lucide="shield-check" class="w-6 h-6 mx-auto mb-2 text-green-500"></i>
+                <p class="text-[10px] font-black uppercase tracking-widest">SSC CGL/CHSL</p>
+            </a>
+            <a href="upsc.html" class="glass-card p-6 rounded-3xl text-center hover:border-blue-500 transition">
+                <i data-lucide="landmark" class="w-6 h-6 mx-auto mb-2 text-purple-500"></i>
+                <p class="text-[10px] font-black uppercase tracking-widest">UPSC / IAS</p>
+            </a>
+            <a href="signature.html" class="glass-card p-6 rounded-3xl text-center hover:border-blue-500 transition">
+                <i data-lucide="pen-tool" class="w-6 h-6 mx-auto mb-2 text-blue-500"></i>
+                <p class="text-[10px] font-black uppercase tracking-widest">Signature</p>
+            </a>
         </div>
     </section>
 
-    <!-- 3. OFFICIAL GUIDELINES -->
-    <section class="max-w-4xl mx-auto px-6 py-20 border-t border-slate-200 dark:border-white/5">
-        <h2 class="text-3xl font-black mb-10 text-center">NEET Postcard Guidelines</h2>
-        <div class="grid md:grid-cols-2 gap-8">
-            <div class="tool-card p-6 rounded-3xl space-y-4">
-                <h4 class="font-bold flex items-center gap-2 text-blue-500">
-                    <i data-lucide="maximize" class="w-5 h-5"></i> Size & Format
-                </h4>
-                <ul class="text-sm text-slate-600 dark:text-slate-400 space-y-2 font-medium">
-                    <li>• Dimension: Exactly 4 inches x 6 inches (Postcard).</li>
-                    <li>• Format: Strictly JPG or JPEG format.</li>
-                    <li>• File Size: Must be between 10KB to 200KB.</li>
-                </ul>
-            </div>
-            <div class="tool-card p-6 rounded-3xl space-y-4">
-                <h4 class="font-bold flex items-center gap-2 text-indigo-500">
-                    <i data-lucide="user-check" class="w-5 h-5"></i> Appearance Rules
-                </h4>
-                <ul class="text-sm text-slate-600 dark:text-slate-400 space-y-2 font-medium">
-                    <li>• Background: Plain white background only.</li>
-                    <li>• Face: 80% face coverage, ears visible.</li>
-                    <li>• Stamp: Name and Date mandatory at bottom.</li>
-                </ul>
-            </div>
+    <!-- Guidelines & FAQ -->
+    <section class="max-w-4xl mx-auto px-6 py-12 space-y-20">
+        <div>
+            <h2 class="text-2xl font-black mb-6 italic uppercase">NTA Guidelines</h2>
+            <ul class="space-y-4 text-sm text-slate-500 dark:text-slate-400">
+                <li class="flex gap-3"><i data-lucide="check" class="text-green-500 shrink-0"></i> 4x6 inches is mandatory for the Postcard photo.</li>
+                <li class="flex gap-3"><i data-lucide="check" class="text-green-500 shrink-0"></i> Background must be white. No colors or shadows.</li>
+                <li class="flex gap-3"><i data-lucide="check" class="text-green-500 shrink-0"></i> Name of the candidate and date of photo must be printed at the bottom.</li>
+            </ul>
         </div>
     </section>
 
-    <!-- 4. FAQs -->
-    <section class="max-w-4xl mx-auto px-6 py-20 border-t border-slate-200 dark:border-white/5">
-        <h2 class="text-3xl font-black mb-10 text-center italic">FAQs</h2>
-        <div class="space-y-4">
-            <details class="group tool-card p-6 rounded-2xl cursor-pointer overflow-hidden transition-all">
-                <summary class="flex justify-between items-center font-bold text-slate-900 dark:text-white list-none">
-                    What is the postcard size for NEET in pixels?
-                    <i data-lucide="chevron-down" class="w-5 h-5 group-open:rotate-180 transition"></i>
-                </summary>
-                <p class="mt-4 text-slate-600 dark:text-slate-400 text-sm leading-relaxed">For a high-quality 300 DPI print, the size is 1200 x 1800 pixels. Our tool automatically sets this for you.</p>
-            </details>
-            <details class="group tool-card p-6 rounded-2xl cursor-pointer overflow-hidden transition-all">
-                <summary class="flex justify-between items-center font-bold text-slate-900 dark:text-white list-none">
-                    Is the name and date stamp mandatory for 2026?
-                    <i data-lucide="chevron-down" class="w-5 h-5 group-open:rotate-180 transition"></i>
-                </summary>
-                <p class="mt-4 text-slate-600 dark:text-slate-400 text-sm leading-relaxed">Yes. NTA requires the candidate's name and the date of taking the photograph to be clearly printed at the bottom of the photo.</p>
-            </details>
-            <details class="group tool-card p-6 rounded-2xl cursor-pointer overflow-hidden transition-all">
-                <summary class="flex justify-between items-center font-bold text-slate-900 dark:text-white list-none">
-                    Can I upload a PNG photo?
-                    <i data-lucide="chevron-down" class="w-5 h-5 group-open:rotate-180 transition"></i>
-                </summary>
-                <p class="mt-4 text-slate-600 dark:text-slate-400 text-sm leading-relaxed">You can upload any image, but our tool will automatically convert it to the NTA-required JPG format upon download.</p>
-            </details>
-            <details class="group tool-card p-6 rounded-2xl cursor-pointer overflow-hidden transition-all">
-                <summary class="flex justify-between items-center font-bold text-slate-900 dark:text-white list-none">
-                    Will my photo be rejected if the background isn't white?
-                    <i data-lucide="chevron-down" class="w-5 h-5 group-open:rotate-180 transition"></i>
-                </summary>
-                <p class="mt-4 text-slate-600 dark:text-slate-400 text-sm leading-relaxed">Yes. NTA is very strict about the white background. If your original photo has a colored background, please use a background remover before uploading here.</p>
-            </details>
-        </div>
-    </section>
-
-    <footer class="py-12 text-center opacity-50 text-[10px] font-bold uppercase tracking-widest">
-        &copy; 2026 ExamPhoto Pro | Professional NEET Utilities
+    <footer class="py-10 text-center opacity-30 text-[10px] font-black uppercase tracking-[0.3em]">
+        ExamPhoto Pro &copy; 2026
     </footer>
 
     <script>
         lucide.createIcons();
 
-        // Theme Logic
-        function toggleTheme() {
-            const html = document.documentElement;
-            if (html.classList.contains('dark')) {
-                html.classList.remove('dark');
-                localStorage.setItem('theme', 'light');
-            } else {
-                html.classList.add('dark');
-                localStorage.setItem('theme', 'dark');
-            }
+        // Canvas Setup
+        const canvas = document.getElementById('mainCanvas');
+        const ctx = canvas.getContext('2d');
+        const fileInput = document.getElementById('fileInput');
+        const qualitySlider = document.getElementById('qualitySlider');
+        const qualityLabel = document.getElementById('qualityLabel');
+        let activeImage = null;
+
+        // Postcard Dimensions (1200x1800 for 4x6 at 300 DPI)
+        const W = 1200;
+        const H = 1800;
+
+        fileInput.addEventListener('change', (e) => {
+            const reader = new FileReader();
+            reader.onload = (event) => {
+                activeImage = new Image();
+                activeImage.onload = render;
+                activeImage.src = event.target.result;
+                
+                // Show Canvas
+                canvas.classList.remove('hidden');
+                document.getElementById('placeholder-text').classList.add('hidden');
+            };
+            reader.readAsDataURL(e.target.files[0]);
+        });
+
+        function render() {
+            if(!activeImage) return;
+
+            canvas.width = W;
+            canvas.height = H;
+
+            // Fill Background
+            ctx.fillStyle = "white";
+            ctx.fillRect(0, 0, W, H);
+
+            // Calculate Scaling (Center Crop)
+            const scale = Math.max(W / activeImage.width, H / activeImage.height);
+            const x = (W / 2) - (activeImage.width / 2) * scale;
+            const y = (H * 0.45) - (activeImage.height / 2) * scale; // Adjust for stamp space
+
+            ctx.drawImage(activeImage, x, y, activeImage.width * scale, activeImage.height * scale);
+
+            // Stamp Area
+            const sH = H * 0.16;
+            ctx.fillStyle = "white";
+            ctx.fillRect(0, H - sH, W, sH);
+
+            // Draw Text
+            ctx.fillStyle = "black";
+            ctx.textAlign = "center";
+            
+            // Name
+            ctx.font = "bold 85px sans-serif";
+            const name = document.getElementById('nameInput').value.toUpperCase() || "NAME HERE";
+            ctx.fillText(name, W/2, H - (sH/1.8));
+
+            // Date
+            ctx.font = "60px sans-serif";
+            const date = document.getElementById('dateInput').value || "DD/MM/YYYY";
+            ctx.fillText(date, W/2, H - (sH/5));
+            
+            // Update Label
+            qualityLabel.innerText = qualitySlider.value + "%";
         }
 
-        if (localStorage.getItem('theme') === 'dark') document.documentElement.classList.add('dark');
+        ['nameInput', 'dateInput', 'qualitySlider'].forEach(id => {
+            document.getElementById(id).addEventListener('input', render);
+        });
 
-        // Canvas Logic
-        const canvas = document.get
+        document.getElementById('downloadBtn').addEventListener('click', () => {
+            if(!activeImage) return alert("Please upload a photo first!");
+            const q = qualitySlider.value / 100;
+            const link = document.createElement('a');
+            link.download = `NEET_Postcard_${Date.now()}.jpg`;
+            link.href = canvas.toDataURL('image/jpeg', q);
+            link.click();
+        });
+
+        // Theme Toggle
+        function toggleTheme() {
+            document.documentElement.classList.toggle('dark');
+            const isDark = document.documentElement.classList.contains('dark');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        }
+        if (localStorage.getItem('theme') === 'dark') document.documentElement.classList.add('dark');
+    </script>
+</body>
+</html>
