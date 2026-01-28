@@ -1,0 +1,33 @@
+:root {
+    --primary: #003366; --accent: #27ae60; --bg: #f0f2f5; --white: #ffffff;
+}
+body { font-family: 'Segoe UI', sans-serif; background: var(--bg); margin: 0; color: #333; }
+.navbar { background: var(--primary); color: white; padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; border-bottom: 3px solid #ff9900; }
+
+/* Tool Layout */
+.tool-grid { display: grid; grid-template-columns: 350px 1fr; gap: 20px; padding: 20px 5%; max-width: 1400px; margin: auto; }
+
+/* Sidebar/Settings */
+.settings-panel { background: var(--white); padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); height: fit-content; }
+.rule-tag { background: #eef2f7; padding: 10px; border-radius: 5px; margin-bottom: 10px; border-left: 4px solid var(--primary); }
+.rule-tag small { color: #666; display: block; }
+.rule-tag b { color: var(--primary); font-size: 1.1rem; }
+
+/* Canvas Area */
+.preview-panel { background: var(--white); padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); text-align: center; min-height: 500px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.upload-box { border: 2px dashed #ccc; padding: 50px; width: 80%; cursor: pointer; border-radius: 10px; transition: 0.3s; }
+.upload-box:hover { border-color: var(--primary); background: #f9f9f9; }
+
+/* Image Cropper sizing */
+.cropper-container { max-width: 100%; max-height: 60vh; margin-top: 20px; }
+
+/* Buttons */
+.btn-main { background: var(--accent); color: white; border: none; padding: 15px 30px; border-radius: 5px; font-size: 1.1rem; cursor: pointer; font-weight: bold; width: 100%; margin-top: 20px; }
+.btn-main:disabled { background: #ccc; cursor: not-allowed; }
+
+/* Status Labels */
+.status-badge { display: inline-block; padding: 5px 15px; border-radius: 20px; font-size: 0.8rem; font-weight: bold; margin-top: 10px; }
+.status-success { background: #d4edda; color: #155724; }
+.status-error { background: #f8d7da; color: #721c24; }
+
+@media (max-width: 900px) { .tool-grid { grid-template-columns: 1fr; } }
