@@ -23,57 +23,56 @@
         .tool-card:hover {
             background: rgba(255, 255, 255, 0.06);
             border-color: #3b82f6;
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.5);
         }
-        .btn-glow:hover { box-shadow: 0 0 20px rgba(59, 130, 246, 0.5); }
     </style>
 </head>
 <body class="mesh-bg">
 
     <!-- Header -->
     <nav class="fixed top-0 w-full z-[100] border-b border-white/5 bg-slate-950/80 backdrop-blur-xl">
-        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+        <div class="max-w-7xl mx-auto px-6 h-16 md:h-20 flex items-center justify-between">
             <div class="flex items-center gap-3">
-                <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl flex items-center justify-center shadow-lg">
-                    <i data-lucide="aperture" class="text-white w-6 h-6"></i>
+                <div class="w-8 h-8 md:w-10 md:h-10 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl flex items-center justify-center shadow-lg">
+                    <i data-lucide="aperture" class="text-white w-5 h-5 md:w-6 md:h-6"></i>
                 </div>
-                <span class="font-black text-2xl tracking-tighter uppercase italic">Exam<span class="text-blue-500 italic-none">Photo</span></span>
+                <span class="font-black text-xl md:text-2xl tracking-tighter uppercase italic">Exam<span class="text-blue-500 italic-none">Photo</span></span>
             </div>
             <div class="hidden md:flex gap-8 text-xs font-black uppercase tracking-widest text-slate-400">
                 <a href="#tools" class="hover:text-white transition">All Tools</a>
                 <a href="#guidelines" class="hover:text-white transition">Guidelines</a>
+                <a href="#about" class="hover:text-white transition">About</a>
                 <a href="#faq" class="hover:text-white transition">Help</a>
             </div>
         </div>
     </nav>
 
     <!-- Hero -->
-    <header class="pt-48 pb-20 px-6 text-center">
-        <div class="inline-flex items-center gap-2 bg-blue-500/10 border border-blue-500/20 px-4 py-1 rounded-full text-blue-400 text-xs font-bold mb-6">
+    <header class="pt-32 md:pt-48 pb-12 md:pb-20 px-6 text-center">
+        <div class="inline-flex items-center gap-2 bg-blue-500/10 border border-blue-500/20 px-4 py-1.5 rounded-full text-blue-400 text-xs font-bold mb-6">
             <span class="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></span>
             AS PER OFFICIAL GUIDELINES OF EXAM BODIES
         </div>
-        <h1 class="text-6xl md:text-8xl font-black tracking-tighter mb-6 leading-none">
-            One Click. <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-500">Perfect Photos.</span>
+        <h1 class="text-4xl md:text-7xl lg:text-8xl font-black tracking-tighter mb-6 leading-tight">
+            One Click. <br class="md:hidden"> <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-500">Perfect Photos.</span>
         </h1>
-        <p class="text-slate-400 text-lg md:text-xl max-w-2xl mx-auto">
-            One Platform. Every Exam Requirements <br>Secure, instant, and 100% Free.
+        <p class="text-slate-400 text-base md:text-xl max-w-2xl mx-auto leading-relaxed">
+            One Platform. Every Exam Requirement. <br>Secure, instant, and 100% Free.
         </p>
     </header>
 
     <!-- THE UNIFIED EXAM GRID -->
-    <section id="tools" class="max-w-7xl mx-auto px-6 py-10">
-        <div class="flex items-center gap-4 mb-12">
-            <h2 class="text-3xl font-black">Official Exam Tools</h2>
-            <div class="h-[1px] flex-grow bg-white/10"></div>
-            <span class="text-slate-500 font-mono text-sm">16 TOOLS LOADED</span>
+    <section id="tools" class="max-w-7xl mx-auto px-6 py-12 md:py-20">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-4xl font-black">Official Exam Tools</h2>
+            <p class="text-slate-500 mt-2 text-sm md:text-base">Select your exam to start resizing</p>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             
             <!-- Tool 1: NEET Postcard -->
-            <a href="tool.html?exam=neet-postcard" class="tool-card p-8 rounded-[2.5rem] flex flex-col justify-between group">
+            <a href="tool.html?exam=neet-postcard" class="tool-card p-8 rounded-[2rem] flex flex-col justify-between group">
                 <div>
                     <div class="w-12 h-12 bg-blue-500/10 text-blue-500 rounded-2xl flex items-center justify-center mb-6">
                         <i data-lucide="image"></i>
@@ -87,7 +86,7 @@
             </a>
 
             <!-- Tool 2: NEET Passport -->
-            <a href="tool.html?exam=neet-passport" class="tool-card p-8 rounded-[2.5rem] flex flex-col justify-between group">
+            <a href="tool.html?exam=neet-passport" class="tool-card p-8 rounded-[2rem] flex flex-col justify-between group">
                 <div>
                     <div class="w-12 h-12 bg-indigo-500/10 text-indigo-500 rounded-2xl flex items-center justify-center mb-6">
                         <i data-lucide="user"></i>
@@ -101,7 +100,7 @@
             </a>
 
             <!-- Tool 3: SSC CGL/CHSL -->
-            <a href="tool.html?exam=ssc" class="tool-card p-8 rounded-[2.5rem] flex flex-col justify-between group">
+            <a href="tool.html?exam=ssc" class="tool-card p-8 rounded-[2rem] flex flex-col justify-between group">
                 <div>
                     <div class="w-12 h-12 bg-green-500/10 text-green-500 rounded-2xl flex items-center justify-center mb-6">
                         <i data-lucide="shield-check"></i>
@@ -115,7 +114,7 @@
             </a>
 
             <!-- Tool 4: UPSC CSE -->
-            <a href="tool.html?exam=upsc" class="tool-card p-8 rounded-[2.5rem] flex flex-col justify-between group">
+            <a href="tool.html?exam=upsc" class="tool-card p-8 rounded-[2rem] flex flex-col justify-between group">
                 <div>
                     <div class="w-12 h-12 bg-purple-500/10 text-purple-500 rounded-2xl flex items-center justify-center mb-6">
                         <i data-lucide="landmark"></i>
@@ -129,7 +128,7 @@
             </a>
 
             <!-- Tool 5: JEE Mains -->
-            <a href="tool.html?exam=jee" class="tool-card p-8 rounded-[2.5rem] flex flex-col justify-between group">
+            <a href="tool.html?exam=jee" class="tool-card p-8 rounded-[2rem] flex flex-col justify-between group">
                 <div>
                     <div class="w-12 h-12 bg-red-500/10 text-red-500 rounded-2xl flex items-center justify-center mb-6">
                         <i data-lucide="zap"></i>
@@ -143,7 +142,7 @@
             </a>
 
             <!-- Tool 6: IBPS / SBI Banking -->
-            <a href="tool.html?exam=banking" class="tool-card p-8 rounded-[2.5rem] flex flex-col justify-between group">
+            <a href="tool.html?exam=banking" class="tool-card p-8 rounded-[2rem] flex flex-col justify-between group">
                 <div>
                     <div class="w-12 h-12 bg-orange-500/10 text-orange-500 rounded-2xl flex items-center justify-center mb-6">
                         <i data-lucide="piggy-bank"></i>
@@ -157,7 +156,7 @@
             </a>
 
             <!-- Tool 7: NDA / Defense -->
-            <a href="tool.html?exam=defense" class="tool-card p-8 rounded-[2.5rem] flex flex-col justify-between group">
+            <a href="tool.html?exam=defense" class="tool-card p-8 rounded-[2rem] flex flex-col justify-between group">
                 <div>
                     <div class="w-12 h-12 bg-slate-500/10 text-slate-400 rounded-2xl flex items-center justify-center mb-6">
                         <i data-lucide="shield"></i>
@@ -171,7 +170,7 @@
             </a>
 
             <!-- Tool 8: Signature Tool -->
-            <a href="tool.html?exam=signature" class="tool-card p-8 rounded-[2.5rem] flex flex-col justify-between group bg-blue-600/5">
+            <a href="tool.html?exam=signature" class="tool-card p-8 rounded-[2rem] flex flex-col justify-between group bg-blue-600/5">
                 <div>
                     <div class="w-12 h-12 bg-blue-600 text-white rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-blue-500/20">
                         <i data-lucide="pen-tool"></i>
@@ -183,14 +182,15 @@
                     Launch Tool <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-2 transition"></i>
                 </div>
             </a>
-           <!-- Tool 9: CUET UG/PG -->
-            <a href="tool.html?exam=defense" class="tool-card p-8 rounded-[2.5rem] flex flex-col justify-between group">
+
+            <!-- Tool 9: CUET UG/PG -->
+            <a href="tool.html?exam=cuet" class="tool-card p-8 rounded-[2rem] flex flex-col justify-between group">
                 <div>
                     <div class="w-12 h-12 bg-slate-500/10 text-slate-400 rounded-2xl flex items-center justify-center mb-6">
-                        <i data-lucide="shield"></i>
+                        <i data-lucide="graduation-cap"></i>
                     </div>
                     <h3 class="text-xl font-bold mb-2">CUET UG/PG</h3>
-                    <p class="text-slate-500 text-sm">Compliant with defense recruitment rules.</p>
+                    <p class="text-slate-500 text-sm">NTA standard compliant photo resizer for CUET.</p>
                 </div>
                 <div class="mt-8 flex items-center justify-between font-bold text-xs uppercase tracking-widest text-slate-400">
                     Launch Tool <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-2 transition"></i>
@@ -201,26 +201,26 @@
     </section>
 
     <!-- SEO Guidelines Content -->
-    <section id="guidelines" class="max-w-7xl mx-auto px-6 py-24 border-t border-white/5">
-        <div class="grid lg:grid-cols-2 gap-20">
-            <div class="prose prose-invert prose-blue max-w-none">
-                <h2 class="text-4xl font-black text-white mb-8">General Guidelines for Exam Photos <span class="text-blue-500">2026</span></h2>
-                <p class="text-slate-400 text-lg leading-relaxed">
-                    Preparing for a competitive exam like <strong>NEET</strong>, <strong>SSC</strong>, or <strong>UPSC</strong> is hard enough. A small mistake in your exam photo can lead to form rejection. Follow these common exam photo guidelines 2026 used by most Indian exam authorities.
+    <section id="guidelines" class="max-w-7xl mx-auto px-6 py-12 md:py-20 border-t border-white/5">
+        <div class="grid lg:grid-cols-2 gap-12 md:gap-20">
+            <div class="prose prose-invert prose-blue max-w-none text-center lg:text-left">
+                <h2 class="text-3xl md:text-4xl font-black text-white mb-8">General Guidelines for Exam Photos <span class="text-blue-500">2026</span></h2>
+                <p class="text-slate-400 text-lg leading-relaxed mb-10">
+                    A small mistake in your exam photo can lead to form rejection. Follow these common exam photo guidelines 2026 used by most Indian exam authorities.
                 </p>
-                <div class="space-y-6 mt-10">
-                    <div class="flex gap-6">
+                <div class="space-y-8">
+                    <div class="flex flex-col md:flex-row gap-6 items-center lg:items-start text-center lg:text-left">
                         <div class="text-blue-500 font-bold text-2xl">01.</div>
                         <div>
-                            <h4 class="text-white font-bold text-xl">Plain White Background</h4>
-                            <p class="text-slate-400">90% of national exams (NTA, UPSC, IBPS) now require a plain white background. Colored or busy backgrounds are a major cause of rejection.</p>
+                            <h4 class="text-white font-bold text-xl uppercase tracking-tight">Plain White Background</h4>
+                            <p class="text-slate-400 mt-2">90% of national exams (NTA, UPSC, IBPS) now require a plain white background. Colored or busy backgrounds are a major cause of rejection.</p>
                         </div>
                     </div>
-                        <div class="flex gap-6">
+                    <div class="flex flex-col md:flex-row gap-6 items-center lg:items-start text-center lg:text-left border-t border-white/5 pt-8">
                         <div class="text-blue-500 font-bold text-2xl">02.</div>
                         <div>
-                            <h4 class="text-white font-bold text-xl">Correct Photo Size, Format & KB</h4>
-                            <p class="text-slate-400">Exam forms accept photos only in JPG/JPEG format with a strict file size (KB) limit. Always resize your image using an exam photo resizer to avoid upload errors.</p>
+                            <h4 class="text-white font-bold text-xl uppercase tracking-tight">Size, Format & KB</h4>
+                            <p class="text-slate-400 mt-2">Exam forms accept photos strictly in JPG/JPEG format. Always resize your image using an exam photo resizer to avoid upload errors.</p>
                         </div>
                     </div>
                 </div>
@@ -228,182 +228,131 @@
 
             <!-- FAQ Accordion -->
             <div id="faq" class="space-y-4">
-                <h3 class="text-2xl font-black mb-8 italic">Frequently Asked Questions (FAQ)</h3>
-                <details class="group tool-card p-6 rounded-3xl overflow-hidden cursor-pointer">
-                    <summary class="flex justify-between items-center font-bold text-lg list-none">
+                <h3 class="text-2xl font-black mb-8 italic text-center lg:text-left uppercase tracking-wider">Help & FAQ</h3>
+                
+                <details class="group tool-card p-6 rounded-2xl overflow-hidden cursor-pointer">
+                    <summary class="flex justify-between items-center font-bold text-sm md:text-base list-none uppercase">
                         1. What is an exam photo resizer?
                         <i data-lucide="chevron-down" class="group-open:rotate-180 transition"></i>
                     </summary>
-                    <p class="mt-4 text-slate-500 leading-relaxed">An exam photo resizer is an online tool that helps you resize your photo to the correct passport size and file size (KB) required for exams like NEET, SSC, UPSC, JEE, and GATE.</p>
+                    <p class="mt-4 text-slate-500 text-sm leading-relaxed border-t border-white/5 pt-4">An exam photo resizer helps you resize photos to correct dimensions and file sizes (KB) required for exams like NEET, SSC, and UPSC.</p>
                 </details>
-                <details class="group tool-card p-6 rounded-3xl overflow-hidden cursor-pointer">
-                    <summary class="flex justify-between items-center font-bold text-lg list-none">
-                        2. Can I resize my exam photo online for free?
+
+                <details class="group tool-card p-6 rounded-2xl overflow-hidden cursor-pointer">
+                    <summary class="flex justify-between items-center font-bold text-sm md:text-base list-none uppercase">
+                        2. Is this resizer free to use?
                         <i data-lucide="chevron-down" class="group-open:rotate-180 transition"></i>
                     </summary>
-                    <p class="mt-4 text-slate-500 leading-relaxed">Yes. This exam photo resizer online is completely free. You can upload, resize, and download your exam photo without signup or payment.</p>
+                    <p class="mt-4 text-slate-500 text-sm leading-relaxed border-t border-white/5 pt-4">Yes. This exam photo resizer online is completely free. No signup or payment is required.</p>
                 </details>
-                <details class="group tool-card p-6 rounded-3xl overflow-hidden cursor-pointer">
-                    <summary class="flex justify-between items-center font-bold text-lg list-none">
-                        3. Which exams are supported by this photo resizer?
+
+                <details class="group tool-card p-6 rounded-2xl overflow-hidden cursor-pointer">
+                    <summary class="flex justify-between items-center font-bold text-sm md:text-base list-none uppercase">
+                        3. Is my photo safe here?
                         <i data-lucide="chevron-down" class="group-open:rotate-180 transition"></i>
                     </summary>
-                    <p class="mt-4 text-slate-500 leading-relaxed">This tool supports popular Indian exams such as NEET, JEE, SSC, UPSC, and GATE. Each exam has its own page with the correct photo rules applied automatically.</p>
-                </details>
-                <details class="group tool-card p-6 rounded-3xl overflow-hidden cursor-pointer">
-                    <summary class="flex justify-between items-center font-bold text-lg list-none">
-                        4. Does this tool create passport size photos for exams?
-                        <i data-lucide="chevron-down" class="group-open:rotate-180 transition"></i>
-                    </summary>
-                    <p class="mt-4 text-slate-500 leading-relaxed">Yes. It helps you create a passport size photo for exams with the correct dimensions, background, and format accepted by exam portals.</p>
-                </details>
-                <details class="group tool-card p-6 rounded-3xl overflow-hidden cursor-pointer">
-                    <summary class="flex justify-between items-center font-bold text-lg list-none">
-                        5. Can I control the photo size in KB?
-                        <i data-lucide="chevron-down" class="group-open:rotate-180 transition"></i>
-                    </summary>
-                    <p class="mt-4 text-slate-500 leading-relaxed">Yes. The tool allows you to reduce or adjust photo size in KB, which helps avoid rejection during exam form upload.</p>
-                </details>
-                <details class="group tool-card p-6 rounded-3xl overflow-hidden cursor-pointer">
-                    <summary class="flex justify-between items-center font-bold text-lg list-none">
-                        6. What photo format does this exam photo resizer provide?
-                        <i data-lucide="chevron-down" class="group-open:rotate-180 transition"></i>
-                    </summary>
-                    <p class="mt-4 text-slate-500 leading-relaxed">The tool downloads the final photo in JPG/JPEG/PNG format, which is commonly accepted by most exam application forms.<p>
-                </details>
-                <details class="group tool-card p-6 rounded-3xl overflow-hidden cursor-pointer">
-                    <summary class="flex justify-between items-center font-bold text-lg list-none">
-                        7. Can I use a mobile photo for exam applications?
-                        <i data-lucide="chevron-down" class="group-open:rotate-180 transition"></i>
-                    </summary>
-                    <p class="mt-4 text-slate-500 leading-relaxed">Yes. You can use a mobile camera photo as long as it is clear, well-lit, and resized properly using this exam photo resizer.</p>
-                </details>
-                <details class="group tool-card p-6 rounded-3xl overflow-hidden cursor-pointer">
-                    <summary class="flex justify-between items-center font-bold text-lg list-none">
-                        8. Why do exam forms reject photos?
-                        <i data-lucide="chevron-down" class="group-open:rotate-180 transition"></i>
-                    </summary>
-                    <p class="mt-4 text-slate-500 leading-relaxed">Exam photos are usually rejected due to wrong photo size, high KB, incorrect format, blurry image, or non-white background. This tool helps fix these issues.</p>
-                </details>
-                <details class="group tool-card p-6 rounded-3xl overflow-hidden cursor-pointer">
-                    <summary class="flex justify-between items-center font-bold text-lg list-none">
-                        9. Is this exam photo resizer safe to use?
-                        <i data-lucide="chevron-down" class="group-open:rotate-180 transition"></i>
-                    </summary>
-                    <p class="mt-4 text-slate-500 leading-relaxed"> Yes. Your photo is processed only in your browser. We do not upload or store your images on any server.</p>
+                    <p class="mt-4 text-slate-500 text-sm leading-relaxed border-t border-white/5 pt-4">Yes. Your photo is processed only in your browser. We do not upload or store your images on our servers.</p>
                 </details>
             </div>
         </div>
     </section>
-<!-- ABOUT US SECTION -->
-    <section id="about" class="max-w-7xl mx-auto px-6 py-24 border-t border-white/5">
-        <div class="grid lg:grid-cols-2 gap-16 place-items-center lg:place-items-stretch text-center lg:text-left">
-            <div class="relative">
-                <div class="absolute -top-20 -left-20 w-64 h-64 bg-blue-600/20 rounded-full blur-[120px]"></div>
-                <h2 class="text-4xl font-black mb-8 leading-tight">Empowering Students <br><span class="text-blue-500">With Precision.</span></h2>
-                <div class="space-y-6 text-slate-400 text-lg leading-relaxed">
-                    <p>
-                        ExamPhoto Pro was founded with a simple mission: to eliminate "Form Rejection" for aspirants. We understand that a single pixel error or an incorrect KB size can ruin months of hard work.
-                    </p>
-                    <p>
-                        Our suite is designed by educational experts and tech enthusiasts who believe that professional photo tools should be <strong>free, fast, and private.</strong>
-                    </p>
-                </div>
-                <div class="flex justify-center lg:justify-start gap-10 mt-12">
+
+    <!-- ABOUT US SECTION -->
+    <section id="about" class="max-w-7xl mx-auto px-6 py-12 md:py-20">
+        <div class="grid lg:grid-cols-2 gap-12 md:gap-16 items-center">
+            <div class="text-center lg:text-left relative">
+                <div class="absolute -top-20 -left-20 w-64 h-64 bg-blue-600/10 rounded-full blur-[100px]"></div>
+                <h2 class="text-3xl md:text-5xl font-black mb-6 leading-tight">Empowering Aspirants <br><span class="text-blue-500">With Precision.</span></h2>
+                <p class="text-slate-400 text-base md:text-lg leading-relaxed mb-10 max-w-xl mx-auto lg:mx-0">
+                    ExamPhoto Pro was founded to eliminate form rejection. We believe that professional photo tools should be free, fast, and private.
+                </p>
+                <div class="flex justify-center lg:justify-start gap-8 md:gap-12">
                     <div>
-                        <div class="text-3xl font-black text-white">100%</div>
-                        <div class="text-sm uppercase tracking-widest text-slate-500 font-bold">Accuracy</div>
+                        <div class="text-2xl md:text-3xl font-black text-white">100%</div>
+                        <div class="text-xs uppercase tracking-widest text-slate-500 font-bold mt-1">Accuracy</div>
                     </div>
                     <div>
-                        <div class="text-3xl font-black text-white">Secure</div>
-                        <div class="text-sm uppercase tracking-widest text-slate-500 font-bold">Privacy</div>
+                        <div class="text-2xl md:text-3xl font-black text-white">Secure</div>
+                        <div class="text-xs uppercase tracking-widest text-slate-500 font-bold mt-1">Private</div>
                     </div>
                     <div>
-                        <div class="text-3xl font-black text-white">Free</div>
-                        <div class="text-sm uppercase tracking-widest text-slate-500 font-bold">Forever</div>
+                        <div class="text-2xl md:text-3xl font-black text-white">Free</div>
+                        <div class="text-xs uppercase tracking-widest text-slate-500 font-bold mt-1">Forever</div>
                     </div>
                 </div>
             </div>
             
-            <div class="grid grid-cols-2 gap-4">
+            <div class="grid grid-cols-2 gap-4 max-w-md mx-auto lg:max-w-none">
                 <div class="tool-card p-6 rounded-3xl flex flex-col items-center text-center">
                     <i data-lucide="zap" class="w-8 h-8 text-yellow-500 mb-4"></i>
-                    <h4 class="font-bold">Instant</h4>
+                    <h4 class="font-bold text-sm">Instant</h4>
                 </div>
-                <div class="tool-card p-6 rounded-3xl mt-8 flex flex-col items-center text-center">
+                <div class="tool-card p-6 rounded-3xl mt-4 md:mt-8 flex flex-col items-center text-center">
                     <i data-lucide="shield-check" class="w-8 h-8 text-green-500 mb-4"></i>
-                    <h4 class="font-bold">Safe</h4>
+                    <h4 class="font-bold text-sm">Safe</h4>
                 </div>
                 <div class="tool-card p-6 rounded-3xl flex flex-col items-center text-center">
                     <i data-lucide="refresh-ccw" class="w-8 h-8 text-blue-500 mb-4"></i>
-                    <h4 class="font-bold">Updated</h4>
+                    <h4 class="font-bold text-sm">Updated</h4>
                 </div>
-                <div class="tool-card p-6 rounded-3xl mt-8 flex flex-col items-center text-center">
+                <div class="tool-card p-6 rounded-3xl mt-4 md:mt-8 flex flex-col items-center text-center">
                     <i data-lucide="monitor" class="w-8 h-8 text-purple-500 mb-4"></i>
-                    <h4 class="font-bold">Online</h4>
+                    <h4 class="font-bold text-sm">Online</h4>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- PRIVACY POLICY SECTION -->
-    <section id="privacy" class="max-w-7xl mx-auto px-6 py-20">
-        <div class="tool-card bg-gradient-to-br from-blue-600/10 to-purple-600/10 p-12 rounded-[3rem] border-blue-500/20 relative overflow-hidden">
-            <div class="max-w-3xl relative z-10">
-                <div class="flex items-center gap-3 text-blue-400 font-bold mb-6 italic">
-                    <i data-lucide="lock" class="w-5 h-5"></i> Why Lakhs of Aspirants Use ExamPhoto?
+    <section id="privacy" class="max-w-7xl mx-auto px-6 py-12 md:py-20">
+        <div class="tool-card bg-gradient-to-br from-blue-600/5 to-purple-600/5 p-8 md:p-16 rounded-[2rem] border-blue-500/20 text-center lg:text-left relative overflow-hidden">
+            <div class="max-w-3xl relative z-10 mx-auto lg:mx-0">
+                <div class="flex items-center justify-center lg:justify-start gap-3 text-blue-400 font-bold mb-4 text-xs uppercase tracking-widest">
+                    <i data-lucide="lock" class="w-4 h-4"></i> Privacy Protection
                 </div>
-                <h2 class="text-3xl font-black mb-6">Your Photos Never Leave Your Device.</h2>
-                <p class="text-slate-400 text-lg mb-8 leading-relaxed">
-                    Most exam forms are rejected due to small photo mistakes — wrong size, wrong ratio, or file size issues. ExamPhoto removes that risk by following official exam photo standards. 
+                <h2 class="text-3xl md:text-4xl font-black mb-6">Local Browser Processing</h2>
+                <p class="text-slate-400 text-base md:text-lg mb-8 leading-relaxed">
+                    Most exam forms are rejected due to small photo mistakes. ExamPhoto Pro handles everything locally in your browser. Your images are never uploaded to our servers.
                 </p>
-                <ul class="grid md:grid-cols-2 gap-4 text-sm font-semibold text-slate-300">
-                    <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-green-500"></i> Exact size & KB control</li>
-                    <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-green-500"></i> Auto face centering</li>
-                    <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-green-500"></i> White background correction</li>
-                    <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-green-500"></i> Ready for Exam uploads</li>
-                </ul>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs font-bold text-slate-300 uppercase tracking-tight">
+                    <div class="flex items-center justify-center lg:justify-start gap-2"><i data-lucide="check" class="w-4 h-4 text-green-500"></i> No Database Storage</div>
+                    <div class="flex items-center justify-center lg:justify-start gap-2"><i data-lucide="check" class="w-4 h-4 text-green-500"></i> Auto face centering</div>
+                    <div class="flex items-center justify-center lg:justify-start gap-2"><i data-lucide="check" class="w-4 h-4 text-green-500"></i> Local Image Processing</div>
+                    <div class="flex items-center justify-center lg:justify-start gap-2"><i data-lucide="check" class="w-4 h-4 text-green-500"></i> Ready for uploads</div>
+                </div>
             </div>
-            <!-- Decorative Icon in background -->
-            <i data-lucide="shield-alert" class="absolute -right-10 -bottom-10 w-64 h-64 text-white/5 -rotate-12"></i>
         </div>
     </section>
 
     <!-- CONTACT US SECTION -->
-    <section id="contact" class="max-w-7xl mx-auto px-6 py-24">
-        <div class="grid lg:grid-cols-2 gap-16 place-items-center text-center">
-            <div>
-                <h2 class="text-4xl font-black mb-6">Get in Touch</h2>
-                <p class="text-slate-400 text-lg mb-10">Have questions about a specific exam requirement? Or found a bug? Drop us a message and our team will get back to you.</p>
-                
-                <div class="space-y-6">
-                    <div class="flex items-center justify-center gap-6">
-                        <div>
-                            <div class="text-sm text-slate-500 font-bold uppercase tracking-widest">Email Support</div>
-                            <div class="text-lg font-bold">hello@examphoto.pro</div>
-                        </div>
-                    </div>
+    <section id="contact" class="max-w-7xl mx-auto px-6 py-12 md:py-20 mb-10">
+        <div class="grid lg:grid-cols-2 gap-12 md:gap-20 items-center">
+            <div class="text-center lg:text-left">
+                <h2 class="text-3xl md:text-5xl font-black mb-6 uppercase tracking-tight">Get in Touch</h2>
+                <p class="text-slate-400 text-base md:text-lg mb-10 max-w-lg mx-auto lg:mx-0">Found a bug or have a suggestion? Reach out to us.</p>
+                <div class="flex items-center justify-center lg:justify-start gap-4">
+                    <i data-lucide="mail" class="text-blue-500"></i>
+                    <span class="text-lg font-bold">hello@examphoto.pro</span>
                 </div>
             </div>
 
-            <!-- Contact Form -->
-            <form class="tool-card p-10 rounded-[2.5rem] space-y-4">
+            <form class="tool-card p-8 md:p-10 rounded-[2rem] space-y-4 max-w-xl mx-auto w-full">
                 <div class="grid md:grid-cols-2 gap-4">
-                    <input type="text" placeholder="Your Name" class="bg-white/5 border border-white/10 p-4 rounded-2xl outline-none focus:border-blue-500 transition w-full">
-                    <input type="email" placeholder="Email Address" class="bg-white/5 border border-white/10 p-4 rounded-2xl outline-none focus:border-blue-500 transition w-full">
+                    <input type="text" placeholder="Name" class="bg-white/5 border border-white/10 p-4 rounded-xl outline-none focus:border-blue-500 transition w-full text-sm">
+                    <input type="email" placeholder="Email" class="bg-white/5 border border-white/10 p-4 rounded-xl outline-none focus:border-blue-500 transition w-full text-sm">
                 </div>
-                <input type="text" placeholder="Subject" class="bg-white/5 border border-white/10 p-4 rounded-2xl outline-none focus:border-blue-500 transition w-full">
-                <textarea placeholder="Your Message" rows="4" class="bg-white/5 border border-white/10 p-4 rounded-2xl outline-none focus:border-blue-500 transition w-full"></textarea>
-                <button type="submit" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-black p-4 rounded-2xl transition shadow-lg shadow-blue-500/20 uppercase tracking-widest">
+                <textarea placeholder="Message" rows="4" class="bg-white/5 border border-white/10 p-4 rounded-xl outline-none focus:border-blue-500 transition w-full text-sm"></textarea>
+                <button type="submit" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-black py-4 rounded-xl transition shadow-lg shadow-blue-500/20 uppercase text-xs tracking-widest">
                     Send Message
                 </button>
             </form>
         </div>
     </section>
- <!-- Footer -->
-    <footer class="py-20 border-t border-white/5 text-center">
-        <p class="text-slate-600 font-bold tracking-widest text-xs mb-4">THE COMPLETE EXAM PHOTO SUITE</p>
-        <p class="text-slate-400 text-sm italic">&copy; EXAMPHOTO PRO. Created by Mubasir.</p>
+
+    <!-- Footer -->
+    <footer class="py-12 border-t border-white/5 text-center px-6">
+        <p class="text-slate-600 font-black tracking-[0.2em] text-[10px] md:text-xs mb-4 uppercase">THE COMPLETE EXAM PHOTO SUITE</p>
+        <p class="text-slate-400 text-xs md:text-sm italic font-medium">&copy; EXAMPHOTO PRO. Created by Mubasir.</p>
     </footer>
 
     <script>
