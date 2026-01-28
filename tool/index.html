@@ -2,30 +2,55 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photo Resizer Tool - Official Exam Specifications</title>
     <link rel="stylesheet" href="/assets/css/style.css">
+    <!-- Cropper.js CDN for the cropping engine -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css">
-    <title>Photo Maker Tool</title>
 </head>
-<body class="light-bg">
+<body class="tool-page">
 
-<header>
+<header class="govt-header">
     <div class="container">
-        <span id="exam-label">Loading Tool...</span>
+        <div class="logo">
+            <span class="logo-main" id="tool-heading">Processing...</span>
+            <span class="logo-sub">Official Size & KB Validator</span>
+        </div>
     </div>
 </header>
 
-<div class="container">
-    <div class="tool-box">
-        <h2>Step 1: Upload Photo</h2>
-        <input type="file" id="upload" accept="image/jpeg">
-        
-        <div id="crop-wrapper" style="margin-top: 20px; display: none;">
-            <h2>Step 2: Crop Face Correctly</h2>
-            <img id="image-to-crop">
-            <button id="download-btn" class="cta-btn" style="margin-top: 20px; width:100%;">Download Validated Photo</button>
+<div class="container tool-main-wrapper">
+    <div class="tool-card">
+        <!-- Step 1: Upload -->
+        <div id="step-1">
+            <div class="upload-zone">
+                <input type="file" id="fileInput" accept="image/jpeg, image/jpg" hidden>
+                <label for="fileInput" class="upload-label">
+                    <span class="icon">📁</span>
+                    <strong>Click to Upload Photo</strong>
+                    <p>Format: JPG/JPEG only</p>
+                </label>
+            </div>
+            
+            <div class="active-rules">
+                <h3>Target Specifications:</h3>
+                <ul id="rule-list"></ul>
+            </div>
         </div>
 
-        <div id="validation-feedback"></div>
+        <!-- Step 2: Crop -->
+        <div id="step-2" style="display:none;">
+            <div class="cropper-container">
+                <img id="image-to-crop">
+            </div>
+            <div class="tool-controls">
+                <button id="resetBtn" class="btn-secondary">Back</button>
+                <button id="downloadBtn" class="btn-primary">Download & Validate Photo</button>
+            </div>
+        </div>
+
+        <!-- Step 3: Result -->
+        <div id="validation-result"></div>
     </div>
 </div>
 
