@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SSC Passport Photo Maker | Official 3.5x4.5cm (20-50KB)</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Professional Processing Libraries -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/heic2any@0.0.4/dist/heic2any.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: { extend: { colors: { brand: { 500: '#3b82f6', 600: '#2563eb' } } } }
+        }
+    </script>
+
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; transition: background-color 0.3s ease; }
+        .mesh-bg {
+            background-color: #f8fafc;
+            background-image: radial-gradient(at 0% 0%, hsla(210, 100%, 93%, 1) 0, transparent 50%), 
+                              radial-gradient(at 100% 0%, hsla(230, 100%, 93%, 1) 0, transparent 50%);
+        }
+        .dark .mesh-bg {
+            background-color: #020617;
+            background-image: radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), 
+                              radial-gradient(at 100% 0%, hsla(225,39%,20%,1) 0, transparent 50%);
+        }
+        .tool-card { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(0, 0, 0, 0.05); }
+        .dark .tool-card { background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.08); }
+        
+        /* Cropper Customization */
+        .crop-container { width: 100%; max-height: 500px; border-radius: 1.5rem; display: none; background: #000; position: relative; overflow: hidden; }
+        
+        /* Face Guide Overlay (80% Rule) */
+        .face-guide {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 70%; height: 75%;
+            border: 2px dashed rgba(59, 130, 246, 0.6);
+            border-radius: 50% 50% 45% 45%;
+            pointer-events: none;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .face-guide::after {
+            content: "SSC FACE ALIGNMENT (80%)";
+            font-size: 8px;
+            font-weight: 800;
+            color: #3b82f6;
+            background: rgba(255,255,255,0.8);
+            padding: 2px 6px;
+            border-radius: 4px;
+            position: absolute;
+            top: -10px;
+        }
+
+        .spinner { border: 3px solid rgba(255,255,255,0.1); border-top: 3px solid #3b82f6; border-radius: 50%; width: 30px; height: 30px; animation: spin 1s linear infinite; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
+</head>
+<body class="mesh-bg text-slate-900 dark:text-slate-100 min-h-screen">
+
+    <nav class="fixed top-0 w-full z-[100] border-b border-slate-200 dark:border-white/5 bg-white/80 dark:bg-slate-950/80 backdrop-blur-xl">
+        <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-2 font-bold text-blue-600 dark:text-blue-400 group text-xs uppercase tracking-widest">
+                <i data-lucide="arrow-left" class="w-4 h-4"></i> Home
+            </a>
+            <span class="font-black italic uppercase tracking-tighter">EXAM<span class="text-blue-500">PHOTO</span></span>
+        </div>
+    </nav>
+
+    <main class="pt-24 pb-12 px-6 max-w-4xl mx-auto">
+        <div class="text-center mb-10">
+            <div class="inline-flex items-center gap-2 bg-blue-500/10 border border-blue-500/20 px-4 py-1.5 rounded-full text-blue-600 dark:text-blue-400 text-[10px] font-black mb-4 uppercase tracking-widest">
+                <span class="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></span> SSC OFFICIAL GUIDELINES 3.5 X 4.5 CM
+            </div>
+            <h1 class="text-4xl md:text-6xl font-black tracking-tighter mb-4 leading-tight">SSC Exam Photo Maker</h1>
+            <p class="text-slate-500 dark:text-slate-400 text-lg not-italic tracking-tighter">Auto-Resize for CGL, CHSL, MTS & GD (Target 20-50KB)</p>
+        </div>
+
+        <div class="tool-card p-6 md:p-10 rounded-[2.5rem] shadow-2xl space-y-8 relative">
+            <div id="loader" class="absolute inset-0 z-50 bg-slate-950/90 rounded-[2.5rem] flex flex-col items-center justify-center space-y-4 hidden">
+                <div class="spinner"></div>
+                <p class="text-xs font-black text-white uppercase tracking-[0.2em]">Processing SSC Photo...</p>
+            </div>
+
+            <!-- Upload Area -->
+            <div id="upload-wrapper" class="relative border-2 border-dashed border-slate-300 dark:border-white/10 rounded-[2rem] p-4 text-center bg-white/50 dark:bg-black/20 overflow-hidden">
+                <div id="upload-prompt" class="py-16">
+                    <input type="file" id="fileInput" class="absolute inset-0 opacity-0 cursor-pointer" accept="image/*, .heic, .heif">
+                    <i data-lucide="camera-off" class="w-12 h-12 mx-auto mb-3 text-blue-500"></i>
+                    <p class="font-black text-sm uppercase tracking-widest">Upload Recent Photo</p>
+                    <p class="text-[10px] text-slate-500 mt-2 font-bold opacity-60 uppercase tracking-tight">Recent Photo (Max 3 Months Old) • Light Background</p>
+                </div>
+                
+                <div id="crop-wrapper" class="crop-container">
+                    <div class="face-guide"></div>
+                    <img id="imageToCrop" src="">
+                    <button onclick="resetTool()" class="absolute top-4 right-4 z-20 bg-red-500 text-white p-2 rounded-full shadow-2xl hover:bg-red-600 transition">
+                        <i data-lucide="x" class="w-5 h-5"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Inputs for Name & Date (Optional for SSC now, but kept for user preference) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="space-y-2">
+                    <label class="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-2">Name (Optional)</label>
+                    <input type="text" id="nameInput" placeholder="ENTER NAME" class="w-full bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 p-4 rounded-2xl outline-none focus:ring-2 ring-blue-500 font-bold uppercase">
+                </div>
+                <div class="space-y-2">
+                    <label class="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-2">Date (Optional)</label>
+                    <input type="text" id="dateInput" maxlength="10" placeholder="DD/MM/YYYY" class="w-full bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 p-4 rounded-2xl outline-none focus:ring-2 ring-blue-500 font-bold">
+                </div>
+            </div>
+
+            <!-- Size Selection & Compression -->
+            <div class="space-y-4 pt-4 border-t border-slate-200 dark:border-white/5">
+                <div class="flex justify-between items-center px-2">
+                    <label class="text-[10px] font-black uppercase tracking-widest text-slate-500">Target File Size (20KB - 50KB)</label>
+                    <div class="flex items-center gap-2">
+                        <span id="size-estimate" class="text-xs font-black text-blue-600 dark:text-blue-400">Est: -- KB</span>
+                        <div id="status-indicator" class="w-2 h-2 rounded-full bg-slate-300"></div>
+                    </div>
+                </div>
+                <input type="range" id="qualitySlider" min="5" max="95" value="50" class="w-full h-1.5 bg-slate-200 dark:bg-white/10 rounded-lg appearance-none cursor-pointer accent-blue-600">
+                <div class="flex justify-between text-[8px] font-black uppercase tracking-tighter opacity-50 px-1">
+                    <span>Low Size (SSC Target)</span>
+                    <span>Higher Quality</span>
+                </div>
+            </div>
+
+            <button id="downloadBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-black py-5 rounded-2xl transition shadow-xl shadow-blue-500/20 uppercase tracking-widest text-xs flex items-center justify-center gap-2">
+                <i data-lucide="check-circle" class="w-5 h-5"></i> Generate SSC Compliant Photo
+            </button>
+        </div>
+    </main>
+
+     <!-- 2. HOW TO USE SECTION -->
+    <section class="max-w-7xl mx-auto px-6 py-20 border-t border-slate-200 dark:border-white/5">
+        <div class="text-center mb-12">
+            <h2 class="text-2xl md:text-3xl font-black not-italic tracking-tighter">How to Resize Photo for SSC Exams?</h2>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
+            <div class="tool-card p-6 rounded-3xl text-center space-y-3">
+                <div class="w-10 h-10 bg-blue-500/10 text-blue-500 rounded-xl flex items-center justify-center mx-auto"><i data-lucide="upload"></i></div>
+                <h4 class="font-bold text-[10px] uppercase tracking-widest">01. Upload</h4>
+                <p class="text-[9px] text-slate-500">Select your recent photo.</p>
+            </div>
+            <div class="tool-card p-6 rounded-3xl text-center space-y-3">
+                <div class="w-10 h-10 bg-indigo-500/10 text-indigo-500 rounded-xl flex items-center justify-center mx-auto"><i data-lucide="crop"></i></div>
+                <h4 class="font-bold text-[10px] uppercase tracking-widest">02. Crop</h4>
+                <p class="text-[9px] text-slate-500">Align face to 80% coverage.</p>
+            </div>
+            <div class="tool-card p-6 rounded-3xl text-center space-y-3">
+                <div class="w-10 h-10 bg-purple-500/10 text-purple-500 rounded-xl flex items-center justify-center mx-auto"><i data-lucide="type"></i></div>
+                <h4 class="font-bold text-[10px] uppercase tracking-widest">03. Stamp</h4>
+                <p class="text-[9px] text-slate-500">Add Name/Date (If required).</p>
+            </div>
+            <div class="tool-card p-6 rounded-3xl text-center space-y-3 border-blue-500/20 bg-blue-500/5">
+                <div class="w-10 h-10 bg-green-500/10 text-green-500 rounded-xl flex items-center justify-center mx-auto"><i data-lucide="maximize"></i></div>
+                <h4 class="font-bold text-[10px] uppercase tracking-widest text-blue-500">04. Compress</h4>
+                <p class="text-[9px] text-slate-500">Adjust to stay between 20-50KB.</p>
+            </div>
+            <div class="tool-card p-6 rounded-3xl text-center space-y-3 bg-blue-600 text-white">
+                <div class="w-10 h-10 bg-white/20 text-white rounded-xl flex items-center justify-center mx-auto"><i data-lucide="download"></i></div>
+                <h4 class="font-bold text-[10px] uppercase tracking-widest">05. Done</h4>
+                <p class="text-[9px] text-white/70">Download SSC CGL/CHSL JPG.</p>
+            </div>
+        </div>
+    </section>
+
+  <!-- 3. GUIDELINES SECTION -->
+    <section class="max-w-7xl mx-auto px-6 py-20 border-t border-slate-200 dark:border-white/5">
+        <div class="grid lg:grid-cols-2 gap-16 items-start">
+            <div>
+               <h2 class="text-3xl font-black mb-8 leading-tight not-italic">Official SSC Photograph Guidelines</h2>
+                <div class="space-y-6">
+                    <div class="flex gap-4">
+                        <div class="w-10 h-10 shrink-0 bg-blue-500 text-white rounded-full flex items-center justify-center font-black italic">01</div>
+                        <div>
+                            <h4 class="font-bold uppercase tracking-tight mb-1">Recency Policy</h4>
+                            <p class="text-sm text-slate-500">The photograph should not be more than three months old from the date of publication of the Notice of Examination.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="w-10 h-10 shrink-0 bg-blue-500 text-white rounded-full flex items-center justify-center font-black italic">02</div>
+                        <div>
+                            <h4 class="font-bold uppercase tracking-tight mb-1">No Accessories</h4>
+                            <p class="text-sm text-slate-500">Photographs with caps, spectacles, or frontal face not clearly visible will be rejected.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tool-card p-8 rounded-[2.5rem] bg-blue-500/5 border-blue-500/20">
+                <h3 class="text-xl font-bold mb-6 italic tracking-tighter">SSC Official Specs</h3>
+                <div class="space-y-4 font-black uppercase text-[10px]">
+                    <div class="flex justify-between border-b border-blue-500/10 pb-3"><span>Dimensions</span> <span class="text-blue-500">3.5 cm x 4.5 cm</span></div>
+                    <div class="flex justify-between border-b border-blue-500/10 pb-3"><span>File Format</span> <span class="text-blue-500">JPG / JPEG ONLY</span></div>
+                    <div class="flex justify-between border-b border-blue-500/10 pb-3"><span>File Size</span> <span class="text-blue-500">20 KB to 50 KB</span></div>
+                    <div class="flex justify-between border-b border-blue-500/10 pb-3"><span>Background</span> <span class="text-blue-500">White / Light Blue</span></div>
+                    <div class="flex justify-between"><span>Spectacles</span> <span class="text-blue-500">NOT ALLOWED</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+     <!-- 4. FAQ SECTION -->
+    <section class="max-w-4xl mx-auto px-6 py-20 border-t border-slate-200 dark:border-white/5">
+        <h2 class="text-3xl font-black mb-10 text-center uppercase italic">SSC Photo FAQ</h2>
+        <div class="space-y-4">
+            <details class="group tool-card p-6 rounded-2xl cursor-pointer">
+                <summary class="flex justify-between items-center font-bold list-none">
+                    1. What happens if my photo is less than 20KB?
+                    <i data-lucide="chevron-down" class="group-open:rotate-180 transition"></i>
+                </summary>
+                <p class="mt-4 text-sm text-slate-500 leading-relaxed">The SSC server will reject the upload. Use our quality slider to ensure the estimated size is between 20KB and 50KB.</p>
+            </details>
+            <details class="group tool-card p-6 rounded-2xl cursor-pointer">
+                <summary class="flex justify-between items-center font-bold list-none">
+                    2. Do I need to print the date on the SSC photo?
+                    <i data-lucide="chevron-down" class="group-open:rotate-180 transition"></i>
+                </summary>
+                <p class="mt-4 text-sm text-slate-500 leading-relaxed">As per the latest SSC CGL/CHSL notifications, a date stamp is NOT mandatory, but the photo must be recent. If you still want it, our tool provides an optional stamp.</p>
+            </details>
+        </div>
+    </section>
+    
+    <!-- OTHER TOOLS -->
+    <section class="max-w-7xl mx-auto px-6 pb-20">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <a href="neet-passport.html" class="tool-card p-6 rounded-3xl text-center hover:border-blue-500 transition group">
+                <i data-lucide="image" class="w-6 h-6 mx-auto mb-2 text-indigo-500"></i>
+                <h4 class="text-[9px] font-black uppercase tracking-widest">NEET Passport</h4>
+            </a>
+            <a href="signature.html" class="tool-card p-6 rounded-3xl text-center hover:border-blue-500 transition group">
+                <i data-lucide="pen-tool" class="w-6 h-6 mx-auto mb-2 text-green-500"></i>
+                <h4 class="text-[9px] font-black uppercase tracking-widest">Signature Resizer</h4>
+            </a>
+            <a href="thumb-impression.html" class="tool-card p-6 rounded-3xl text-center hover:border-blue-500 transition group">
+                <i data-lucide="fingerprint" class="w-6 h-6 mx-auto mb-2 text-purple-500"></i>
+                <h4 class="text-[9px] font-black uppercase tracking-widest">Thumb Impression</h4>
+            </a>
+            <a href="neet-postcard.html" class="tool-card p-6 rounded-3xl text-center hover:border-blue-500 transition group">
+                <i data-lucide="maximize" class="w-6 h-6 mx-auto mb-2 text-blue-500"></i>
+                <h4 class="text-[9px] font-black uppercase tracking-widest">NEET Postcard</h4>
+            </a>
+        </div>
+    </section>
+
+    <footer class="py-12 border-t border-slate-200 dark:border-white/5 text-center px-6">
+        <p class="text-slate-400 text-[10px] font-bold uppercase tracking-[0.2em]">© 2026 • ExamPhoto Pro • Optimized for SSC Recruitment</p>
+    </footer>
+
+    <canvas id="finalCanvas" class="hidden"></canvas>
+
+    <script>
+        lucide.createIcons();
+
+        const fileInput = document.getElementById('fileInput');
+        const imageToCrop = document.getElementById('imageToCrop');
+        const cropWrapper = document.getElementById('crop-wrapper');
+        const uploadPrompt = document.getElementById('upload-prompt');
+        const loader = document.getElementById('loader');
+        const finalCanvas = document.getElementById('finalCanvas');
+        const ctx = finalCanvas.getContext('2d');
+        const qualitySlider = document.getElementById('qualitySlider');
+        const sizeEstimate = document.getElementById('size-estimate');
+        const indicator = document.getElementById('status-indicator');
+        const nameInput = document.getElementById('nameInput');
+        const dateInput = document.getElementById('dateInput');
+
+        let cropper = null;
+
+        // Auto Formatting Date
+        dateInput.addEventListener('input', (e) => {
+            let v = e.target.value.replace(/\D/g, '');
+            if (v.length > 8) v = v.substring(0, 8);
+            if (v.length > 4) v = v.substring(0, 2) + '/' + v.substring(2, 4) + '/' + v.substring(4);
+            else if (v.length > 2) v = v.substring(0, 2) + '/' + v.substring(2);
+            e.target.value = v;
+            updateLiveResult();
+        });
+
+        function resetTool() {
+            if (cropper) cropper.destroy();
+            fileInput.value = "";
+            cropWrapper.style.display = 'none';
+            uploadPrompt.style.display = 'block';
+        }
+
+        fileInput.addEventListener('change', async (e) => {
+            let file = e.target.files[0];
+            if (!file) return;
+
+            loader.classList.remove('hidden');
+
+            if (file.name.toLowerCase().endsWith(".heic") || file.name.toLowerCase().endsWith(".heif")) {
+                const blob = await heic2any({ blob: file, toType: "image/jpeg" });
+                file = Array.isArray(blob) ? blob[0] : blob;
+            }
+
+            const reader = new FileReader();
+            reader.onload = (event) => {
+                imageToCrop.src = event.target.result;
+                uploadPrompt.style.display = 'none';
+                cropWrapper.style.display = 'block';
+                loader.classList.add('hidden');
+
+                if (cropper) cropper.destroy();
+                cropper = new Cropper(imageToCrop, {
+                    aspectRatio: 3.5 / 4.5,
+                    viewMode: 1,
+                    dragMode: 'move',
+                    autoCropArea: 0.95,
+                    guides: true,
+                    crop() { updateLiveResult(); }
+                });
+            };
+            reader.readAsDataURL(file);
+        });
+
+        function updateLiveResult() {
+            if (!cropper) return;
+
+            // SSC Standard: 3.5cm x 4.5cm
+            const W = 413, H = 531; 
+            finalCanvas.width = W; finalCanvas.height = H;
+
+            const croppedCanvas = cropper.getCroppedCanvas({ width: W, height: H });
+            
+            ctx.fillStyle = "white";
+            ctx.fillRect(0, 0, W, H);
+            ctx.drawImage(croppedCanvas, 0, 0, W, H);
+
+            const name = nameInput.value.toUpperCase();
+            const date = dateInput.value;
+
+            if (name || date) {
+                const plateH = H * 0.15;
+                ctx.fillStyle = "white";
+                ctx.fillRect(0, H - plateH, W, plateH);
+                ctx.fillStyle = "black";
+                ctx.textAlign = "center";
+                
+                if (name) {
+                    ctx.font = "bold 22px sans-serif";
+                    ctx.fillText(name, W/2, H - (plateH / 1.8));
+                }
+                if (date) {
+                    ctx.font = "18px sans-serif";
+                    ctx.fillText(date, W/2, H - (plateH / 6));
+                }
+            }
+
+            // Estimate Size logic for SSC (20-50KB range)
+            const q = qualitySlider.value / 100;
+            const dataUrl = finalCanvas.toDataURL('image/jpeg', q);
+            const sizeKB = Math.round((dataUrl.length * (3/4)) / 1024);
+            sizeEstimate.innerText = `Est: ${sizeKB} KB`;
+
+            // Color Indicator for SSC requirements
+            if(sizeKB >= 20 && sizeKB <= 50) {
+                indicator.className = "w-2 h-2 rounded-full bg-green-500 animate-pulse";
+                sizeEstimate.className = "text-xs font-black text-green-600";
+            } else {
+                indicator.className = "w-2 h-2 rounded-full bg-red-500";
+                sizeEstimate.className = "text-xs font-black text-red-600";
+            }
+        }
+
+        [nameInput, qualitySlider].forEach(input => {
+            input.addEventListener('input', updateLiveResult);
+        });
+
+        document.getElementById('downloadBtn').addEventListener('click', () => {
+            if (!cropper) return alert("Please upload a photo first.");
+            const q = qualitySlider.value / 100;
+            const link = document.createElement('a');
+            link.download = `SSC_Photo_${Date.now()}.jpg`;
+            link.href = finalCanvas.toDataURL('image/jpeg', q);
+            link.click();
+        });
+    </script>
+</body>
+</html>
