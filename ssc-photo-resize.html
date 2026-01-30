@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SSC Passport Photo Maker | Official 3.5x4.5cm (20-50KB)</title>
+    <title>SSC Photo Resizer | Official 3.5x4.5cm (20KB-50KB)</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
@@ -36,10 +36,8 @@
         .tool-card { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(0, 0, 0, 0.05); }
         .dark .tool-card { background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.08); }
         
-        /* Cropper Customization */
         .crop-container { width: 100%; max-height: 500px; border-radius: 1.5rem; display: none; background: #000; position: relative; overflow: hidden; }
         
-        /* Face Guide Overlay (80% Rule) */
         .face-guide {
             position: absolute;
             top: 50%; left: 50%;
@@ -49,12 +47,9 @@
             border-radius: 50% 50% 45% 45%;
             pointer-events: none;
             z-index: 10;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
         .face-guide::after {
-            content: "SSC FACE ALIGNMENT (80%)";
+            content: "ALIGN FACE HERE (80%)";
             font-size: 8px;
             font-weight: 800;
             color: #3b82f6;
@@ -63,6 +58,8 @@
             border-radius: 4px;
             position: absolute;
             top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
         }
 
         .spinner { border: 3px solid rgba(255,255,255,0.1); border-top: 3px solid #3b82f6; border-radius: 50%; width: 30px; height: 30px; animation: spin 1s linear infinite; }
@@ -71,6 +68,7 @@
 </head>
 <body class="mesh-bg text-slate-900 dark:text-slate-100 min-h-screen">
 
+    <!-- 1. NAVIGATION -->
     <nav class="fixed top-0 w-full z-[100] border-b border-slate-200 dark:border-white/5 bg-white/80 dark:bg-slate-950/80 backdrop-blur-xl">
         <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
             <a href="index.html" class="flex items-center gap-2 font-bold text-blue-600 dark:text-blue-400 group text-xs uppercase tracking-widest">
@@ -80,13 +78,14 @@
         </div>
     </nav>
 
+    <!-- 2. MAIN TOOL SECTION -->
     <main class="pt-24 pb-12 px-6 max-w-4xl mx-auto">
         <div class="text-center mb-10">
             <div class="inline-flex items-center gap-2 bg-blue-500/10 border border-blue-500/20 px-4 py-1.5 rounded-full text-blue-600 dark:text-blue-400 text-[10px] font-black mb-4 uppercase tracking-widest">
-                <span class="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></span> SSC OFFICIAL GUIDELINES 3.5 X 4.5 CM
+                <span class="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></span> SSC CGL/CHSL/MTS COMPLIANT
             </div>
-            <h1 class="text-4xl md:text-6xl font-black tracking-tighter mb-4 leading-tight">SSC Exam Photo Maker</h1>
-            <p class="text-slate-500 dark:text-slate-400 text-lg not-italic tracking-tighter">Auto-Resize for CGL, CHSL, MTS & GD (Target 20-50KB)</p>
+            <h1 class="text-4xl md:text-6xl font-black tracking-tighter mb-4 leading-tight">SSC Photo Resizer</h1>
+            <p class="text-slate-500 dark:text-slate-400 text-lg not-italic tracking-tighter">Official 3.5x4.5cm Dimensions • Target 20KB - 50KB</p>
         </div>
 
         <div class="tool-card p-6 md:p-10 rounded-[2.5rem] shadow-2xl space-y-8 relative">
@@ -99,55 +98,43 @@
             <div id="upload-wrapper" class="relative border-2 border-dashed border-slate-300 dark:border-white/10 rounded-[2rem] p-4 text-center bg-white/50 dark:bg-black/20 overflow-hidden">
                 <div id="upload-prompt" class="py-16">
                     <input type="file" id="fileInput" class="absolute inset-0 opacity-0 cursor-pointer" accept="image/*, .heic, .heif">
-                    <i data-lucide="camera-off" class="w-12 h-12 mx-auto mb-3 text-blue-500"></i>
-                    <p class="font-black text-sm uppercase tracking-widest">Upload Recent Photo</p>
-                    <p class="text-[10px] text-slate-500 mt-2 font-bold opacity-60 uppercase tracking-tight">Recent Photo (Max 3 Months Old) • Light Background</p>
+                    <i data-lucide="user-round" class="w-12 h-12 mx-auto mb-3 text-blue-500"></i>
+                    <p class="font-black text-sm uppercase tracking-widest">Upload Candidate Photo</p>
+                    <p class="text-[10px] text-slate-500 mt-2 font-bold opacity-60 uppercase tracking-tight">Recent Photo • No Specs • No Cap</p>
                 </div>
                 
                 <div id="crop-wrapper" class="crop-container">
                     <div class="face-guide"></div>
                     <img id="imageToCrop" src="">
-                    <button onclick="resetTool()" class="absolute top-4 right-4 z-20 bg-red-500 text-white p-2 rounded-full shadow-2xl hover:bg-red-600 transition">
+                    <button onclick="resetTool()" class="absolute top-4 right-4 z-20 bg-red-500 text-white p-2 rounded-full shadow-2xl">
                         <i data-lucide="x" class="w-5 h-5"></i>
                     </button>
                 </div>
             </div>
 
-            <!-- Inputs for Name & Date (Optional for SSC now, but kept for user preference) -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="space-y-2">
-                    <label class="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-2">Name (Optional)</label>
-                    <input type="text" id="nameInput" placeholder="ENTER NAME" class="w-full bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 p-4 rounded-2xl outline-none focus:ring-2 ring-blue-500 font-bold uppercase">
-                </div>
-                <div class="space-y-2">
-                    <label class="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-2">Date (Optional)</label>
-                    <input type="text" id="dateInput" maxlength="10" placeholder="DD/MM/YYYY" class="w-full bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 p-4 rounded-2xl outline-none focus:ring-2 ring-blue-500 font-bold">
-                </div>
-            </div>
-
-            <!-- Size Selection & Compression -->
+            <!-- Enhanced Compression Control -->
             <div class="space-y-4 pt-4 border-t border-slate-200 dark:border-white/5">
                 <div class="flex justify-between items-center px-2">
-                    <label class="text-[10px] font-black uppercase tracking-widest text-slate-500">Target File Size (20KB - 50KB)</label>
-                    <div class="flex items-center gap-2">
-                        <span id="size-estimate" class="text-xs font-black text-blue-600 dark:text-blue-400">Est: -- KB</span>
-                        <div id="status-indicator" class="w-2 h-2 rounded-full bg-slate-300"></div>
+                    <div class="flex flex-col">
+                        <label class="text-[10px] font-black uppercase tracking-widest text-slate-500">Target File Size (20KB - 50KB)</label>
+                        <span id="status-text" class="text-[9px] font-bold text-blue-500 uppercase">Awaiting Upload...</span>
                     </div>
+                    <span id="size-estimate" class="text-lg font-black text-blue-600 dark:text-blue-400">-- KB</span>
                 </div>
-                <input type="range" id="qualitySlider" min="5" max="95" value="50" class="w-full h-1.5 bg-slate-200 dark:bg-white/10 rounded-lg appearance-none cursor-pointer accent-blue-600">
+                <input type="range" id="qualitySlider" min="5" max="95" value="60" class="w-full h-1.5 bg-slate-200 dark:bg-white/10 rounded-lg appearance-none cursor-pointer accent-blue-600">
                 <div class="flex justify-between text-[8px] font-black uppercase tracking-tighter opacity-50 px-1">
-                    <span>Low Size (SSC Target)</span>
-                    <span>Higher Quality</span>
+                    <span>Compress (Smaller)</span>
+                    <span>Better Quality</span>
                 </div>
             </div>
 
             <button id="downloadBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-black py-5 rounded-2xl transition shadow-xl shadow-blue-500/20 uppercase tracking-widest text-xs flex items-center justify-center gap-2">
-                <i data-lucide="check-circle" class="w-5 h-5"></i> Generate SSC Compliant Photo
+                <i data-lucide="download" class="w-5 h-5"></i> Download SSC Ready JPG
             </button>
         </div>
     </main>
 
-     <!-- 2. HOW TO USE SECTION -->
+    <!-- 3. HOW TO USE SECTION (5 Steps) -->
     <section class="max-w-7xl mx-auto px-6 py-20 border-t border-slate-200 dark:border-white/5">
         <div class="text-center mb-12">
             <h2 class="text-2xl md:text-3xl font-black not-italic tracking-tighter">How to Resize Photo for SSC Exams?</h2>
@@ -156,49 +143,49 @@
             <div class="tool-card p-6 rounded-3xl text-center space-y-3">
                 <div class="w-10 h-10 bg-blue-500/10 text-blue-500 rounded-xl flex items-center justify-center mx-auto"><i data-lucide="upload"></i></div>
                 <h4 class="font-bold text-[10px] uppercase tracking-widest">01. Upload</h4>
-                <p class="text-[9px] text-slate-500">Select your recent photo.</p>
+                <p class="text-[9px] text-slate-500">Choose your recent photo.</p>
             </div>
             <div class="tool-card p-6 rounded-3xl text-center space-y-3">
                 <div class="w-10 h-10 bg-indigo-500/10 text-indigo-500 rounded-xl flex items-center justify-center mx-auto"><i data-lucide="crop"></i></div>
                 <h4 class="font-bold text-[10px] uppercase tracking-widest">02. Crop</h4>
-                <p class="text-[9px] text-slate-500">Align face to 80% coverage.</p>
+                <p class="text-[9px] text-slate-500">Auto-lock to 3.5x4.5cm ratio.</p>
             </div>
             <div class="tool-card p-6 rounded-3xl text-center space-y-3">
-                <div class="w-10 h-10 bg-purple-500/10 text-purple-500 rounded-xl flex items-center justify-center mx-auto"><i data-lucide="type"></i></div>
-                <h4 class="font-bold text-[10px] uppercase tracking-widest">03. Stamp</h4>
-                <p class="text-[9px] text-slate-500">Add Name/Date (If required).</p>
+                <div class="w-10 h-10 bg-purple-500/10 text-purple-500 rounded-xl flex items-center justify-center mx-auto"><i data-lucide="scan-face"></i></div>
+                <h4 class="font-bold text-[10px] uppercase tracking-widest">03. Align</h4>
+                <p class="text-[9px] text-slate-500">Ensure 80% face coverage.</p>
             </div>
             <div class="tool-card p-6 rounded-3xl text-center space-y-3 border-blue-500/20 bg-blue-500/5">
-                <div class="w-10 h-10 bg-green-500/10 text-green-500 rounded-xl flex items-center justify-center mx-auto"><i data-lucide="maximize"></i></div>
-                <h4 class="font-bold text-[10px] uppercase tracking-widest text-blue-500">04. Compress</h4>
-                <p class="text-[9px] text-slate-500">Adjust to stay between 20-50KB.</p>
+                <div class="w-10 h-10 bg-green-500/10 text-green-500 rounded-xl flex items-center justify-center mx-auto"><i data-lucide="minimize"></i></div>
+                <h4 class="font-bold text-[10px] uppercase tracking-widest text-blue-500">04. Resize</h4>
+                <p class="text-[9px] text-slate-500">Slider ensures 20KB-50KB size.</p>
             </div>
             <div class="tool-card p-6 rounded-3xl text-center space-y-3 bg-blue-600 text-white">
-                <div class="w-10 h-10 bg-white/20 text-white rounded-xl flex items-center justify-center mx-auto"><i data-lucide="download"></i></div>
-                <h4 class="font-bold text-[10px] uppercase tracking-widest">05. Done</h4>
-                <p class="text-[9px] text-white/70">Download SSC CGL/CHSL JPG.</p>
+                <div class="w-10 h-10 bg-white/20 text-white rounded-xl flex items-center justify-center mx-auto"><i data-lucide="check"></i></div>
+                <h4 class="font-bold text-[10px] uppercase tracking-widest">05. Save</h4>
+                <p class="text-[9px] text-white/70">Instant SSC-compliant JPG download.</p>
             </div>
         </div>
     </section>
 
-  <!-- 3. GUIDELINES SECTION -->
+    <!-- 4. GUIDELINES SECTION -->
     <section class="max-w-7xl mx-auto px-6 py-20 border-t border-slate-200 dark:border-white/5">
         <div class="grid lg:grid-cols-2 gap-16 items-start">
             <div>
-               <h2 class="text-3xl font-black mb-8 leading-tight not-italic">Official SSC Photograph Guidelines</h2>
+               <h2 class="text-3xl font-black mb-8 leading-tight not-italic">Official SSC Photograph Guidelines 2024-25</h2>
                 <div class="space-y-6">
                     <div class="flex gap-4">
                         <div class="w-10 h-10 shrink-0 bg-blue-500 text-white rounded-full flex items-center justify-center font-black italic">01</div>
                         <div>
-                            <h4 class="font-bold uppercase tracking-tight mb-1">Recency Policy</h4>
-                            <p class="text-sm text-slate-500">The photograph should not be more than three months old from the date of publication of the Notice of Examination.</p>
+                            <h4 class="font-bold uppercase tracking-tight mb-1">Recency & Appearance</h4>
+                            <p class="text-sm text-slate-500">Photo must be taken within 3 months. Caps and spectacles are strictly prohibited.</p>
                         </div>
                     </div>
                     <div class="flex gap-4">
                         <div class="w-10 h-10 shrink-0 bg-blue-500 text-white rounded-full flex items-center justify-center font-black italic">02</div>
                         <div>
-                            <h4 class="font-bold uppercase tracking-tight mb-1">No Accessories</h4>
-                            <p class="text-sm text-slate-500">Photographs with caps, spectacles, or frontal face not clearly visible will be rejected.</p>
+                            <h4 class="font-bold uppercase tracking-tight mb-1">Face Alignment</h4>
+                            <p class="text-sm text-slate-500">Frontal view of full face. Both ears must be clearly visible. No side profiles allowed.</p>
                         </div>
                     </div>
                 </div>
@@ -209,36 +196,43 @@
                 <div class="space-y-4 font-black uppercase text-[10px]">
                     <div class="flex justify-between border-b border-blue-500/10 pb-3"><span>Dimensions</span> <span class="text-blue-500">3.5 cm x 4.5 cm</span></div>
                     <div class="flex justify-between border-b border-blue-500/10 pb-3"><span>File Format</span> <span class="text-blue-500">JPG / JPEG ONLY</span></div>
-                    <div class="flex justify-between border-b border-blue-500/10 pb-3"><span>File Size</span> <span class="text-blue-500">20 KB to 50 KB</span></div>
-                    <div class="flex justify-between border-b border-blue-500/10 pb-3"><span>Background</span> <span class="text-blue-500">White / Light Blue</span></div>
-                    <div class="flex justify-between"><span>Spectacles</span> <span class="text-blue-500">NOT ALLOWED</span></div>
+                    <div class="flex justify-between border-b border-blue-500/10 pb-3"><span>Required Size</span> <span class="text-blue-500">20 KB - 50 KB</span></div>
+                    <div class="flex justify-between border-b border-blue-500/10 pb-3"><span>Face Coverage</span> <span class="text-blue-500">Approx 80%</span></div>
+                    <div class="flex justify-between"><span>Background</span> <span class="text-blue-500">White / Light Blue</span></div>
                 </div>
             </div>
         </div>
     </section>
 
-     <!-- 4. FAQ SECTION -->
+    <!-- 5. FAQ SECTION -->
     <section class="max-w-4xl mx-auto px-6 py-20 border-t border-slate-200 dark:border-white/5">
-        <h2 class="text-3xl font-black mb-10 text-center uppercase italic">SSC Photo FAQ</h2>
+        <h2 class="text-3xl font-black mb-10 text-center uppercase italic">Frequently Asked Questions</h2>
         <div class="space-y-4">
             <details class="group tool-card p-6 rounded-2xl cursor-pointer">
                 <summary class="flex justify-between items-center font-bold list-none">
-                    1. What happens if my photo is less than 20KB?
+                    1. Is the date stamp required on the SSC photo?
                     <i data-lucide="chevron-down" class="group-open:rotate-180 transition"></i>
                 </summary>
-                <p class="mt-4 text-sm text-slate-500 leading-relaxed">The SSC server will reject the upload. Use our quality slider to ensure the estimated size is between 20KB and 50KB.</p>
+                <p class="mt-4 text-sm text-slate-500 leading-relaxed">No. As per the latest official SSC recruitment notices, the date and name stamp on the photograph is no longer mandatory. The photo must simply be recent.</p>
             </details>
             <details class="group tool-card p-6 rounded-2xl cursor-pointer">
                 <summary class="flex justify-between items-center font-bold list-none">
-                    2. Do I need to print the date on the SSC photo?
+                    2. Can I upload a photo with spectacles?
                     <i data-lucide="chevron-down" class="group-open:rotate-180 transition"></i>
                 </summary>
-                <p class="mt-4 text-sm text-slate-500 leading-relaxed">As per the latest SSC CGL/CHSL notifications, a date stamp is NOT mandatory, but the photo must be recent. If you still want it, our tool provides an optional stamp.</p>
+                <p class="mt-4 text-sm text-slate-500 leading-relaxed">No. SSC strictly rejects photos with spectacles (glasses), even if you wear them regularly. Ensure your eyes and ears are clearly visible.</p>
+            </details>
+            <details class="group tool-card p-6 rounded-2xl cursor-pointer">
+                <summary class="flex justify-between items-center font-bold list-none">
+                    3. How do I get exactly 20KB-50KB?
+                    <i data-lucide="chevron-down" class="group-open:rotate-180 transition"></i>
+                </summary>
+                <p class="mt-4 text-sm text-slate-500 leading-relaxed">Use the quality slider in our tool. It provides a live size estimate. Aim for around 35KB to be safe.</p>
             </details>
         </div>
     </section>
     
-    <!-- OTHER TOOLS -->
+    <!-- 6. OTHER TOOLS -->
     <section class="max-w-7xl mx-auto px-6 pb-20">
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
             <a href="neet-passport.html" class="tool-card p-6 rounded-3xl text-center hover:border-blue-500 transition group">
@@ -260,8 +254,9 @@
         </div>
     </section>
 
+    <!-- 7. FOOTER -->
     <footer class="py-12 border-t border-slate-200 dark:border-white/5 text-center px-6">
-        <p class="text-slate-400 text-[10px] font-bold uppercase tracking-[0.2em]">© 2026 • ExamPhoto Pro • Optimized for SSC Recruitment</p>
+        <p class="text-slate-400 text-[10px] font-bold uppercase tracking-[0.2em]">© 2026 • ExamPhoto Pro • Secure Browser-Side Processing</p>
     </footer>
 
     <canvas id="finalCanvas" class="hidden"></canvas>
@@ -278,27 +273,17 @@
         const ctx = finalCanvas.getContext('2d');
         const qualitySlider = document.getElementById('qualitySlider');
         const sizeEstimate = document.getElementById('size-estimate');
-        const indicator = document.getElementById('status-indicator');
-        const nameInput = document.getElementById('nameInput');
-        const dateInput = document.getElementById('dateInput');
+        const statusText = document.getElementById('status-text');
 
         let cropper = null;
-
-        // Auto Formatting Date
-        dateInput.addEventListener('input', (e) => {
-            let v = e.target.value.replace(/\D/g, '');
-            if (v.length > 8) v = v.substring(0, 8);
-            if (v.length > 4) v = v.substring(0, 2) + '/' + v.substring(2, 4) + '/' + v.substring(4);
-            else if (v.length > 2) v = v.substring(0, 2) + '/' + v.substring(2);
-            e.target.value = v;
-            updateLiveResult();
-        });
 
         function resetTool() {
             if (cropper) cropper.destroy();
             fileInput.value = "";
             cropWrapper.style.display = 'none';
             uploadPrompt.style.display = 'block';
+            sizeEstimate.innerText = "-- KB";
+            statusText.innerText = "Awaiting Upload...";
         }
 
         fileInput.addEventListener('change', async (e) => {
@@ -324,7 +309,7 @@
                     aspectRatio: 3.5 / 4.5,
                     viewMode: 1,
                     dragMode: 'move',
-                    autoCropArea: 0.95,
+                    autoCropArea: 0.9,
                     guides: true,
                     crop() { updateLiveResult(); }
                 });
@@ -335,55 +320,36 @@
         function updateLiveResult() {
             if (!cropper) return;
 
-            // SSC Standard: 3.5cm x 4.5cm
             const W = 413, H = 531; 
             finalCanvas.width = W; finalCanvas.height = H;
 
             const croppedCanvas = cropper.getCroppedCanvas({ width: W, height: H });
-            
             ctx.fillStyle = "white";
             ctx.fillRect(0, 0, W, H);
             ctx.drawImage(croppedCanvas, 0, 0, W, H);
 
-            const name = nameInput.value.toUpperCase();
-            const date = dateInput.value;
-
-            if (name || date) {
-                const plateH = H * 0.15;
-                ctx.fillStyle = "white";
-                ctx.fillRect(0, H - plateH, W, plateH);
-                ctx.fillStyle = "black";
-                ctx.textAlign = "center";
-                
-                if (name) {
-                    ctx.font = "bold 22px sans-serif";
-                    ctx.fillText(name, W/2, H - (plateH / 1.8));
-                }
-                if (date) {
-                    ctx.font = "18px sans-serif";
-                    ctx.fillText(date, W/2, H - (plateH / 6));
-                }
-            }
-
-            // Estimate Size logic for SSC (20-50KB range)
+            // Estimate Size
             const q = qualitySlider.value / 100;
             const dataUrl = finalCanvas.toDataURL('image/jpeg', q);
             const sizeKB = Math.round((dataUrl.length * (3/4)) / 1024);
-            sizeEstimate.innerText = `Est: ${sizeKB} KB`;
+            sizeEstimate.innerText = `${sizeKB} KB`;
 
-            // Color Indicator for SSC requirements
             if(sizeKB >= 20 && sizeKB <= 50) {
-                indicator.className = "w-2 h-2 rounded-full bg-green-500 animate-pulse";
-                sizeEstimate.className = "text-xs font-black text-green-600";
+                statusText.innerText = "Compliant (20-50KB)";
+                statusText.classList.replace('text-blue-500', 'text-green-500');
+                statusText.classList.remove('text-red-500');
+            } else if (sizeKB < 20) {
+                statusText.innerText = "Too Small (<20KB)";
+                statusText.classList.replace('text-blue-500', 'text-red-500');
+                statusText.classList.replace('text-green-500', 'text-red-500');
             } else {
-                indicator.className = "w-2 h-2 rounded-full bg-red-500";
-                sizeEstimate.className = "text-xs font-black text-red-600";
+                statusText.innerText = "Too Large (>50KB)";
+                statusText.classList.replace('text-blue-500', 'text-red-500');
+                statusText.classList.replace('text-green-500', 'text-red-500');
             }
         }
 
-        [nameInput, qualitySlider].forEach(input => {
-            input.addEventListener('input', updateLiveResult);
-        });
+        qualitySlider.addEventListener('input', updateLiveResult);
 
         document.getElementById('downloadBtn').addEventListener('click', () => {
             if (!cropper) return alert("Please upload a photo first.");
