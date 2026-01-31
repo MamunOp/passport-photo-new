@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exam Guidelines Blog | ExamPhoto Pro</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = { darkMode: 'class', theme: { extend: { colors: { brand: { 500: '#3b82f6' } } } } }
+    </script>
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; transition: background-color 0.3s ease; }
+        .mesh-bg { background-color: #f8fafc; background-image: radial-gradient(at 0% 0%, hsla(210, 100%, 93%, 1) 0, transparent 50%), radial-gradient(at 100% 0%, hsla(230, 100%, 93%, 1) 0, transparent 50%); }
+        .dark .mesh-bg { background-color: #020617; background-image: radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), radial-gradient(at 100% 0%, hsla(225,39%,20%,1) 0, transparent 50%); }
+        .tool-card { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(0, 0, 0, 0.05); transition: all 0.3s ease; }
+        .dark .tool-card { background: rgba(15, 23, 42, 0.3); border: 1px solid rgba(255, 255, 255, 0.06); }
+    </style>
+</head>
+<body class="mesh-bg text-slate-900 dark:text-slate-100 antialiased overflow-x-hidden">
+
+    <!-- Theme Toggle -->
+    <button onclick="toggleTheme()" class="fixed bottom-6 right-6 z-[100] p-4 bg-white dark:bg-slate-800 rounded-full shadow-2xl border border-slate-200 dark:border-slate-700 hover:scale-110 transition-all active:scale-95">
+        <i data-lucide="sun" class="hidden dark:block text-yellow-400"></i>
+        <i data-lucide="moon" class="block dark:hidden text-indigo-600"></i>
+    </button>
+
+    <nav class="fixed top-0 w-full z-[100] border-b border-slate-200/50 dark:border-white/5 bg-white/70 dark:bg-slate-950/70 backdrop-blur-xl">
+        <div class="max-w-7xl mx-auto px-6 h-16 md:h-20 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-3">
+                <div class="w-8 h-8 bg-gradient-to-br from-blue-600 to-indigo-600 rounded-lg flex items-center justify-center shadow-lg"><i data-lucide="aperture" class="text-white w-5 h-5"></i></div>
+                <span class="font-black text-xl tracking-tighter dark:text-white">Exam<span class="text-blue-600">Photo</span></span>
+            </a>
+            <a href="index.html" class="text-xs font-black uppercase tracking-widest text-slate-500 hover:text-blue-600 transition">Home</a>
+        </div>
+    </nav>
+
+    <main class="pt-32 pb-12 px-6">
+        <div class="max-w-7xl mx-auto">
+            <header class="text-center mb-10">
+                <h1 class="text-4xl md:text-6xl font-black mb-6">Our <span class="text-blue-600">Blogs</span></h1>
+                
+                <!-- BLOG SEARCH BAR -->
+                <div class="max-w-xl mx-auto relative mb-8">
+                    <input type="text" id="blogSearch" onkeyup="filterBlogs()" placeholder="Search articles (e.g. NEET, Stamp, Resize)..." class="w-full bg-white/70 dark:bg-white/5 border border-slate-200 dark:border-white/10 px-6 py-4 rounded-2xl outline-none focus:ring-2 focus:ring-blue-500 transition-all dark:text-white text-sm shadow-lg">
+                    <button onclick="filterBlogs()" class="absolute right-2.5 top-2 bg-blue-600 p-2.5 rounded-xl text-white hover:bg-blue-700 shadow-lg shadow-blue-500/20 transition active:scale-95">
+                        <i data-lucide="search" class="w-5 h-5"></i>
+                    </button>
+                </div>
+                <p id="searchStatus" class="text-slate-500 text-sm md:text-base">Expert advice on exam documentation and rules.</p>
+            </header>
+
+            <div id="blogGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Blog Entry 1 -->
+                <article class="tool-card rounded-[2.5rem] flex flex-col h-full group overflow-hidden">
+                    <div class="aspect-video overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1621944190310-e3cca1564bd7?q=80&w=800" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    </div>
+                    <div class="p-8 flex flex-col flex-grow">
+                        <span class="text-[10px] font-bold text-blue-600 uppercase tracking-widest">NEET 2026</span>
+                        <h3 class="text-xl font-bold mt-2 mb-4 group-hover:text-blue-600 transition blog-title">The Mandatory Name & Date Rule for NEET</h3>
+                        <p class="text-slate-500 text-sm mb-6 flex-grow">Learn how to correctly add your name and date on the passport photo to avoid form rejection.</p>
+                        <a href="blog-post.html" class="text-xs font-black uppercase tracking-widest text-blue-600 flex items-center gap-2">Read Article <i data-lucide="chevron-right" class="w-4 h-4"></i></a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        lucide.createIcons();
+
+        function filterBlogs() {
+            const input = document.getElementById('blogSearch');
+            const filter = input.value.toLowerCase();
+            const grid = document.getElementById('blogGrid');
+            const articles = grid.getElementsByTagName('article');
+            const status = document.getElementById('searchStatus');
+            let found = 0;
+
+            for (let i = 0; i < articles.length; i++) {
+                const title = articles[i].querySelector('.blog-title').innerText.toLowerCase();
+                const desc = articles[i].querySelector('p').innerText.toLowerCase();
+                
+                if (title.includes(filter) || desc.includes(filter)) {
+                    articles[i].style.display = "";
+                    found++;
+                } else {
+                    articles[i].style.display = "none";
+                }
+            }
+            if (found === 0 && filter !== "") status.innerText = "No articles found.";
+            else status.innerText = filter === "" ? "Expert advice on exam documentation." : `Found ${found} articles.`;
+        }
+
+        function toggleTheme() {
+            const html = document.documentElement;
+            html.classList.toggle('dark');
+            localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+        }
+        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        }
+    </script>
+</body>
+</html>
