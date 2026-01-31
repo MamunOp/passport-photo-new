@@ -24,7 +24,6 @@
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; transition: background-color 0.3s ease; }
         
-        /* Matching the Homepage Mesh Background */
         .mesh-bg {
             background-color: #f8fafc;
             background-image: radial-gradient(at 0% 0%, hsla(210, 100%, 93%, 1) 0, transparent 50%), 
@@ -50,11 +49,23 @@
             border-left: 4px solid #3b82f6; 
             padding-left: 1rem; 
         }
+
+        /* Justified text logic */
+        .text-justify {
+            text-align: justify;
+            text-justify: inter-word;
+        }
     </style>
 </head>
 <body class="mesh-bg text-slate-900 dark:text-slate-100 antialiased overflow-x-hidden">
 
-    <!-- Navigation (Synced with Dark Mode) -->
+    <!-- Theme Toggle Button (Same as Homepage) -->
+    <button onclick="toggleTheme()" class="fixed bottom-6 right-6 z-[100] p-4 bg-white dark:bg-slate-800 rounded-full shadow-2xl border border-slate-200 dark:border-slate-700 hover:scale-110 transition-all active:scale-95">
+        <i data-lucide="sun" class="hidden dark:block text-yellow-400"></i>
+        <i data-lucide="moon" class="block dark:hidden text-indigo-600"></i>
+    </button>
+
+    <!-- Navigation -->
     <nav class="fixed top-0 w-full z-[100] border-b border-slate-200/50 dark:border-white/5 bg-white/70 dark:bg-slate-950/70 backdrop-blur-xl">
         <div class="max-w-7xl mx-auto px-6 h-16 md:h-20 flex items-center justify-between">
             <a href="index.html" class="flex items-center gap-3">
@@ -76,39 +87,38 @@
             <div class="content-card p-8 md:p-16 rounded-[2.5rem] space-y-12 text-slate-600 dark:text-slate-400 leading-relaxed text-left">
                 
                 <section>
-                    <p class="text-lg">At ExamPhoto Pro, accessible from our website, one of our main priorities is the privacy of our visitors. This Privacy Policy document contains types of information that is collected and recorded by ExamPhoto Pro and how we use it.</p>
+                    <p class="text-lg text-justify">At ExamPhoto Pro, accessible from our website, one of our main priorities is the privacy of our visitors. This Privacy Policy document contains types of information that is collected and recorded by ExamPhoto Pro and how we use it. We understand how sensitive personal photos are, which is why we have built this tool with a privacy-first approach.</p>
                 </section>
                 
                 <section class="space-y-4">
                     <h2 class="heading-line text-2xl font-black text-slate-900 dark:text-white uppercase tracking-tight">1. Local Image Processing</h2>
-                    <p>Unlike traditional online tools, ExamPhoto Pro processes all images <strong>locally in your browser</strong>. This means your photos are never uploaded to our servers, stored in any database, or viewed by our team. Your data stays on your device at all times.</p>
+                    <p class="text-justify">Unlike traditional online photo editors, ExamPhoto Pro processes all images <strong>locally in your browser</strong>. This is a crucial security feature. When you upload a photo to resize, it never travels over the internet to our servers. All cropping, compression, and resizing happen on your CPU within the browser environment. Your data never leaves your device.</p>
                 </section>
 
                 <section class="space-y-4">
                     <h2 class="heading-line text-2xl font-black text-slate-900 dark:text-white uppercase tracking-tight">2. Log Files</h2>
-                    <p>ExamPhoto Pro follows a standard procedure of using log files. These files log visitors when they visit websites. The information collected includes IP addresses, browser type, ISP, and date/time stamps.</p>
+                    <p class="text-justify">ExamPhoto Pro follows a standard procedure of using log files. These files log visitors when they visit websites. The information collected by log files includes internet protocol (IP) addresses, browser type, Internet Service Provider (ISP), date and time stamp, and referring/exit pages. These are not linked to any information that is personally identifiable.</p>
                 </section>
 
                 <section class="space-y-4">
                     <h2 class="heading-line text-2xl font-black text-slate-900 dark:text-white uppercase tracking-tight">3. Google AdSense & Cookies</h2>
-                    <p>Google is one of the third-party vendors on our site. It also uses cookies, known as DART cookies, to serve ads to our site visitors based upon their visit to our website and other sites on the internet.</p>
+                    <p class="text-justify">Google is one of the third-party vendors on our site. It also uses cookies, known as DART cookies, to serve ads to our site visitors based upon their visit to our website and other sites on the internet. You may choose to decline the use of DART cookies by visiting the Google ad and content network Privacy Policy at the following URL – https://policies.google.com/technologies/ads</p>
                 </section>
 
                 <section class="space-y-4">
                     <h2 class="heading-line text-2xl font-black text-slate-900 dark:text-white uppercase tracking-tight">4. Advertising Partners</h2>
-                    <p>Third-party ad servers or ad networks use technologies like cookies or JavaScript for their respective advertisements. ExamPhoto Pro has no access to or control over these cookies used by third-party advertisers.</p>
+                    <p class="text-justify">Some of the advertisers on our site may use cookies and web beacons. Our advertising partners include Google AdSense. Each of our advertising partners has their own Privacy Policy for their policies on user data. For easier access, we hyperlinked to their Privacy Policies above. We do not have control over these third-party cookies.</p>
                 </section>
 
                 <section class="space-y-4">
                     <h2 class="heading-line text-2xl font-black text-slate-900 dark:text-white uppercase tracking-tight">5. Consent</h2>
-                    <p>By using our website, you hereby consent to our Privacy Policy and agree to its Terms and Conditions.</p>
+                    <p class="text-justify">By using our website, you hereby consent to our Privacy Policy and agree to its Terms and Conditions. If you have additional questions or require more information about our Privacy Policy, do not hesitate to contact us through our email.</p>
                 </section>
                 
             </div>
         </div>
     </main>
 
-    <!-- Footer Synced with Home -->
     <footer class="py-12 border-t border-slate-200 dark:border-white/10 text-center px-6">
         <p class="text-slate-400 dark:text-slate-500 text-[10px] font-bold uppercase tracking-widest">
             © 2026 • ExamPhoto Pro • Secure & Private
@@ -119,7 +129,19 @@
         // Initialize Icons
         lucide.createIcons();
 
-        // Theme sync logic: This is critical for the legal page to detect the dark mode set on index.html
+        // Theme Toggle Logic (Same as Homepage)
+        function toggleTheme() {
+            const html = document.documentElement;
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+            } else {
+                html.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        // Apply saved preference on load
         if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             document.documentElement.classList.add('dark');
         } else {
