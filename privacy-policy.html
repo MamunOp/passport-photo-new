@@ -47,19 +47,20 @@
         
         .heading-line { 
             border-left: 4px solid #3b82f6; 
-            padding-left: 1rem; 
+            padding-left: 0.8rem; 
         }
 
-        /* Justified text logic */
-        .text-justify {
+        /* Fixed Justified Text for Mobile */
+        .text-justify-custom {
             text-align: justify;
             text-justify: inter-word;
+            word-break: break-word; /* Prevents text from coming out of the box */
         }
     </style>
 </head>
 <body class="mesh-bg text-slate-900 dark:text-slate-100 antialiased overflow-x-hidden">
 
-    <!-- Theme Toggle Button (Same as Homepage) -->
+    <!-- Theme Toggle Button -->
     <button onclick="toggleTheme()" class="fixed bottom-6 right-6 z-[100] p-4 bg-white dark:bg-slate-800 rounded-full shadow-2xl border border-slate-200 dark:border-slate-700 hover:scale-110 transition-all active:scale-95">
         <i data-lucide="sun" class="hidden dark:block text-yellow-400"></i>
         <i data-lucide="moon" class="block dark:hidden text-indigo-600"></i>
@@ -68,51 +69,52 @@
     <!-- Navigation -->
     <nav class="fixed top-0 w-full z-[100] border-b border-slate-200/50 dark:border-white/5 bg-white/70 dark:bg-slate-950/70 backdrop-blur-xl">
         <div class="max-w-7xl mx-auto px-6 h-16 md:h-20 flex items-center justify-between">
-            <a href="index.html" class="flex items-center gap-3">
+            <a href="index.html" class="flex items-center gap-2">
                 <div class="w-8 h-8 bg-gradient-to-br from-blue-600 to-indigo-600 rounded-lg flex items-center justify-center shadow-lg">
                     <i data-lucide="aperture" class="text-white w-5 h-5"></i>
                 </div>
-                <span class="font-black text-xl tracking-tighter dark:text-white">Exam<span class="text-blue-600">Photo</span></span>
+                <span class="font-black text-lg md:text-xl tracking-tighter dark:text-white">Exam<span class="text-blue-600">Photo</span></span>
             </a>
-            <a href="index.html" class="text-xs font-black uppercase tracking-widest text-slate-500 hover:text-blue-600 dark:hover:text-white transition-colors">Back to Home</a>
+            <a href="index.html" class="text-[10px] md:text-xs font-black uppercase tracking-widest text-slate-500 hover:text-blue-600 dark:hover:text-white transition-colors">Back to Home</a>
         </div>
     </nav>
 
     <!-- Content Area -->
-    <main class="pt-32 pb-20 px-6">
+    <main class="pt-28 md:pt-40 pb-20 px-4 md:px-6">
         <div class="max-w-4xl mx-auto">
             
-            <h1 class="text-4xl md:text-5xl font-black mb-12 text-center text-slate-900 dark:text-white">Privacy Policy</h1>
+            <h1 class="text-3xl md:text-6xl font-black mb-8 md:mb-16 text-center text-slate-900 dark:text-white tracking-tight">Privacy Policy</h1>
             
-            <div class="content-card p-8 md:p-16 rounded-[2.5rem] space-y-12 text-slate-600 dark:text-slate-400 leading-relaxed text-left">
+            <!-- Optimized Card for Mobile -->
+            <div class="content-card p-6 md:p-16 rounded-[2rem] md:rounded-[3rem] space-y-10 md:space-y-14 text-slate-600 dark:text-slate-400 leading-relaxed text-justify-custom">
                 
                 <section>
-                    <p class="text-lg text-justify">At ExamPhoto Pro, accessible from our website, one of our main priorities is the privacy of our visitors. This Privacy Policy document contains types of information that is collected and recorded by ExamPhoto Pro and how we use it. We understand how sensitive personal photos are, which is why we have built this tool with a privacy-first approach.</p>
+                    <p class="text-base md:text-lg">At ExamPhoto Pro, one of our main priorities is the privacy of our visitors. This Privacy Policy document contains types of information that is collected and recorded by ExamPhoto Pro and how we use it.</p>
                 </section>
                 
                 <section class="space-y-4">
-                    <h2 class="heading-line text-2xl font-black text-slate-900 dark:text-white uppercase tracking-tight">1. Local Image Processing</h2>
-                    <p class="text-justify">Unlike traditional online photo editors, ExamPhoto Pro processes all images <strong>locally in your browser</strong>. This is a crucial security feature. When you upload a photo to resize, it never travels over the internet to our servers. All cropping, compression, and resizing happen on your CPU within the browser environment. Your data never leaves your device.</p>
+                    <h2 class="heading-line text-xl md:text-2xl font-black text-slate-900 dark:text-white uppercase tracking-tight">1. Local Image Processing</h2>
+                    <p class="text-sm md:text-base">ExamPhoto Pro processes all images <strong>locally in your browser</strong>. This is a security feature. When you upload a photo, it never travels to our servers. All resizing happens on your device CPU. Your data never leaves your device.</p>
                 </section>
 
                 <section class="space-y-4">
-                    <h2 class="heading-line text-2xl font-black text-slate-900 dark:text-white uppercase tracking-tight">2. Log Files</h2>
-                    <p class="text-justify">ExamPhoto Pro follows a standard procedure of using log files. These files log visitors when they visit websites. The information collected by log files includes internet protocol (IP) addresses, browser type, Internet Service Provider (ISP), date and time stamp, and referring/exit pages. These are not linked to any information that is personally identifiable.</p>
+                    <h2 class="heading-line text-xl md:text-2xl font-black text-slate-900 dark:text-white uppercase tracking-tight">2. Log Files</h2>
+                    <p class="text-sm md:text-base">We follow standard procedures of using log files. These files log visitors when they visit websites. The information collected includes IP addresses, browser type, ISP, and date/time stamps. These are not linked to any personal identity.</p>
                 </section>
 
                 <section class="space-y-4">
-                    <h2 class="heading-line text-2xl font-black text-slate-900 dark:text-white uppercase tracking-tight">3. Google AdSense & Cookies</h2>
-                    <p class="text-justify">Google is one of the third-party vendors on our site. It also uses cookies, known as DART cookies, to serve ads to our site visitors based upon their visit to our website and other sites on the internet. You may choose to decline the use of DART cookies by visiting the Google ad and content network Privacy Policy at the following URL – https://policies.google.com/technologies/ads</p>
+                    <h2 class="heading-line text-xl md:text-2xl font-black text-slate-900 dark:text-white uppercase tracking-tight">3. AdSense & Cookies</h2>
+                    <p class="text-sm md:text-base">Google is a third-party vendor on our site. It uses DART cookies to serve ads to visitors based on their visit to our site. You may choose to decline DART cookies via Google's policy link: <span class="break-all text-blue-500 underline">https://policies.google.com/technologies/ads</span></p>
                 </section>
 
                 <section class="space-y-4">
-                    <h2 class="heading-line text-2xl font-black text-slate-900 dark:text-white uppercase tracking-tight">4. Advertising Partners</h2>
-                    <p class="text-justify">Some of the advertisers on our site may use cookies and web beacons. Our advertising partners include Google AdSense. Each of our advertising partners has their own Privacy Policy for their policies on user data. For easier access, we hyperlinked to their Privacy Policies above. We do not have control over these third-party cookies.</p>
+                    <h2 class="heading-line text-xl md:text-2xl font-black text-slate-900 dark:text-white uppercase tracking-tight">4. Advertising Partners</h2>
+                    <p class="text-sm md:text-base">Third-party ad servers use cookies or JavaScript for their advertisements. ExamPhoto Pro has no access to or control over these cookies used by third-party advertisers.</p>
                 </section>
 
-                <section class="space-y-4">
-                    <h2 class="heading-line text-2xl font-black text-slate-900 dark:text-white uppercase tracking-tight">5. Consent</h2>
-                    <p class="text-justify">By using our website, you hereby consent to our Privacy Policy and agree to its Terms and Conditions. If you have additional questions or require more information about our Privacy Policy, do not hesitate to contact us through our email.</p>
+                <section class="space-y-4 border-t border-slate-200 dark:border-white/5 pt-8">
+                    <h2 class="text-xl md:text-2xl font-black text-slate-900 dark:text-white uppercase tracking-tight">Consent</h2>
+                    <p class="text-sm md:text-base">By using our website, you hereby consent to our Privacy Policy and agree to its Terms and Conditions. If you have questions, please contact us.</p>
                 </section>
                 
             </div>
@@ -121,15 +123,13 @@
 
     <footer class="py-12 border-t border-slate-200 dark:border-white/10 text-center px-6">
         <p class="text-slate-400 dark:text-slate-500 text-[10px] font-bold uppercase tracking-widest">
-            © 2026 • ExamPhoto Pro • Secure & Private
+            © 2026 • ExamPhoto Pro • Made in India
         </p>
     </footer>
 
     <script>
-        // Initialize Icons
         lucide.createIcons();
 
-        // Theme Toggle Logic (Same as Homepage)
         function toggleTheme() {
             const html = document.documentElement;
             if (html.classList.contains('dark')) {
@@ -141,7 +141,6 @@
             }
         }
 
-        // Apply saved preference on load
         if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             document.documentElement.classList.add('dark');
         } else {
