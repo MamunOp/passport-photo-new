@@ -1,1 +1,149 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disclaimer | ExamPhoto Pro</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 500: '#3b82f6', 600: '#2563eb' }
+                    }
+                }
+            }
+        }
+    </script>
 
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; transition: background-color 0.3s ease; }
+        
+        .mesh-bg {
+            background-color: #f8fafc;
+            background-image: radial-gradient(at 0% 0%, hsla(210, 100%, 93%, 1) 0, transparent 50%), 
+                              radial-gradient(at 100% 0%, hsla(230, 100%, 93%, 1) 0, transparent 50%);
+        }
+        .dark .mesh-bg {
+            background-color: #020617;
+            background-image: radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), 
+                              radial-gradient(at 100% 0%, hsla(225,39%,20%,1) 0, transparent 50%);
+        }
+
+        .content-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        .dark .content-card {
+            background: rgba(15, 23, 42, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+        
+        .heading-line { 
+            border-left: 4px solid #3b82f6; 
+            padding-left: 0.8rem; 
+        }
+
+        .text-justify-custom {
+            text-align: justify;
+            text-justify: inter-word;
+            word-break: break-word;
+        }
+    </style>
+</head>
+<body class="mesh-bg text-slate-900 dark:text-slate-100 antialiased overflow-x-hidden">
+
+    <!-- Theme Toggle Button -->
+    <button onclick="toggleTheme()" class="fixed bottom-6 right-6 z-[100] p-4 bg-white dark:bg-slate-800 rounded-full shadow-2xl border border-slate-200 dark:border-slate-700 hover:scale-110 transition-all active:scale-95">
+        <i data-lucide="sun" class="hidden dark:block text-yellow-400"></i>
+        <i data-lucide="moon" class="block dark:hidden text-indigo-600"></i>
+    </button>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-[100] border-b border-slate-200/50 dark:border-white/5 bg-white/70 dark:bg-slate-950/70 backdrop-blur-xl">
+        <div class="max-w-7xl mx-auto px-6 h-16 md:h-20 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-2">
+                <div class="w-8 h-8 bg-gradient-to-br from-blue-600 to-indigo-600 rounded-lg flex items-center justify-center shadow-lg">
+                    <i data-lucide="aperture" class="text-white w-5 h-5"></i>
+                </div>
+                <span class="font-black text-lg md:text-xl tracking-tighter dark:text-white">Exam<span class="text-blue-600">Photo</span></span>
+            </a>
+            <a href="index.html" class="text-[10px] md:text-xs font-black uppercase tracking-widest text-slate-500 hover:text-blue-600 dark:hover:text-white transition-colors">Back to Home</a>
+        </div>
+    </nav>
+
+    <!-- Content Area -->
+    <main class="pt-28 md:pt-40 pb-20 px-4 md:px-6">
+        <div class="max-w-4xl mx-auto">
+            
+            <h1 class="text-3xl md:text-6xl font-black mb-8 md:mb-16 text-center text-slate-900 dark:text-white tracking-tight">Disclaimer</h1>
+            
+            <div class="content-card p-6 md:p-16 rounded-[2rem] md:rounded-[3rem] space-y-10 md:space-y-14 text-slate-600 dark:text-slate-400 leading-relaxed text-justify-custom">
+                
+                <section>
+                    <p class="text-base md:text-lg">The information provided by ExamPhoto Pro ("we," "us," or "our") on this website is for general informational purposes only. All tools and information on the site are provided in good faith, however, we make no representation or warranty of any kind, express or implied, regarding accuracy, reliability, or completeness.</p>
+                </section>
+                
+                <section class="space-y-4">
+                    <h2 class="heading-line text-xl md:text-2xl font-black text-slate-900 dark:text-white uppercase tracking-tight">1. No Official Affiliation</h2>
+                    <p class="text-sm md:text-base">ExamPhoto Pro is a <strong>private and independent</strong> online tool. We are <strong>not affiliated, associated, authorized, endorsed by, or in any way officially connected</strong> with any government agency or examination body, including but not limited to NTA (National Testing Agency), SSC (Staff Selection Commission), UPSC, IBPS, or SBI. The names of these exams are registered trademarks of their respective owners.</p>
+                </section>
+
+                <section class="space-y-4">
+                    <h2 class="heading-line text-xl md:text-2xl font-black text-slate-900 dark:text-white uppercase tracking-tight">2. Information Accuracy</h2>
+                    <p class="text-sm md:text-base">While we strive to provide the most accurate photo dimensions, background requirements, and file size (KB) limits based on the latest 2026 notifications, exam rules can change without prior notice. We encourage all aspirants to <strong>verify the photo specifications from the official notification/brochure</strong> before final submission. We are not responsible for any application rejection based on photo errors.</p>
+                </section>
+
+                <section class="space-y-4">
+                    <h2 class="heading-line text-xl md:text-2xl font-black text-slate-900 dark:text-white uppercase tracking-tight">3. Limitation of Liability</h2>
+                    <p class="text-sm md:text-base">In no event shall ExamPhoto Pro be liable for any special, direct, indirect, consequential, or incidental damages or any damages whatsoever, whether in an action of contract, negligence or other tort, arising out of or in connection with the use of the Service or the contents of the Service.</p>
+                </section>
+
+                <section class="space-y-4">
+                    <h2 class="heading-line text-xl md:text-2xl font-black text-slate-900 dark:text-white uppercase tracking-tight">4. External Links Disclaimer</h2>
+                    <p class="text-sm md:text-base">The Site may contain links to external websites that are not provided or maintained by or in any way affiliated with us. Please note that ExamPhoto Pro does not guarantee the accuracy, relevance, timeliness, or completeness of any information on these external websites, including official exam portals.</p>
+                </section>
+
+                <section class="space-y-4 border-t border-slate-200 dark:border-white/5 pt-8">
+                    <h2 class="text-xl md:text-2xl font-black text-slate-900 dark:text-white uppercase tracking-tight">Consent</h2>
+                    <p class="text-sm md:text-base">By using our website, you hereby acknowledge and agree to this Disclaimer. If you do not agree with any part of this disclaimer, you must stop using our tools immediately.</p>
+                </section>
+                
+            </div>
+        </div>
+    </main>
+
+    <footer class="py-12 border-t border-slate-200 dark:border-white/10 text-center px-6">
+        <p class="text-slate-400 dark:text-slate-500 text-[10px] font-bold uppercase tracking-widest">
+            © 2026 • ExamPhoto Pro • Use at your own discretion
+        </p>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        function toggleTheme() {
+            const html = document.documentElement;
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+            } else {
+                html.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
+</body>
+</html>
