@@ -71,6 +71,12 @@
 </head>
 <body class="mesh-bg text-slate-900 dark:text-slate-100 min-h-screen">
 
+    <!-- Theme Toggle Button -->
+    <button onclick="toggleTheme()" class="fixed bottom-6 right-6 z-[100] p-4 bg-white dark:bg-slate-800 rounded-full shadow-2xl border border-slate-200 dark:border-slate-700 hover:scale-110 transition-all active:scale-95">
+        <i data-lucide="sun" class="hidden dark:block text-yellow-400"></i>
+        <i data-lucide="moon" class="block dark:hidden text-indigo-600"></i>
+    </button>
+
     <nav class="fixed top-0 w-full z-[100] border-b border-slate-200 dark:border-white/5 bg-white/80 dark:bg-slate-950/80 backdrop-blur-xl">
         <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
             <a href="index.html" class="flex items-center gap-2 font-bold text-blue-600 dark:text-blue-400 group text-xs uppercase tracking-widest">
@@ -144,10 +150,10 @@
         </div>
     </main>
 
-     <!-- 2. HOW TO USE SECTION (5 Steps Including Resize) -->
+     <!-- 2. HOW TO USE SECTION -->
     <section class="max-w-7xl mx-auto px-6 py-20 border-t border-slate-200 dark:border-white/5">
         <div class="text-center mb-12">
-            <h2 class="text-2xl md:text-3xl font-black not-italic tracking-tighter">How to Crop and Resize NEET Postcard Size Photo?</h2>
+            <h2 class="text-2xl md:text-3xl font-black not-italic tracking-tighter">How to Crop and Resize NEET Passport Size Photo?</h2>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
             <div class="tool-card p-6 rounded-3xl text-center space-y-3">
@@ -158,7 +164,7 @@
             <div class="tool-card p-6 rounded-3xl text-center space-y-3">
                 <div class="w-10 h-10 bg-indigo-500/10 text-indigo-500 rounded-xl flex items-center justify-center mx-auto"><i data-lucide="crop"></i></div>
                 <h4 class="font-bold text-[10px] uppercase tracking-widest">02. Crop</h4>
-                <p class="text-[9px] text-slate-500">Auto-lock to 4:6 aspect ratio for NTA.</p>
+                <p class="text-[9px] text-slate-500">Auto-lock to 3.5:4.5 ratio.</p>
             </div>
             <div class="tool-card p-6 rounded-3xl text-center space-y-3">
                 <div class="w-10 h-10 bg-purple-500/10 text-purple-500 rounded-xl flex items-center justify-center mx-auto"><i data-lucide="type"></i></div>
@@ -168,12 +174,12 @@
             <div class="tool-card p-6 rounded-3xl text-center space-y-3 border-blue-500/20 bg-blue-500/5">
                 <div class="w-10 h-10 bg-green-500/10 text-green-500 rounded-xl flex items-center justify-center mx-auto"><i data-lucide="maximize"></i></div>
                 <h4 class="font-bold text-[10px] uppercase tracking-widest text-blue-500">04. Resize</h4>
-                <p class="text-[9px] text-slate-500">Slide to compress image under 200KB.</p>
+                <p class="text-[9px] text-slate-500">Slide to compress KB.</p>
             </div>
             <div class="tool-card p-6 rounded-3xl text-center space-y-3 bg-blue-600 text-white">
                 <div class="w-10 h-10 bg-white/20 text-white rounded-xl flex items-center justify-center mx-auto"><i data-lucide="download"></i></div>
                 <h4 class="font-bold text-[10px] uppercase tracking-widest">05. Save</h4>
-                <p class="text-[9px] text-white/70">Instant NEET Postcard Size JPG download.</p>
+                <p class="text-[9px] text-white/70">Instant Passport JPG download.</p>
             </div>
         </div>
     </section>
@@ -182,13 +188,13 @@
     <section class="max-w-7xl mx-auto px-6 py-20 border-t border-slate-200 dark:border-white/5">
         <div class="grid lg:grid-cols-2 gap-16 items-start">
             <div>
-               <h2 class="text-3xl font-black mb-8 leading-tight not-italic">NTA Guidelines for Postcard Size Photo 2027</h2>
+               <h2 class="text-3xl font-black mb-8 leading-tight not-italic">NTA Guidelines for Passport Size Photo 2026-27</h2>
                 <div class="space-y-6">
                     <div class="flex gap-4">
                         <div class="w-10 h-10 shrink-0 bg-blue-500 text-white rounded-full flex items-center justify-center font-black italic">01</div>
                         <div>
-                            <h4 class="font-bold uppercase tracking-tight mb-1">Standard 4x6 Dimensions</h4>
-                            <p class="text-sm text-slate-500">Postcard must be 4 inches width x 6 inches height. Resolution should be 300 DPI.</p>
+                            <h4 class="font-bold uppercase tracking-tight mb-1">Standard 3.5x4.5cm</h4>
+                            <p class="text-sm text-slate-500">Passport photo must be 3.5cm width x 4.5cm height.</p>
                         </div>
                     </div>
                     <div class="flex gap-4">
@@ -202,7 +208,7 @@
             </div>
             
             <div class="tool-card p-8 rounded-[2.5rem] bg-blue-500/5 border-blue-500/20">
-                <h3 class="text-xl font-bold mb-6 italic tracking-tighter">NTA Official Specs 2026-27</h3>
+                <h3 class="text-xl font-bold mb-6 italic tracking-tighter">NTA Official Specs</h3>
                 <div class="space-y-4 font-black uppercase text-[10px]">
                     <div class="flex justify-between border-b border-blue-500/10 pb-3"><span>Dimensions</span> <span class="text-blue-500">3.5 cm x 4.5 cm</span></div>
                     <div class="flex justify-between border-b border-blue-500/10 pb-3"><span>File Format</span> <span class="text-blue-500">JPG / JPEG</span></div>
@@ -214,49 +220,6 @@
         </div>
     </section>
 
-     <!-- 4. FAQ SECTION -->
-    <section class="max-w-4xl mx-auto px-6 py-20 border-t border-slate-200 dark:border-white/5">
-        <h2 class="text-3xl font-black mb-10 text-center uppercase italic">Frequently Asked Questions</h2>
-        <div class="space-y-4">
-            <details class="group tool-card p-6 rounded-2xl cursor-pointer">
-                <summary class="flex justify-between items-center font-bold list-none">
-                    1. Is white background mandatory for the postcard photo?
-                    <i data-lucide="chevron-down" class="group-open:rotate-180 transition"></i>
-                </summary>
-                <p class="mt-4 text-sm text-slate-500 leading-relaxed">Yes, NTA rejects photos with any colored background. Our tool ensures your 4x6 output matches official standards.</p>
-            </details>
-            <details class="group tool-card p-6 rounded-2xl cursor-pointer">
-                <summary class="flex justify-between items-center font-bold list-none">
-                    2. Does this tool support high MB photos?
-                    <i data-lucide="chevron-down" class="group-open:rotate-180 transition"></i>
-                </summary>
-                <p class="mt-4 text-sm text-slate-500 leading-relaxed">Yes. You can upload photos up to 15MB. The tool will process them in the background and let you resize them to under 200KB.</p>
-            </details>
-        </div>
-    </section>
-    
-    <!-- OTHER TOOLS -->
-    <section class="max-w-7xl mx-auto px-6 pb-20">
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <a href="neet-postcard.html" class="tool-card p-6 rounded-3xl text-center hover:border-blue-500 transition group">
-                <i data-lucide="image" class="w-6 h-6 mx-auto mb-2 text-indigo-500"></i>
-                <h4 class="text-[9px] font-black uppercase tracking-widest">NEET Postcard</h4>
-            </a>
-            <a href="signature.html" class="tool-card p-6 rounded-3xl text-center hover:border-blue-500 transition group">
-                <i data-lucide="pen-tool" class="w-6 h-6 mx-auto mb-2 text-green-500"></i>
-                <h4 class="text-[9px] font-black uppercase tracking-widest">Signature Resizer</h4>
-            </a>
-            <a href="thumb-impression.html" class="tool-card p-6 rounded-3xl text-center hover:border-blue-500 transition group">
-                <i data-lucide="fingerprint" class="w-6 h-6 mx-auto mb-2 text-purple-500"></i>
-                <h4 class="text-[9px] font-black uppercase tracking-widest">Thumb Impression</h4>
-            </a>
-            <a href="ssc.html" class="tool-card p-6 rounded-3xl text-center hover:border-blue-500 transition group">
-                <i data-lucide="shield-check" class="w-6 h-6 mx-auto mb-2 text-blue-500"></i>
-                <h4 class="text-[9px] font-black uppercase tracking-widest">SSC CGL Tools</h4>
-            </a>
-        </div>
-    </section>
-
     <footer class="py-12 border-t border-slate-200 dark:border-white/5 text-center px-6">
         <p class="text-slate-400 text-[10px] font-bold uppercase tracking-[0.2em]">© 2026 • ExamPhoto Pro • Secure Browser-Side Processing</p>
     </footer>
@@ -264,7 +227,27 @@
     <canvas id="finalCanvas" class="hidden"></canvas>
 
     <script>
+        // Initialize Icons
         lucide.createIcons();
+
+        // Theme Toggle Logic
+        function toggleTheme() {
+            const html = document.documentElement;
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+            } else {
+                html.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        // Apply saved preference on load
+        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
 
         const fileInput = document.getElementById('fileInput');
         const imageToCrop = document.getElementById('imageToCrop');
@@ -331,18 +314,15 @@
         function updateLiveResult() {
             if (!cropper) return;
 
-            // NTA Resolution Standard: approx 413x531 px for 3.5x4.5cm at 300DPI
             const W = 600, H = 772; 
             finalCanvas.width = W; finalCanvas.height = H;
 
             const croppedCanvas = cropper.getCroppedCanvas({ width: W, height: H });
             
-            // Draw Image
             ctx.fillStyle = "white";
             ctx.fillRect(0, 0, W, H);
             ctx.drawImage(croppedCanvas, 0, 0, W, H);
 
-            // Draw Name/Date Plate
             const name = nameInput.value.toUpperCase();
             const date = dateInput.value;
 
@@ -364,7 +344,6 @@
                 }
             }
 
-            // Estimate Size
             const q = qualitySlider.value / 100;
             const dataUrl = finalCanvas.toDataURL('image/jpeg', q);
             const sizeKB = Math.round((dataUrl.length * (3/4)) / 1024);
