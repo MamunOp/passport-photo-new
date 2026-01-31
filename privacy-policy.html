@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Title | ExamPhoto Pro</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; transition: background-color 0.3s ease; }
+        .mesh-bg { background-color: #f8fafc; background-image: radial-gradient(at 0% 0%, hsla(210, 100%, 93%, 1) 0, transparent 50%), radial-gradient(at 100% 0%, hsla(230, 100%, 93%, 1) 0, transparent 50%); }
+        .dark .mesh-bg { background-color: #020617; background-image: radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), radial-gradient(at 100% 0%, hsla(225,39%,20%,1) 0, transparent 50%); }
+        .content-card { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(0, 0, 0, 0.05); }
+        .dark .content-card { background: rgba(15, 23, 42, 0.3); border: 1px solid rgba(255, 255, 255, 0.06); }
+    </style>
+</head>
+<body class="mesh-bg text-slate-900 dark:text-slate-100 antialiased overflow-x-hidden">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-[100] border-b border-slate-200/50 dark:border-white/5 bg-white/70 dark:bg-slate-950/70 backdrop-blur-xl">
+        <div class="max-w-7xl mx-auto px-6 h-16 md:h-20 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-3">
+                <div class="w-8 h-8 bg-gradient-to-br from-blue-600 to-indigo-600 rounded-lg flex items-center justify-center shadow-lg">
+                    <i data-lucide="aperture" class="text-white w-5 h-5"></i>
+                </div>
+                <span class="font-black text-xl tracking-tighter dark:text-white">Exam<span class="text-blue-600">Photo</span></span>
+            </a>
+            <a href="index.html" class="text-xs font-black uppercase tracking-widest text-slate-500 hover:text-blue-600 transition">Back to Home</a>
+        </div>
+    </nav>
+
+    <!-- Content Area -->
+    <main class="pt-32 pb-20 px-6">
+        <div class="max-w-4xl mx-auto">
+            <div id="page-content">
+                <!-- SPECIFIC CONTENT WILL GO HERE -->
+            </div>
+        </div>
+    </main>
+
+    <footer class="py-12 border-t border-slate-200 dark:border-white/10 text-center">
+        <p class="text-slate-400 text-[10px] font-bold uppercase tracking-widest">© 2026 • ExamPhoto Pro</p>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        }
+    </script>
+</body>
+</html>
+<h1 class="text-4xl font-black mb-6">Privacy Policy</h1>
+<div class="content-card p-8 md:p-12 rounded-3xl space-y-6 text-slate-600 dark:text-slate-400 leading-relaxed">
+    <p>At ExamPhoto Pro, your privacy is our top priority. We process all images <strong>locally in your browser</strong>. This means your photos are never uploaded to our servers.</p>
+    <h2 class="text-xl font-bold text-slate-900 dark:text-white">Cookies and AdSense</h2>
+    <p>We use Google AdSense to serve ads. Google may use cookies (DART cookies) to show ads based on your visit to this and other sites on the internet.</p>
+    <h2 class="text-xl font-bold text-slate-900 dark:text-white">Log Files</h2>
+    <p>We follow standard log file procedures that track IP addresses, browser types, and time stamps for analytical purposes only.</p>
+</div>
