@@ -53,6 +53,12 @@
             background: rgba(15, 23, 42, 0.6);
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
+        
+        .text-justify-custom {
+            text-align: justify;
+            text-justify: inter-word;
+            word-break: break-word;
+        }
     </style>
 </head>
 <body class="mesh-bg text-slate-900 dark:text-slate-100 antialiased overflow-x-hidden">
@@ -92,11 +98,14 @@
                     <h4 class="font-bold text-sm uppercase tracking-widest mb-1">Email</h4>
                     <p class="text-xs text-slate-500 break-all">hello@examphoto.pro</p>
                 </div>
-                <div class="content-card p-6 rounded-[2rem] text-center">
-                    <i data-lucide="clock" class="w-6 h-6 mx-auto mb-3 text-green-500"></i>
-                    <h4 class="font-bold text-sm uppercase tracking-widest mb-1">Support</h4>
-                    <p class="text-xs text-slate-500">Mon - Fri (10am - 6pm)</p>
-                </div>
+                
+                <!-- Updated Call Us Section -->
+                <a href="tel:+919876543210" class="content-card p-6 rounded-[2rem] text-center block hover:border-blue-500/50 transition-colors">
+                    <i data-lucide="phone" class="w-6 h-6 mx-auto mb-3 text-green-500"></i>
+                    <h4 class="font-bold text-sm uppercase tracking-widest mb-1">Call Us</h4>
+                    <p class="text-xs text-slate-500">+91 98765 43210</p>
+                </a>
+
                 <div class="content-card p-6 rounded-[2rem] text-center">
                     <i data-lucide="map-pin" class="w-6 h-6 mx-auto mb-3 text-purple-500"></i>
                     <h4 class="font-bold text-sm uppercase tracking-widest mb-1">Made In</h4>
@@ -120,7 +129,7 @@
 
                     <div class="space-y-2">
                         <label class="text-[10px] font-black uppercase tracking-[0.2em] ml-2 text-slate-400">Subject</label>
-                        <select class="input-style w-full p-4 rounded-2xl outline-none focus:border-blue-500 transition-all dark:text-white text-sm appearance-none">
+                        <select class="input-style w-full p-4 rounded-2xl outline-none focus:border-blue-500 transition-all dark:text-white text-sm appearance-none cursor-pointer">
                             <option>General Inquiry</option>
                             <option>Report a Bug</option>
                             <option>Feature Suggestion</option>
@@ -140,15 +149,15 @@
             </div>
 
             <!-- Justified Policy Note -->
-            <div class="mt-12 text-slate-500 dark:text-slate-500 text-xs md:text-sm text-justify leading-relaxed px-4">
-                <strong>Note:</strong> We take your feedback seriously to improve ExamPhoto Pro. If you are reporting an error with a specific exam photo size, please mention the exam name (e.g., NEET 2026, SSC CGL) so our team can update the guidelines immediately. Your personal information shared in this form is used only to respond to your query and is never shared with third parties.
+            <div class="mt-12 text-slate-500 dark:text-slate-500 text-xs md:text-sm text-justify-custom leading-relaxed px-4">
+                <strong>Important Note:</strong> We value your time and feedback to make ExamPhoto Pro the best tool for aspirants. If you are reaching out regarding a specific exam rejection, please attach the rejection reason or the exam name so we can investigate and update our dimensions. We do not store any images sent via this form on our permanent database. For urgent technical help, you can use the contact number provided above during business hours.
             </div>
         </div>
     </main>
 
     <footer class="py-12 border-t border-slate-200 dark:border-white/10 text-center px-6">
         <p class="text-slate-400 dark:text-slate-500 text-[10px] font-bold uppercase tracking-widest">
-            © 2026 • ExamPhoto Pro • We're here to help
+            © 2026 • ExamPhoto Pro • Made with ❤️ for Students
         </p>
     </footer>
 
