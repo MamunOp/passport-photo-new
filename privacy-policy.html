@@ -7,17 +7,54 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 500: '#3b82f6', 600: '#2563eb' }
+                    }
+                }
+            }
+        }
+    </script>
+
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; transition: background-color 0.3s ease; }
-        .mesh-bg { background-color: #f8fafc; background-image: radial-gradient(at 0% 0%, hsla(210, 100%, 93%, 1) 0, transparent 50%), radial-gradient(at 100% 0%, hsla(230, 100%, 93%, 1) 0, transparent 50%); }
-        .dark .mesh-bg { background-color: #020617; background-image: radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), radial-gradient(at 100% 0%, hsla(225,39%,20%,1) 0, transparent 50%); }
-        .content-card { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(0, 0, 0, 0.05); }
-        .dark .content-card { background: rgba(15, 23, 42, 0.3); border: 1px solid rgba(255, 255, 255, 0.06); }
+        
+        /* Matching the Homepage Mesh Background */
+        .mesh-bg {
+            background-color: #f8fafc;
+            background-image: radial-gradient(at 0% 0%, hsla(210, 100%, 93%, 1) 0, transparent 50%), 
+                              radial-gradient(at 100% 0%, hsla(230, 100%, 93%, 1) 0, transparent 50%);
+        }
+        .dark .mesh-bg {
+            background-color: #020617;
+            background-image: radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), 
+                              radial-gradient(at 100% 0%, hsla(225,39%,20%,1) 0, transparent 50%);
+        }
+
+        .content-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        .dark .content-card {
+            background: rgba(15, 23, 42, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+        
+        .heading-line { 
+            border-left: 4px solid #3b82f6; 
+            padding-left: 1rem; 
+        }
     </style>
 </head>
 <body class="mesh-bg text-slate-900 dark:text-slate-100 antialiased overflow-x-hidden">
 
-    <!-- Navigation -->
+    <!-- Navigation (Synced with Dark Mode) -->
     <nav class="fixed top-0 w-full z-[100] border-b border-slate-200/50 dark:border-white/5 bg-white/70 dark:bg-slate-950/70 backdrop-blur-xl">
         <div class="max-w-7xl mx-auto px-6 h-16 md:h-20 flex items-center justify-between">
             <a href="index.html" class="flex items-center gap-3">
@@ -26,60 +63,67 @@
                 </div>
                 <span class="font-black text-xl tracking-tighter dark:text-white">Exam<span class="text-blue-600">Photo</span></span>
             </a>
-            <a href="index.html" class="text-xs font-black uppercase tracking-widest text-slate-500 hover:text-blue-600 transition">Back to Home</a>
+            <a href="index.html" class="text-xs font-black uppercase tracking-widest text-slate-500 hover:text-blue-600 dark:hover:text-white transition-colors">Back to Home</a>
         </div>
     </nav>
 
     <!-- Content Area -->
     <main class="pt-32 pb-20 px-6">
-        <!-- mx-auto centers the container, text-center centers the text inside -->
-        <div class="max-w-4xl mx-auto text-center">
+        <div class="max-w-4xl mx-auto">
             
-            <h1 class="text-4xl md:text-5xl font-black mb-10 text-slate-900 dark:text-white">Privacy Policy</h1>
+            <h1 class="text-4xl md:text-5xl font-black mb-12 text-center text-slate-900 dark:text-white">Privacy Policy</h1>
             
-            <div class="content-card p-8 md:p-12 rounded-[2.5rem] space-y-8 text-slate-600 dark:text-slate-400 leading-relaxed mx-auto">
+            <div class="content-card p-8 md:p-16 rounded-[2.5rem] space-y-12 text-slate-600 dark:text-slate-400 leading-relaxed text-left">
                 
                 <section>
-                    <p class="mb-4 text-lg">At ExamPhoto Pro, accessible from our website, one of our main priorities is the privacy of our visitors. This Privacy Policy document contains types of information that is collected and recorded by ExamPhoto Pro and how we use it.</p>
+                    <p class="text-lg">At ExamPhoto Pro, accessible from our website, one of our main priorities is the privacy of our visitors. This Privacy Policy document contains types of information that is collected and recorded by ExamPhoto Pro and how we use it.</p>
                 </section>
                 
-                <section>
-                    <h2 class="text-xl font-bold text-slate-900 dark:text-white mb-3">1. Local Image Processing</h2>
-                    <p>Unlike traditional online tools, ExamPhoto Pro processes all images <strong>locally in your browser</strong>. This means your photos are never uploaded to our servers, stored in any database, or viewed by our team. Your data stays on your device.</p>
+                <section class="space-y-4">
+                    <h2 class="heading-line text-2xl font-black text-slate-900 dark:text-white uppercase tracking-tight">1. Local Image Processing</h2>
+                    <p>Unlike traditional online tools, ExamPhoto Pro processes all images <strong>locally in your browser</strong>. This means your photos are never uploaded to our servers, stored in any database, or viewed by our team. Your data stays on your device at all times.</p>
                 </section>
 
-                <section>
-                    <h2 class="text-xl font-bold text-slate-900 dark:text-white mb-3">2. Log Files</h2>
+                <section class="space-y-4">
+                    <h2 class="heading-line text-2xl font-black text-slate-900 dark:text-white uppercase tracking-tight">2. Log Files</h2>
                     <p>ExamPhoto Pro follows a standard procedure of using log files. These files log visitors when they visit websites. The information collected includes IP addresses, browser type, ISP, and date/time stamps.</p>
                 </section>
 
-                <section>
-                    <h2 class="text-xl font-bold text-slate-900 dark:text-white mb-3">3. Google DoubleClick DART Cookie</h2>
+                <section class="space-y-4">
+                    <h2 class="heading-line text-2xl font-black text-slate-900 dark:text-white uppercase tracking-tight">3. Google AdSense & Cookies</h2>
                     <p>Google is one of the third-party vendors on our site. It also uses cookies, known as DART cookies, to serve ads to our site visitors based upon their visit to our website and other sites on the internet.</p>
                 </section>
 
-                <section>
-                    <h2 class="text-xl font-bold text-slate-900 dark:text-white mb-3">4. Advertising Partners</h2>
-                    <p>Third-party ad servers use technologies like cookies or JavaScript for their respective advertisements. They automatically receive your IP address when this occurs to measure the effectiveness of their campaigns.</p>
+                <section class="space-y-4">
+                    <h2 class="heading-line text-2xl font-black text-slate-900 dark:text-white uppercase tracking-tight">4. Advertising Partners</h2>
+                    <p>Third-party ad servers or ad networks use technologies like cookies or JavaScript for their respective advertisements. ExamPhoto Pro has no access to or control over these cookies used by third-party advertisers.</p>
                 </section>
 
-                <section>
-                    <h2 class="text-xl font-bold text-slate-900 dark:text-white mb-3">5. Children's Information</h2>
-                    <p>Another part of our priority is adding protection for children while using the internet. We encourage parents and guardians to monitor and guide their online activity.</p>
+                <section class="space-y-4">
+                    <h2 class="heading-line text-2xl font-black text-slate-900 dark:text-white uppercase tracking-tight">5. Consent</h2>
+                    <p>By using our website, you hereby consent to our Privacy Policy and agree to its Terms and Conditions.</p>
                 </section>
                 
             </div>
         </div>
     </main>
 
+    <!-- Footer Synced with Home -->
     <footer class="py-12 border-t border-slate-200 dark:border-white/10 text-center px-6">
-        <p class="text-slate-400 text-[10px] font-bold uppercase tracking-widest">© 2026 • ExamPhoto Pro • Made with Privacy in Mind</p>
+        <p class="text-slate-400 dark:text-slate-500 text-[10px] font-bold uppercase tracking-widest">
+            © 2026 • ExamPhoto Pro • Secure & Private
+        </p>
     </footer>
 
     <script>
+        // Initialize Icons
         lucide.createIcons();
+
+        // Theme sync logic: This is critical for the legal page to detect the dark mode set on index.html
         if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
         }
     </script>
 </body>
