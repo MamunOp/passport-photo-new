@@ -10,17 +10,6 @@
     <meta name="keywords" content="NEET postcard photo maker, 4x6 photo resizer, NTA postcard photo guidelines, NEET photo with name and date, postcard size photo for neet, exam photo resizer">
     <link rel="canonical" href="https://myexamphoto.com/neet-postcard.html" />
     
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="NEET Postcard Photo Maker | Official 4x6 Resize">
-    <meta property="og:description" content="Generate NTA-compliant 4x6 postcard photos with name and date stamps instantly.">
-    <meta property="og:image" content="https://myexamphoto.com/og-postcard.jpg">
-
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:title" content="NEET Postcard Photo Maker">
-    <meta property="twitter:description" content="Resize and add name/date to your NEET postcard photo as per official guidelines.">
-
     <!-- Schema.org JSON-LD for SEO -->
     <script type="application/ld+json">
     {
@@ -52,13 +41,6 @@
             darkMode: 'class',
             theme: { extend: { colors: { brand: { 500: '#3b82f6', 600: '#2563eb' } } } }
         }
-        
-        // Theme Management
-        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            document.documentElement.classList.add('dark');
-        } else {
-            document.documentElement.classList.remove('dark');
-        }
     </script>
 
     <style>
@@ -85,21 +67,18 @@
 </head>
 <body class="mesh-bg text-slate-900 dark:text-slate-100 min-h-screen">
 
+    <!-- Theme Toggle (Same as Homepage) -->
+    <button onclick="toggleTheme()" class="fixed bottom-6 right-6 z-[100] p-4 bg-white dark:bg-slate-800 rounded-full shadow-2xl border border-slate-200 dark:border-slate-700 hover:scale-110 transition-all active:scale-95">
+        <i data-lucide="sun" class="hidden dark:block text-yellow-400"></i>
+        <i data-lucide="moon" class="block dark:hidden text-indigo-600"></i>
+    </button>
+
     <nav class="fixed top-0 w-full z-[100] border-b border-slate-200 dark:border-white/5 bg-white/80 dark:bg-slate-950/80 backdrop-blur-xl">
         <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
             <a href="index.html" class="flex items-center gap-2 font-bold text-blue-600 dark:text-blue-400 group text-xs uppercase tracking-widest">
                 <i data-lucide="arrow-left" class="w-4 h-4"></i> Home
             </a>
-            
-            <div class="flex items-center gap-4">
-                <span class="font-black text-xl md:text-2xl tracking-tighter dark:text-white">MyExam<span class="text-blue-600 italic-none">Photo</span></span>
-                
-                <!-- Theme Toggle Button -->
-                <button id="theme-toggle" class="p-2 rounded-xl bg-slate-100 dark:bg-white/5 hover:bg-slate-200 dark:hover:bg-white/10 transition-colors">
-                    <i data-lucide="sun" class="w-5 h-5 hidden dark:block text-yellow-400"></i>
-                    <i data-lucide="moon" class="w-5 h-5 block dark:hidden text-slate-600"></i>
-                </button>
-            </div>
+            <span class="font-black text-xl md:text-2xl tracking-tighter dark:text-white">MyExam<span class="text-blue-600 italic-none">Photo</span></span>
         </div>
     </nav>
 
@@ -151,14 +130,14 @@
             <!-- Compression -->
             <div class="space-y-4 pt-4 border-t border-slate-200 dark:border-white/5">
                 <div class="flex justify-between items-center px-2">
-                    <label class="text-[10px] font-black uppercase tracking-widest text-slate-500">Resize & Compress upto 200 KB</label>
+                    <label class="text-[10px] font-black uppercase tracking-widest text-slate-500">Resize & Compress (Max 200 KB)</label>
                     <span id="size-estimate" class="text-xs font-black text-blue-600 dark:text-blue-400">Est: -- KB</span>
                 </div>
                 <input type="range" id="qualitySlider" min="10" max="100" value="85" class="w-full h-1.5 bg-slate-200 dark:bg-white/10 rounded-lg appearance-none cursor-pointer accent-blue-600">
             </div>
 
             <button id="downloadBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-black py-5 rounded-2xl transition shadow-xl shadow-blue-500/20 uppercase tracking-widest text-xs flex items-center justify-center gap-2">
-                <i data-lucide="download-cloud" class="w-5 h-5"></i> Download JPG
+                <i data-lucide="download-cloud" class="w-5 h-5"></i> Download Postcard JPG
             </button>
         </div>
     </main>
@@ -182,17 +161,17 @@
             <div class="tool-card p-6 rounded-3xl text-center space-y-3">
                 <div class="w-10 h-10 bg-purple-500/10 text-purple-500 rounded-xl flex items-center justify-center mx-auto"><i data-lucide="type"></i></div>
                 <h4 class="font-bold text-[10px] uppercase tracking-widest">03. Stamp</h4>
-                <p class="text-[9px] text-slate-500">Add Name & Date of photo.</p>
+                <p class="text-[9px] text-slate-500">Add Name & Date.</p>
             </div>
             <div class="tool-card p-6 rounded-3xl text-center space-y-3 border-blue-500/20 bg-blue-500/5">
                 <div class="w-10 h-10 bg-green-500/10 text-green-500 rounded-xl flex items-center justify-center mx-auto"><i data-lucide="maximize"></i></div>
                 <h4 class="font-bold text-[10px] uppercase tracking-widest text-blue-500">04. Resize</h4>
-                <p class="text-[9px] text-slate-500">Slide to compress image.</p>
+                <p class="text-[9px] text-slate-500">Compress image easily.</p>
             </div>
             <div class="tool-card p-6 rounded-3xl text-center space-y-3 bg-blue-600 text-white">
                 <div class="w-10 h-10 bg-white/20 text-white rounded-xl flex items-center justify-center mx-auto"><i data-lucide="download"></i></div>
                 <h4 class="font-bold text-[10px] uppercase tracking-widest">05. Save</h4>
-                <p class="text-[9px] text-white/70">Instant NEET JPG download.</p>
+                <p class="text-[9px] text-white/70">Instant high-quality download.</p>
             </div>
         </div>
     </section>
@@ -207,49 +186,28 @@
                         <div class="w-10 h-10 shrink-0 bg-blue-500 text-white rounded-full flex items-center justify-center font-black italic">01</div>
                         <div>
                             <h4 class="font-bold uppercase tracking-tight mb-1">Standard 4x6 Dimensions</h4>
-                            <p class="text-sm text-slate-500">The Postcard must be exactly 4 inches width x 6 inches height. Our tool ensures 1200x1800 px at high resolution.</p>
+                            <p class="text-sm text-slate-500">Postcard must be exactly 4" width x 6" height. Our tool processes at 300 DPI (1200x1800 px).</p>
                         </div>
                     </div>
                     <div class="flex gap-4">
                         <div class="w-10 h-10 shrink-0 bg-blue-500 text-white rounded-full flex items-center justify-center font-black italic">02</div>
                         <div>
-                            <h4 class="font-bold uppercase tracking-tight mb-1">Background & Identity</h4>
-                            <p class="text-sm text-slate-500">White background is mandatory. Ears must be visible and eyes should be open looking into the camera.</p>
+                            <h4 class="font-bold uppercase tracking-tight mb-1">Background Mandatory</h4>
+                            <p class="text-sm text-slate-500">White background is strictly required. 80% face coverage with both ears visible.</p>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="tool-card p-8 rounded-[2.5rem] bg-blue-500/5">
-                <h3 class="text-xl font-bold mb-6 not-italic tracking-tighter">Technical Specifications</h3>
+                <h3 class="text-xl font-bold mb-6 not-italic tracking-tighter">Official Specs</h3>
                 <div class="space-y-4 text-[10px] font-black uppercase tracking-[0.2em] text-slate-500">
                     <div class="flex justify-between border-b border-white/10 pb-2"><span>Format</span> <span class="text-blue-500 italic">JPG / JPEG</span></div>
-                    <div class="flex justify-between border-b border-white/10 pb-2"><span>Size Range</span> <span class="text-blue-500 italic">10KB - 200KB</span></div>
-                    <div class="flex justify-between"><span>Physical Size</span> <span class="text-blue-500 italic">4 x 6 Inches</span></div>
+                    <div class="flex justify-between border-b border-white/10 pb-2"><span>File Size</span> <span class="text-blue-500 italic">10KB - 200KB</span></div>
+                    <div class="flex justify-between"><span>Physical Size</span> <span class="text-blue-500 italic">4.0 x 6.0 Inch</span></div>
                 </div>
             </div>
         </div>
     </article>
-
-    <!-- 4. FAQ SECTION -->
-    <section class="max-w-4xl mx-auto px-6 py-20 border-t border-slate-200 dark:border-white/5">
-        <h2 class="text-3xl font-black mb-10 text-center uppercase italic">FAQs</h2>
-        <div class="space-y-4">
-            <details class="group tool-card p-6 rounded-2xl cursor-pointer">
-                <summary class="flex justify-between items-center font-bold list-none">
-                    1. Is white background mandatory for the postcard photo?
-                    <i data-lucide="chevron-down" class="group-open:rotate-180 transition"></i>
-                </summary>
-                <p class="mt-4 text-sm text-slate-500 leading-relaxed">Yes, NTA rejects photos with colored or busy backgrounds. Ensure you upload a photo with a plain white background for the NEET application.</p>
-            </details>
-            <details class="group tool-card p-6 rounded-2xl cursor-pointer">
-                <summary class="flex justify-between items-center font-bold list-none">
-                    2. What is the difference between Passport and Postcard photo?
-                    <i data-lucide="chevron-down" class="group-open:rotate-180 transition"></i>
-                </summary>
-                <p class="mt-4 text-sm text-slate-500 leading-relaxed">Passport photo is small (3.5x4.5cm), while Postcard photo is larger (4x6 inches). You need both for the NEET registration process.</p>
-            </details>
-        </div>
-    </section>
 
     <!-- FOOTER -->
     <footer class="py-16 border-t border-slate-200 dark:border-white/10 text-center px-6">
@@ -259,11 +217,9 @@
             <a href="terms.html" class="hover:text-blue-500 transition">Terms of Use</a>
             <span class="opacity-20">|</span>
             <a href="contact.html" class="hover:text-blue-500 transition">Contact Us</a>
-            <span class="opacity-20">|</span>
-            <a href="disclaimer.html" class="hover:text-blue-500 transition">Disclaimer</a>
         </div>
         <p class="text-slate-400 dark:text-slate-500 text-[10px] font-bold uppercase tracking-widest">
-            © 2026 • MyExamPhoto • Optimized for NTA 2027
+            © 2026 • MyExamPhoto • Optimized for NTA NEET
         </p>
     </footer>
 
@@ -272,13 +228,24 @@
     <script>
         lucide.createIcons();
 
-        // Theme Toggle Logic
-        const themeToggle = document.getElementById('theme-toggle');
-        themeToggle.addEventListener('click', () => {
-            document.documentElement.classList.toggle('dark');
-            const isDark = document.documentElement.classList.contains('dark');
-            localStorage.setItem('theme', isDark ? 'dark' : 'light');
-        });
+        // Theme Toggle Function (Exact match to homepage)
+        function toggleTheme() {
+            const html = document.documentElement;
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+            } else {
+                html.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        // Initialize Theme
+        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
 
         const fileInput = document.getElementById('fileInput');
         const imageToCrop = document.getElementById('imageToCrop');
@@ -293,7 +260,7 @@
 
         let cropper = null;
 
-        // Auto-Date Formatting (DD/MM/YYYY)
+        // Auto-Date Formatting
         dateInput.addEventListener('input', (e) => {
             let v = e.target.value.replace(/\D/g, ''); 
             if (v.length > 8) v = v.substring(0, 8);
@@ -325,7 +292,7 @@
                     const blob = await heic2any({ blob: file, toType: "image/jpeg", quality: 0.7 });
                     file = Array.isArray(blob) ? blob[0] : blob;
                 } catch (err) {
-                    alert("Error processing HEIC.");
+                    alert("HEIC error.");
                     loader.classList.add('hidden');
                     return;
                 }
@@ -353,7 +320,7 @@
         function updateLiveResult() {
             if (!cropper) return;
 
-            const W = 1200, H = 1800; // 4x6 at 300 DPI approx
+            const W = 1200, H = 1800;
             finalCanvas.width = W; finalCanvas.height = H;
 
             const croppedCanvas = cropper.getCroppedCanvas({ width: W, height: H, imageSmoothingQuality: 'high' });
@@ -395,7 +362,7 @@
             if (!cropper) return alert("Upload a photo first!");
             const q = qualitySlider.value / 100;
             const link = document.createElement('a');
-            link.download = `NEET_Postcard_4x6.jpg`;
+            link.download = `NEET_Postcard_4x6_Official.jpg`;
             link.href = finalCanvas.toDataURL('image/jpeg', q);
             link.click();
         });
