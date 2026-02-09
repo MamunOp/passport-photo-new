@@ -1,10 +1,38 @@
-
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NEET Passport Photo Maker | Official 3.5x4.5cm (80% Face Coverage)</title>
+    
+    <!-- SEO OPTIMIZATION -->
+    <title>NEET Passport Size Photo Maker | Official 3.5x4.5cm NTA Resizer</title>
+    <meta name="description" content="Create official NTA-compliant NEET passport size photos (3.5x4.5 cm) with 80% face coverage. Free online tool to add Name and Date stamp, crop, and compress under 200KB.">
+    <meta name="keywords" content="NEET passport photo maker, neet 3.5x4.5 cm photo resizer, nta passport photo guidelines, neet photo with name and date stamp, crop photo for neet, compress neet photo 200kb, white background photo maker">
+    <link rel="canonical" href="https://yourdomain.com/neet-passport/" />
+    
+    <!-- Open Graph for Social Media -->
+    <meta property="og:title" content="NEET Passport Size Photo Maker | 3.5x4.5cm Official">
+    <meta property="og:description" content="Official NTA standard photo resizer for NEET. Auto-crop, name/date stamp, and KB compression.">
+    <meta property="og:image" content="https://yourdomain.com/assets/og-passport.jpg">
+    <meta property="og:url" content="https://yourdomain.com/neet-passport/">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Structured Data (JSON-LD Schema) for Google -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "NEET Passport Photo Maker",
+      "operatingSystem": "Windows, MacOS, Android, iOS",
+      "applicationCategory": "DesignApplication",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "INR"
+      },
+      "description": "An online tool to create 3.5x4.5 cm passport photos for NEET applications with name and date stamps as per NTA 2026 guidelines."
+    }
+    </script>
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
@@ -37,10 +65,8 @@
         .tool-card { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(0, 0, 0, 0.05); }
         .dark .tool-card { background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.08); }
         
-        /* Cropper Customization */
         .crop-container { width: 100%; max-height: 500px; border-radius: 1.5rem; display: none; background: #000; position: relative; overflow: hidden; }
         
-        /* Face Guide Overlay (80% Rule) */
         .face-guide {
             position: absolute;
             top: 50%; left: 50%;
@@ -72,7 +98,7 @@
 </head>
 <body class="mesh-bg text-slate-900 dark:text-slate-100 min-h-screen">
 
-    <!-- Theme Toggle Button -->
+    <!-- THEME TOGGLE BUTTON (Exact match to Homepage) -->
     <button onclick="toggleTheme()" class="fixed bottom-6 right-6 z-[100] p-4 bg-white dark:bg-slate-800 rounded-full shadow-2xl border border-slate-200 dark:border-slate-700 hover:scale-110 transition-all active:scale-95">
         <i data-lucide="sun" class="hidden dark:block text-yellow-400"></i>
         <i data-lucide="moon" class="block dark:hidden text-indigo-600"></i>
@@ -80,7 +106,7 @@
 
     <nav class="fixed top-0 w-full z-[100] border-b border-slate-200 dark:border-white/5 bg-white/80 dark:bg-slate-950/80 backdrop-blur-xl">
         <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-            <a href="/" class="flex items-center gap-2 font-bold text-blue-600 dark:text-blue-400 group text-xs uppercase tracking-widest">
+            <a href="../" class="flex items-center gap-2 font-bold text-blue-600 dark:text-blue-400 group text-xs uppercase tracking-widest">
                 <i data-lucide="arrow-left" class="w-4 h-4"></i> Home
             </a>
             <span class="font-black italic uppercase tracking-tighter">EXAM<span class="text-blue-500">PHOTO</span></span>
@@ -90,16 +116,16 @@
     <main class="pt-24 pb-12 px-6 max-w-4xl mx-auto">
         <div class="text-center mb-10">
             <div class="inline-flex items-center gap-2 bg-blue-500/10 border border-blue-500/20 px-4 py-1.5 rounded-full text-blue-600 dark:text-blue-400 text-[10px] font-black mb-4 uppercase tracking-widest">
-                <span class="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></span> NTA PASSPORT GUIDELINES 3.5 X 4.5 CM
+                <span class="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></span> AS PER NTA LATEST GUIDELINES
             </div>
-            <h1 class="text-4xl md:text-6xl font-black tracking-tighter mb-4 leading-tight">NEET Passport Size Photo Maker</h1>
-            <p class="text-slate-500 dark:text-slate-400 text-lg not-italic tracking-tighter">Auto-Resize to 3.5x4.5cm with Name & Date Stamp</p>
+            <h1 class="text-4xl md:text-6xl font-black tracking-tighter mb-4 leading-tight">NEET Passport Photo Resizer</h1>
+            <p class="text-slate-500 dark:text-slate-400 text-lg not-italic tracking-tighter">Official 3.5x4.5cm with 80% Face Coverage Guide</p>
         </div>
 
         <div class="tool-card p-6 md:p-10 rounded-[2.5rem] shadow-2xl space-y-8 relative">
             <div id="loader" class="absolute inset-0 z-50 bg-slate-950/90 rounded-[2.5rem] flex flex-col items-center justify-center space-y-4 hidden">
                 <div class="spinner"></div>
-                <p class="text-xs font-black text-white uppercase tracking-[0.2em]">Processing Passport Photo...</p>
+                <p class="text-xs font-black text-white uppercase tracking-[0.2em]">Processing Image...</p>
             </div>
 
             <!-- Upload Area -->
@@ -120,7 +146,7 @@
                 </div>
             </div>
 
-            <!-- Inputs for Name & Date (NTA Requirement) -->
+            <!-- Inputs for Name & Date -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div class="space-y-2">
                     <label class="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-2">Candidate Full Name</label>
@@ -132,17 +158,13 @@
                 </div>
             </div>
 
-            <!-- Size Selection & Compression -->
+            <!-- Compression -->
             <div class="space-y-4 pt-4 border-t border-slate-200 dark:border-white/5">
                 <div class="flex justify-between items-center px-2">
                     <label class="text-[10px] font-black uppercase tracking-widest text-slate-500">Target File Size (10KB - 200KB)</label>
                     <span id="size-estimate" class="text-xs font-black text-blue-600 dark:text-blue-400">Est: -- KB</span>
                 </div>
                 <input type="range" id="qualitySlider" min="10" max="100" value="80" class="w-full h-1.5 bg-slate-200 dark:bg-white/10 rounded-lg appearance-none cursor-pointer accent-blue-600">
-                <div class="flex justify-between text-[8px] font-black uppercase tracking-tighter opacity-50 px-1">
-                    <span>Small Size (Faster)</span>
-                    <span>High Quality</span>
-                </div>
             </div>
 
             <button id="downloadBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-black py-5 rounded-2xl transition shadow-xl shadow-blue-500/20 uppercase tracking-widest text-xs flex items-center justify-center gap-2">
@@ -151,36 +173,36 @@
         </div>
     </main>
 
-     <!-- 2. HOW TO USE SECTION -->
+    <!-- 2. HOW TO USE SECTION -->
     <section class="max-w-7xl mx-auto px-6 py-20 border-t border-slate-200 dark:border-white/5">
         <div class="text-center mb-12">
-            <h2 class="text-2xl md:text-3xl font-black not-italic tracking-tighter">How to Crop and Resize NEET Passport Size Photo?</h2>
+            <h2 class="text-2xl md:text-3xl font-black not-italic tracking-tighter">How to Resize NEET Passport Size Photo Online?</h2>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
             <div class="tool-card p-6 rounded-3xl text-center space-y-3">
                 <div class="w-10 h-10 bg-blue-500/10 text-blue-500 rounded-xl flex items-center justify-center mx-auto"><i data-lucide="upload"></i></div>
                 <h4 class="font-bold text-[10px] uppercase tracking-widest">01. Upload</h4>
-                <p class="text-[9px] text-slate-500">Select any Photo.</p>
+                <p class="text-[9px] text-slate-500">Portrait Photo.</p>
             </div>
             <div class="tool-card p-6 rounded-3xl text-center space-y-3">
                 <div class="w-10 h-10 bg-indigo-500/10 text-indigo-500 rounded-xl flex items-center justify-center mx-auto"><i data-lucide="crop"></i></div>
                 <h4 class="font-bold text-[10px] uppercase tracking-widest">02. Crop</h4>
-                <p class="text-[9px] text-slate-500">Auto-lock to 3.5:4.5 ratio.</p>
+                <p class="text-[9px] text-slate-500">3.5:4.5 Ratio.</p>
             </div>
             <div class="tool-card p-6 rounded-3xl text-center space-y-3">
                 <div class="w-10 h-10 bg-purple-500/10 text-purple-500 rounded-xl flex items-center justify-center mx-auto"><i data-lucide="type"></i></div>
                 <h4 class="font-bold text-[10px] uppercase tracking-widest">03. Stamp</h4>
-                <p class="text-[9px] text-slate-500">Add Name & Date of photo.</p>
+                <p class="text-[9px] text-slate-500">Name & Date.</p>
             </div>
             <div class="tool-card p-6 rounded-3xl text-center space-y-3 border-blue-500/20 bg-blue-500/5">
                 <div class="w-10 h-10 bg-green-500/10 text-green-500 rounded-xl flex items-center justify-center mx-auto"><i data-lucide="maximize"></i></div>
                 <h4 class="font-bold text-[10px] uppercase tracking-widest text-blue-500">04. Resize</h4>
-                <p class="text-[9px] text-slate-500">Slide to compress KB.</p>
+                <p class="text-[9px] text-slate-500">Compress KB.</p>
             </div>
             <div class="tool-card p-6 rounded-3xl text-center space-y-3 bg-blue-600 text-white">
                 <div class="w-10 h-10 bg-white/20 text-white rounded-xl flex items-center justify-center mx-auto"><i data-lucide="download"></i></div>
                 <h4 class="font-bold text-[10px] uppercase tracking-widest">05. Save</h4>
-                <p class="text-[9px] text-white/70">Instant Passport JPG download.</p>
+                <p class="text-[9px] text-white/70">JPG Download.</p>
             </div>
         </div>
     </section>
@@ -188,50 +210,53 @@
   <!-- 3. GUIDELINES SECTION -->
     <section class="max-w-7xl mx-auto px-6 py-20 border-t border-slate-200 dark:border-white/5">
         <div class="grid lg:grid-cols-2 gap-16 items-start">
-            <div>
-               <h2 class="text-3xl font-black mb-8 leading-tight not-italic">NTA Guidelines for Passport Size Photo 2026-27</h2>
+            <div class="prose dark:prose-invert">
+               <h2 class="text-3xl font-black mb-8 leading-tight not-italic">NTA Guidelines for NEET Passport Size Photo 2026-27</h2>
                 <div class="space-y-6">
                     <div class="flex gap-4">
                         <div class="w-10 h-10 shrink-0 bg-blue-500 text-white rounded-full flex items-center justify-center font-black italic">01</div>
                         <div>
-                            <h4 class="font-bold uppercase tracking-tight mb-1">Standard 3.5x4.5cm</h4>
-                            <p class="text-sm text-slate-500">Passport photo must be 3.5cm width x 4.5cm height.</p>
+                            <h4 class="font-bold uppercase tracking-tight mb-1">Mandatory 3.5x4.5cm Size</h4>
+                            <p class="text-sm text-slate-500">According to NTA, the passport size photograph must be 3.5 cm (width) x 4.5 cm (height). Our tool locks this aspect ratio for 100% accuracy.</p>
                         </div>
                     </div>
                     <div class="flex gap-4">
                         <div class="w-10 h-10 shrink-0 bg-blue-500 text-white rounded-full flex items-center justify-center font-black italic">02</div>
                         <div>
-                            <h4 class="font-bold uppercase tracking-tight mb-1">Background & Face</h4>
-                            <p class="text-sm text-slate-500">White background is mandatory. 80% face coverage with visible ears.</p>
+                            <h4 class="font-bold uppercase tracking-tight mb-1">80% Face Coverage & Ears</h4>
+                            <p class="text-sm text-slate-500">The photo should have 80% face coverage, and the ears must be visible against a white background. Use our dashed face guide to align perfectly.</p>
                         </div>
                     </div>
                 </div>
             </div>
             
             <div class="tool-card p-8 rounded-[2.5rem] bg-blue-500/5 border-blue-500/20">
-                <h3 class="text-xl font-bold mb-6 italic tracking-tighter">NTA Official Specs</h3>
+                <h3 class="text-xl font-bold mb-6 italic tracking-tighter">NTA Official Specs Table</h3>
                 <div class="space-y-4 font-black uppercase text-[10px]">
                     <div class="flex justify-between border-b border-blue-500/10 pb-3"><span>Dimensions</span> <span class="text-blue-500">3.5 cm x 4.5 cm</span></div>
                     <div class="flex justify-between border-b border-blue-500/10 pb-3"><span>File Format</span> <span class="text-blue-500">JPG / JPEG</span></div>
-                    <div class="flex justify-between border-b border-blue-500/10 pb-3"><span>File Size</span> <span class="text-blue-500">10 KB - 200 KB</span></div>
-                    <div class="flex justify-between border-b border-blue-500/10 pb-3"><span>Face Coverage</span> <span class="text-blue-500">80% MANDATORY</span></div>
-                    <div class="flex justify-between"><span>Background</span> <span class="text-blue-500">WHITE ONLY</span></div>
+                    <div class="flex justify-between border-b border-blue-500/10 pb-3"><span>File Size Range</span> <span class="text-blue-500">10 KB - 200 KB</span></div>
+                    <div class="flex justify-between"><span>Background</span> <span class="text-blue-500">PURE WHITE</span></div>
                 </div>
             </div>
         </div>
     </section>
 
     <footer class="py-12 border-t border-slate-200 dark:border-white/5 text-center px-6">
-        <p class="text-slate-400 text-[10px] font-bold uppercase tracking-[0.2em]">© 2026 • ExamPhoto Pro • Secure Browser-Side Processing</p>
+        <div class="flex flex-wrap justify-center gap-6 text-[10px] font-black uppercase tracking-widest text-slate-500 mb-6">
+            <a href="../privacy.html">Privacy</a>
+            <a href="../terms.html">Terms</a>
+            <a href="../contact.html">Contact</a>
+        </div>
+        <p class="text-slate-400 text-[10px] font-bold uppercase tracking-[0.2em]">© 2026 • MyExamPhoto • Optimized for NTA NEET Guidelines</p>
     </footer>
 
     <canvas id="finalCanvas" class="hidden"></canvas>
 
     <script>
-        // Initialize Icons
         lucide.createIcons();
 
-        // Theme Toggle Logic
+        // THEME TOGGLE LOGIC (Exactly like homepage)
         function toggleTheme() {
             const html = document.documentElement;
             if (html.classList.contains('dark')) {
@@ -243,7 +268,7 @@
             }
         }
 
-        // Apply saved preference on load
+        // Apply saved preference
         if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             document.documentElement.classList.add('dark');
         } else {
@@ -264,7 +289,6 @@
 
         let cropper = null;
 
-        // Auto Formatting Date
         dateInput.addEventListener('input', (e) => {
             let v = e.target.value.replace(/\D/g, '');
             if (v.length > 8) v = v.substring(0, 8);
@@ -331,10 +355,8 @@
                 const plateH = H * 0.18;
                 ctx.fillStyle = "white";
                 ctx.fillRect(0, H - plateH, W, plateH);
-                
                 ctx.fillStyle = "black";
                 ctx.textAlign = "center";
-                
                 if (name) {
                     ctx.font = "bold 34px sans-serif";
                     ctx.fillText(name, W/2, H - (plateH / 1.8));
@@ -359,7 +381,7 @@
             if (!cropper) return alert("Please upload a photo first.");
             const q = qualitySlider.value / 100;
             const link = document.createElement('a');
-            link.download = `NEET_Passport_${Date.now()}.jpg`;
+            link.download = `NEET_Passport_Resized.jpg`;
             link.href = finalCanvas.toDataURL('image/jpeg', q);
             link.click();
         });
