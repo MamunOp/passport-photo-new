@@ -1,0 +1,368 @@
+
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEET Passport Photo Maker | Official 3.5x4.5cm (80% Face Coverage)</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Professional Processing Libraries -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/heic2any@0.0.4/dist/heic2any.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: { extend: { colors: { brand: { 500: '#3b82f6', 600: '#2563eb' } } } }
+        }
+    </script>
+
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; transition: background-color 0.3s ease; }
+        .mesh-bg {
+            background-color: #f8fafc;
+            background-image: radial-gradient(at 0% 0%, hsla(210, 100%, 93%, 1) 0, transparent 50%), 
+                              radial-gradient(at 100% 0%, hsla(230, 100%, 93%, 1) 0, transparent 50%);
+        }
+        .dark .mesh-bg {
+            background-color: #020617;
+            background-image: radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), 
+                              radial-gradient(at 100% 0%, hsla(225,39%,20%,1) 0, transparent 50%);
+        }
+        .tool-card { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(0, 0, 0, 0.05); }
+        .dark .tool-card { background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.08); }
+        
+        /* Cropper Customization */
+        .crop-container { width: 100%; max-height: 500px; border-radius: 1.5rem; display: none; background: #000; position: relative; overflow: hidden; }
+        
+        /* Face Guide Overlay (80% Rule) */
+        .face-guide {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 70%; height: 75%;
+            border: 2px dashed rgba(59, 130, 246, 0.6);
+            border-radius: 50% 50% 45% 45%;
+            pointer-events: none;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .face-guide::after {
+            content: "ALIGN FACE HERE (80%)";
+            font-size: 8px;
+            font-weight: 800;
+            color: #3b82f6;
+            background: rgba(255,255,255,0.8);
+            padding: 2px 6px;
+            border-radius: 4px;
+            position: absolute;
+            top: -10px;
+        }
+
+        .spinner { border: 3px solid rgba(255,255,255,0.1); border-top: 3px solid #3b82f6; border-radius: 50%; width: 30px; height: 30px; animation: spin 1s linear infinite; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
+</head>
+<body class="mesh-bg text-slate-900 dark:text-slate-100 min-h-screen">
+
+    <!-- Theme Toggle Button -->
+    <button onclick="toggleTheme()" class="fixed bottom-6 right-6 z-[100] p-4 bg-white dark:bg-slate-800 rounded-full shadow-2xl border border-slate-200 dark:border-slate-700 hover:scale-110 transition-all active:scale-95">
+        <i data-lucide="sun" class="hidden dark:block text-yellow-400"></i>
+        <i data-lucide="moon" class="block dark:hidden text-indigo-600"></i>
+    </button>
+
+    <nav class="fixed top-0 w-full z-[100] border-b border-slate-200 dark:border-white/5 bg-white/80 dark:bg-slate-950/80 backdrop-blur-xl">
+        <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-2 font-bold text-blue-600 dark:text-blue-400 group text-xs uppercase tracking-widest">
+                <i data-lucide="arrow-left" class="w-4 h-4"></i> Home
+            </a>
+            <span class="font-black italic uppercase tracking-tighter">EXAM<span class="text-blue-500">PHOTO</span></span>
+        </div>
+    </nav>
+
+    <main class="pt-24 pb-12 px-6 max-w-4xl mx-auto">
+        <div class="text-center mb-10">
+            <div class="inline-flex items-center gap-2 bg-blue-500/10 border border-blue-500/20 px-4 py-1.5 rounded-full text-blue-600 dark:text-blue-400 text-[10px] font-black mb-4 uppercase tracking-widest">
+                <span class="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></span> NTA PASSPORT GUIDELINES 3.5 X 4.5 CM
+            </div>
+            <h1 class="text-4xl md:text-6xl font-black tracking-tighter mb-4 leading-tight">NEET Passport Size Photo Maker</h1>
+            <p class="text-slate-500 dark:text-slate-400 text-lg not-italic tracking-tighter">Auto-Resize to 3.5x4.5cm with Name & Date Stamp</p>
+        </div>
+
+        <div class="tool-card p-6 md:p-10 rounded-[2.5rem] shadow-2xl space-y-8 relative">
+            <div id="loader" class="absolute inset-0 z-50 bg-slate-950/90 rounded-[2.5rem] flex flex-col items-center justify-center space-y-4 hidden">
+                <div class="spinner"></div>
+                <p class="text-xs font-black text-white uppercase tracking-[0.2em]">Processing Passport Photo...</p>
+            </div>
+
+            <!-- Upload Area -->
+            <div id="upload-wrapper" class="relative border-2 border-dashed border-slate-300 dark:border-white/10 rounded-[2rem] p-4 text-center bg-white/50 dark:bg-black/20 overflow-hidden">
+                <div id="upload-prompt" class="py-16">
+                    <input type="file" id="fileInput" class="absolute inset-0 opacity-0 cursor-pointer" accept="image/*, .heic, .heif">
+                    <i data-lucide="user-check" class="w-12 h-12 mx-auto mb-3 text-blue-500"></i>
+                    <p class="font-black text-sm uppercase tracking-widest">Upload Candidate Photo</p>
+                    <p class="text-[10px] text-slate-500 mt-2 font-bold opacity-60 uppercase tracking-tight">White Background Preferred • JPG/PNG/HEIC</p>
+                </div>
+                
+                <div id="crop-wrapper" class="crop-container">
+                    <div class="face-guide"></div>
+                    <img id="imageToCrop" src="">
+                    <button onclick="resetTool()" class="absolute top-4 right-4 z-20 bg-red-500 text-white p-2 rounded-full shadow-2xl hover:bg-red-600 transition">
+                        <i data-lucide="x" class="w-5 h-5"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Inputs for Name & Date (NTA Requirement) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="space-y-2">
+                    <label class="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-2">Candidate Full Name</label>
+                    <input type="text" id="nameInput" placeholder="ENTER NAME" class="w-full bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 p-4 rounded-2xl outline-none focus:ring-2 ring-blue-500 font-bold uppercase">
+                </div>
+                <div class="space-y-2">
+                    <label class="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-2">Date of Taking Photo</label>
+                    <input type="text" id="dateInput" maxlength="10" placeholder="DD/MM/YYYY" class="w-full bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 p-4 rounded-2xl outline-none focus:ring-2 ring-blue-500 font-bold">
+                </div>
+            </div>
+
+            <!-- Size Selection & Compression -->
+            <div class="space-y-4 pt-4 border-t border-slate-200 dark:border-white/5">
+                <div class="flex justify-between items-center px-2">
+                    <label class="text-[10px] font-black uppercase tracking-widest text-slate-500">Target File Size (10KB - 200KB)</label>
+                    <span id="size-estimate" class="text-xs font-black text-blue-600 dark:text-blue-400">Est: -- KB</span>
+                </div>
+                <input type="range" id="qualitySlider" min="10" max="100" value="80" class="w-full h-1.5 bg-slate-200 dark:bg-white/10 rounded-lg appearance-none cursor-pointer accent-blue-600">
+                <div class="flex justify-between text-[8px] font-black uppercase tracking-tighter opacity-50 px-1">
+                    <span>Small Size (Faster)</span>
+                    <span>High Quality</span>
+                </div>
+            </div>
+
+            <button id="downloadBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-black py-5 rounded-2xl transition shadow-xl shadow-blue-500/20 uppercase tracking-widest text-xs flex items-center justify-center gap-2">
+                <i data-lucide="camera" class="w-5 h-5"></i> Generate Passport Photo
+            </button>
+        </div>
+    </main>
+
+     <!-- 2. HOW TO USE SECTION -->
+    <section class="max-w-7xl mx-auto px-6 py-20 border-t border-slate-200 dark:border-white/5">
+        <div class="text-center mb-12">
+            <h2 class="text-2xl md:text-3xl font-black not-italic tracking-tighter">How to Crop and Resize NEET Passport Size Photo?</h2>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
+            <div class="tool-card p-6 rounded-3xl text-center space-y-3">
+                <div class="w-10 h-10 bg-blue-500/10 text-blue-500 rounded-xl flex items-center justify-center mx-auto"><i data-lucide="upload"></i></div>
+                <h4 class="font-bold text-[10px] uppercase tracking-widest">01. Upload</h4>
+                <p class="text-[9px] text-slate-500">Select any Photo.</p>
+            </div>
+            <div class="tool-card p-6 rounded-3xl text-center space-y-3">
+                <div class="w-10 h-10 bg-indigo-500/10 text-indigo-500 rounded-xl flex items-center justify-center mx-auto"><i data-lucide="crop"></i></div>
+                <h4 class="font-bold text-[10px] uppercase tracking-widest">02. Crop</h4>
+                <p class="text-[9px] text-slate-500">Auto-lock to 3.5:4.5 ratio.</p>
+            </div>
+            <div class="tool-card p-6 rounded-3xl text-center space-y-3">
+                <div class="w-10 h-10 bg-purple-500/10 text-purple-500 rounded-xl flex items-center justify-center mx-auto"><i data-lucide="type"></i></div>
+                <h4 class="font-bold text-[10px] uppercase tracking-widest">03. Stamp</h4>
+                <p class="text-[9px] text-slate-500">Add Name & Date of photo.</p>
+            </div>
+            <div class="tool-card p-6 rounded-3xl text-center space-y-3 border-blue-500/20 bg-blue-500/5">
+                <div class="w-10 h-10 bg-green-500/10 text-green-500 rounded-xl flex items-center justify-center mx-auto"><i data-lucide="maximize"></i></div>
+                <h4 class="font-bold text-[10px] uppercase tracking-widest text-blue-500">04. Resize</h4>
+                <p class="text-[9px] text-slate-500">Slide to compress KB.</p>
+            </div>
+            <div class="tool-card p-6 rounded-3xl text-center space-y-3 bg-blue-600 text-white">
+                <div class="w-10 h-10 bg-white/20 text-white rounded-xl flex items-center justify-center mx-auto"><i data-lucide="download"></i></div>
+                <h4 class="font-bold text-[10px] uppercase tracking-widest">05. Save</h4>
+                <p class="text-[9px] text-white/70">Instant Passport JPG download.</p>
+            </div>
+        </div>
+    </section>
+
+  <!-- 3. GUIDELINES SECTION -->
+    <section class="max-w-7xl mx-auto px-6 py-20 border-t border-slate-200 dark:border-white/5">
+        <div class="grid lg:grid-cols-2 gap-16 items-start">
+            <div>
+               <h2 class="text-3xl font-black mb-8 leading-tight not-italic">NTA Guidelines for Passport Size Photo 2026-27</h2>
+                <div class="space-y-6">
+                    <div class="flex gap-4">
+                        <div class="w-10 h-10 shrink-0 bg-blue-500 text-white rounded-full flex items-center justify-center font-black italic">01</div>
+                        <div>
+                            <h4 class="font-bold uppercase tracking-tight mb-1">Standard 3.5x4.5cm</h4>
+                            <p class="text-sm text-slate-500">Passport photo must be 3.5cm width x 4.5cm height.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="w-10 h-10 shrink-0 bg-blue-500 text-white rounded-full flex items-center justify-center font-black italic">02</div>
+                        <div>
+                            <h4 class="font-bold uppercase tracking-tight mb-1">Background & Face</h4>
+                            <p class="text-sm text-slate-500">White background is mandatory. 80% face coverage with visible ears.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tool-card p-8 rounded-[2.5rem] bg-blue-500/5 border-blue-500/20">
+                <h3 class="text-xl font-bold mb-6 italic tracking-tighter">NTA Official Specs</h3>
+                <div class="space-y-4 font-black uppercase text-[10px]">
+                    <div class="flex justify-between border-b border-blue-500/10 pb-3"><span>Dimensions</span> <span class="text-blue-500">3.5 cm x 4.5 cm</span></div>
+                    <div class="flex justify-between border-b border-blue-500/10 pb-3"><span>File Format</span> <span class="text-blue-500">JPG / JPEG</span></div>
+                    <div class="flex justify-between border-b border-blue-500/10 pb-3"><span>File Size</span> <span class="text-blue-500">10 KB - 200 KB</span></div>
+                    <div class="flex justify-between border-b border-blue-500/10 pb-3"><span>Face Coverage</span> <span class="text-blue-500">80% MANDATORY</span></div>
+                    <div class="flex justify-between"><span>Background</span> <span class="text-blue-500">WHITE ONLY</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-12 border-t border-slate-200 dark:border-white/5 text-center px-6">
+        <p class="text-slate-400 text-[10px] font-bold uppercase tracking-[0.2em]">© 2026 • ExamPhoto Pro • Secure Browser-Side Processing</p>
+    </footer>
+
+    <canvas id="finalCanvas" class="hidden"></canvas>
+
+    <script>
+        // Initialize Icons
+        lucide.createIcons();
+
+        // Theme Toggle Logic
+        function toggleTheme() {
+            const html = document.documentElement;
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+            } else {
+                html.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        // Apply saved preference on load
+        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+
+        const fileInput = document.getElementById('fileInput');
+        const imageToCrop = document.getElementById('imageToCrop');
+        const cropWrapper = document.getElementById('crop-wrapper');
+        const uploadPrompt = document.getElementById('upload-prompt');
+        const loader = document.getElementById('loader');
+        const finalCanvas = document.getElementById('finalCanvas');
+        const ctx = finalCanvas.getContext('2d');
+        const qualitySlider = document.getElementById('qualitySlider');
+        const sizeEstimate = document.getElementById('size-estimate');
+        const nameInput = document.getElementById('nameInput');
+        const dateInput = document.getElementById('dateInput');
+
+        let cropper = null;
+
+        // Auto Formatting Date
+        dateInput.addEventListener('input', (e) => {
+            let v = e.target.value.replace(/\D/g, '');
+            if (v.length > 8) v = v.substring(0, 8);
+            if (v.length > 4) v = v.substring(0, 2) + '/' + v.substring(2, 4) + '/' + v.substring(4);
+            else if (v.length > 2) v = v.substring(0, 2) + '/' + v.substring(2);
+            e.target.value = v;
+            updateLiveResult();
+        });
+
+        function resetTool() {
+            if (cropper) cropper.destroy();
+            fileInput.value = "";
+            cropWrapper.style.display = 'none';
+            uploadPrompt.style.display = 'block';
+        }
+
+        fileInput.addEventListener('change', async (e) => {
+            let file = e.target.files[0];
+            if (!file) return;
+
+            loader.classList.remove('hidden');
+
+            if (file.name.toLowerCase().endsWith(".heic") || file.name.toLowerCase().endsWith(".heif")) {
+                const blob = await heic2any({ blob: file, toType: "image/jpeg" });
+                file = Array.isArray(blob) ? blob[0] : blob;
+            }
+
+            const reader = new FileReader();
+            reader.onload = (event) => {
+                imageToCrop.src = event.target.result;
+                uploadPrompt.style.display = 'none';
+                cropWrapper.style.display = 'block';
+                loader.classList.add('hidden');
+
+                if (cropper) cropper.destroy();
+                cropper = new Cropper(imageToCrop, {
+                    aspectRatio: 3.5 / 4.5,
+                    viewMode: 1,
+                    dragMode: 'move',
+                    autoCropArea: 0.95,
+                    guides: true,
+                    crop() { updateLiveResult(); }
+                });
+            };
+            reader.readAsDataURL(file);
+        });
+
+        function updateLiveResult() {
+            if (!cropper) return;
+
+            const W = 600, H = 772; 
+            finalCanvas.width = W; finalCanvas.height = H;
+
+            const croppedCanvas = cropper.getCroppedCanvas({ width: W, height: H });
+            
+            ctx.fillStyle = "white";
+            ctx.fillRect(0, 0, W, H);
+            ctx.drawImage(croppedCanvas, 0, 0, W, H);
+
+            const name = nameInput.value.toUpperCase();
+            const date = dateInput.value;
+
+            if (name || date) {
+                const plateH = H * 0.18;
+                ctx.fillStyle = "white";
+                ctx.fillRect(0, H - plateH, W, plateH);
+                
+                ctx.fillStyle = "black";
+                ctx.textAlign = "center";
+                
+                if (name) {
+                    ctx.font = "bold 34px sans-serif";
+                    ctx.fillText(name, W/2, H - (plateH / 1.8));
+                }
+                if (date) {
+                    ctx.font = "28px sans-serif";
+                    ctx.fillText(date, W/2, H - (plateH / 5.5));
+                }
+            }
+
+            const q = qualitySlider.value / 100;
+            const dataUrl = finalCanvas.toDataURL('image/jpeg', q);
+            const sizeKB = Math.round((dataUrl.length * (3/4)) / 1024);
+            sizeEstimate.innerText = `Est: ${sizeKB} KB`;
+        }
+
+        [nameInput, qualitySlider].forEach(input => {
+            input.addEventListener('input', updateLiveResult);
+        });
+
+        document.getElementById('downloadBtn').addEventListener('click', () => {
+            if (!cropper) return alert("Please upload a photo first.");
+            const q = qualitySlider.value / 100;
+            const link = document.createElement('a');
+            link.download = `NEET_Passport_${Date.now()}.jpg`;
+            link.href = finalCanvas.toDataURL('image/jpeg', q);
+            link.click();
+        });
+    </script>
+</body>
+</html>
