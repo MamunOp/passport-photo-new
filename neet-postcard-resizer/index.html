@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <link rel="icon" href="/favicon.ico">
+
     
     <!-- SEO OPTIMIZATION -->
     <title>NEET Postcard Photo Resizer (4x6 Inch) – 10KB to 200KB | MyExamPhoto</title>
@@ -34,7 +37,80 @@
       }
     }
     </script>
-    
+    <!-- FAQ Schema (JSON-LD) — add this inside <head> (below your WebApplication schema) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is the postcard photo size for NEET in cm?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The postcard photo size for NEET is 10.16 cm x 15.24 cm (which is exactly 4 inches x 6 inches). It should be in portrait orientation."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the NEET postcard photo size in pixels?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The NEET postcard photo size is usually 1200 × 1800 pixels in portrait orientation. This matches the official 4×6 inch postcard ratio required during the application."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I use the same photo for Passport and Postcard?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, you should use the same photograph. However, you must resize it to the 4x6 aspect ratio and ensure it meets the 10-200KB file size requirement for the postcard upload."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How to compress NEET postcard photo to 200KB?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "After cropping your photo to 4x6 using our tool, use the \"Quality Slider\" to adjust the file size. Check the \"Est KB\" value and download once it is between 10KB and 200KB."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What file format is required for the NEET postcard photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The NEET postcard photo must be uploaded in JPG or JPEG format. Other formats like PNG or HEIC should be converted before uploading."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is white background mandatory for the NEET postcard photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. The background must be plain white with no shadows, patterns, or colors. Photos with colored or dark backgrounds may be rejected."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What should be the file size of the NEET postcard photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The NEET postcard photo file size must be between 10KB and 200KB. Files outside this range may not be accepted by the application system."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I take the NEET postcard photo using my phone?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, you can use a smartphone photo if it has a plain white background, good lighting, and a clear face. After upload, crop to the 4×6 ratio and compress it to 10KB–200KB before downloading."
+      }
+    }
+  ]
+}
+</script>
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -186,13 +262,13 @@
     <section class="max-w-7xl mx-auto px-6 py-20 border-t border-slate-200 dark:border-white/5">
         <div class="grid lg:grid-cols-2 gap-16 items-start">
             <div class="prose dark:prose-invert">
-               <h2 class="text-3xl font-black mb-8 leading-tight not-italic">NTA NEET Postcard Photo Guidelines 2026-27</h2>
+               <h2 class="text-3xl font-black mb-8 leading-tight not-italic">NEET Postcard Photo Guidelines 2026-27</h2>
                 <div class="space-y-6">
                     <div class="flex gap-4">
                         <div class="w-10 h-10 shrink-0 bg-blue-500 text-white rounded-full flex items-center justify-center font-black italic">01</div>
                         <div>
-                            <h4 class="font-bold uppercase tracking-tight mb-1">Exact 4" x 6" Physical Size</h4>
-                            <p class="text-sm text-slate-500">The postcard photograph must be 4 inches wide and 6 inches high. This is much larger than a standard passport photo. Our tool scales this to 1200x1800 pixels at 300 DPI.</p>
+                            <h4 class="font-bold uppercase tracking-tight mb-1">Exact 4" x 6" Size</h4>
+                            <p class="text-sm text-slate-500">The postcard photograph must be 4 inches wide and 6 inches high. This is much larger than a standard passport photo. This tool generates a 4×6 ratio image at 1200×1800 pixels for upload and printing.</p>
                         </div>
                     </div>
                     <div class="flex gap-4">
@@ -230,17 +306,52 @@
             </details>
             <details class="group tool-card p-6 rounded-2xl cursor-pointer">
                 <summary class="flex justify-between items-center font-bold list-none">
-                    2. Can I use the same photo for Passport and Postcard?
+                    2. What is the NEET postcard photo size in pixels?
+                    <i data-lucide="chevron-down" class="group-open:rotate-180 transition"></i>
+                </summary>
+                <p class="mt-4 text-sm text-slate-500 leading-relaxed">The NEET postcard photo size is usually 1200 × 1800 pixels in portrait orientation. This matches the official 4×6 inch postcard ratio required during the application.</p>
+            </details>
+            <details class="group tool-card p-6 rounded-2xl cursor-pointer">
+                <summary class="flex justify-between items-center font-bold list-none">
+                    3. Can I use the same photo for Passport and Postcard?
                     <i data-lucide="chevron-down" class="group-open:rotate-180 transition"></i>
                 </summary>
                 <p class="mt-4 text-sm text-slate-500 leading-relaxed">Yes, you should use the same photograph. However, you must resize it to the 4x6 aspect ratio and ensure it meets the 10-200KB file size requirement for the postcard upload.</p>
             </details>
             <details class="group tool-card p-6 rounded-2xl cursor-pointer">
                 <summary class="flex justify-between items-center font-bold list-none">
-                    3. How to compress NEET postcard photo to 200KB?
+                    4. How to compress NEET postcard photo to 200KB?
                     <i data-lucide="chevron-down" class="group-open:rotate-180 transition"></i>
                 </summary>
                 <p class="mt-4 text-sm text-slate-500 leading-relaxed">After cropping your photo to 4x6 using our tool, use the "Quality Slider" to adjust the file size. Check the "Est KB" value and download once it is between 10KB and 200KB.</p>
+            </details>
+            <details class="group tool-card p-6 rounded-2xl cursor-pointer">
+                <summary class="flex justify-between items-center font-bold list-none">
+                    5. What file format is required for the NEET postcard photo?
+                    <i data-lucide="chevron-down" class="group-open:rotate-180 transition"></i>
+                </summary>
+                <p class="mt-4 text-sm text-slate-500 leading-relaxed">The NEET postcard photo must be uploaded in JPG or JPEG format. Other formats like PNG or HEIC should be converted before uploading.</p>
+            </details>
+            <details class="group tool-card p-6 rounded-2xl cursor-pointer">
+                <summary class="flex justify-between items-center font-bold list-none">
+                    6. Is white background mandatory for the NEET postcard photo?
+                    <i data-lucide="chevron-down" class="group-open:rotate-180 transition"></i>
+                </summary>
+                <p class="mt-4 text-sm text-slate-500 leading-relaxed">Yes. The background must be plain white with no shadows, patterns, or colors. Photos with colored or dark backgrounds may be rejected.</p>
+            </details>
+            <details class="group tool-card p-6 rounded-2xl cursor-pointer">
+                <summary class="flex justify-between items-center font-bold list-none">
+                    7. What should be the file size of the NEET postcard photo?
+                    <i data-lucide="chevron-down" class="group-open:rotate-180 transition"></i>
+                </summary>
+                <p class="mt-4 text-sm text-slate-500 leading-relaxed">The NEET postcard photo file size must be between 10KB and 200KB. Files outside this range may not be accepted by the application system.</p>
+            </details>
+            <details class="group tool-card p-6 rounded-2xl cursor-pointer">
+                <summary class="flex justify-between items-center font-bold list-none">
+                    8. Can I take the NEET postcard photo using my phone?
+                    <i data-lucide="chevron-down" class="group-open:rotate-180 transition"></i>
+                </summary>
+               <p class="mt-4 text-sm text-slate-500 leading-relaxed">Yes, you can use a smartphone photo if it has a plain white background, good lighting, and a clear face. After upload, crop to the 4×6 ratio and compress it to 10KB–200KB before downloading.</p>
             </details>
         </div>
     </section>
