@@ -1,10 +1,39 @@
-
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NEET Passport Photo Maker | Official 3.5x4.5cm (80% Face Coverage)</title>
+    
+    <!-- SEO OPTIMIZATION -->
+    <title>NEET Postcard Size Photo Maker | Official 4x6 Inch NTA Resizer</title>
+    <meta name="description" content="Create official NTA-compliant NEET Postcard size photos (4x6 inches / 10x15 cm). Free online tool to add Name and Date stamp, crop to 4:6 ratio, and compress under 200KB.">
+    <meta name="keywords" content="NEET postcard photo maker, neet 4x6 photo resizer, nta postcard guidelines 2026, neet postcard size in cm, postcard photo with name and date, 4x6 image compressor for neet, official neet postcard maker">
+    <link rel="canonical" href="https://yourdomain.com/neet-postcard/" />
+    
+    <!-- Open Graph for Social Media -->
+    <meta property="og:title" content="NEET Postcard Size Photo Maker | 4x6 Inch Official">
+    <meta property="og:description" content="Latest NTA standard postcard photo resizer for NEET. Auto-crop to 4x6, name/date stamp, and KB compression.">
+    <meta property="og:image" content="https://yourdomain.com/assets/og-postcard.jpg">
+    <meta property="og:url" content="https://yourdomain.com/neet-postcard/">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Structured Data (JSON-LD Schema) for Google -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "NEET Postcard Photo Resizer",
+      "url": "https://yourdomain.com/neet-postcard/",
+      "applicationCategory": "PhotographyApplication",
+      "operatingSystem": "Any",
+      "description": "Resize NEET postcard photo to 4x6 inches with name and date stamp and compress between 10KB and 200KB.",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "INR"
+      }
+    }
+    </script>
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
@@ -37,42 +66,15 @@
         .tool-card { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(0, 0, 0, 0.05); }
         .dark .tool-card { background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.08); }
         
-        /* Cropper Customization */
         .crop-container { width: 100%; max-height: 500px; border-radius: 1.5rem; display: none; background: #000; position: relative; overflow: hidden; }
         
-        /* Face Guide Overlay (80% Rule) */
-        .face-guide {
-            position: absolute;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            width: 70%; height: 75%;
-            border: 2px dashed rgba(59, 130, 246, 0.6);
-            border-radius: 50% 50% 45% 45%;
-            pointer-events: none;
-            z-index: 10;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .face-guide::after {
-            content: "ALIGN FACE HERE (80%)";
-            font-size: 8px;
-            font-weight: 800;
-            color: #3b82f6;
-            background: rgba(255,255,255,0.8);
-            padding: 2px 6px;
-            border-radius: 4px;
-            position: absolute;
-            top: -10px;
-        }
-
         .spinner { border: 3px solid rgba(255,255,255,0.1); border-top: 3px solid #3b82f6; border-radius: 50%; width: 30px; height: 30px; animation: spin 1s linear infinite; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     </style>
 </head>
 <body class="mesh-bg text-slate-900 dark:text-slate-100 min-h-screen">
 
-    <!-- Theme Toggle Button -->
+    <!-- THEME TOGGLE BUTTON -->
     <button onclick="toggleTheme()" class="fixed bottom-6 right-6 z-[100] p-4 bg-white dark:bg-slate-800 rounded-full shadow-2xl border border-slate-200 dark:border-slate-700 hover:scale-110 transition-all active:scale-95">
         <i data-lucide="sun" class="hidden dark:block text-yellow-400"></i>
         <i data-lucide="moon" class="block dark:hidden text-indigo-600"></i>
@@ -80,47 +82,46 @@
 
     <nav class="fixed top-0 w-full z-[100] border-b border-slate-200 dark:border-white/5 bg-white/80 dark:bg-slate-950/80 backdrop-blur-xl">
         <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-            <a href="index.html" class="flex items-center gap-2 font-bold text-blue-600 dark:text-blue-400 group text-xs uppercase tracking-widest">
+            <a href="../" class="flex items-center gap-2 font-bold text-blue-600 dark:text-blue-400 group text-xs uppercase tracking-widest">
                 <i data-lucide="arrow-left" class="w-4 h-4"></i> Home
             </a>
-            <span class="font-black italic uppercase tracking-tighter">EXAM<span class="text-blue-500">PHOTO</span></span>
+            <span class="font-black text-xl md:text-2xl tracking-tighter dark:text-white">MyExam<span class="text-blue-600 italic-none">Photo</span></span>
         </div>
     </nav>
 
     <main class="pt-24 pb-12 px-6 max-w-4xl mx-auto">
         <div class="text-center mb-10">
             <div class="inline-flex items-center gap-2 bg-blue-500/10 border border-blue-500/20 px-4 py-1.5 rounded-full text-blue-600 dark:text-blue-400 text-[10px] font-black mb-4 uppercase tracking-widest">
-                <span class="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></span> NTA PASSPORT GUIDELINES 3.5 X 4.5 CM
+                <span class="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></span> NTA POSTCARD SIZE (4" X 6")
             </div>
-            <h1 class="text-4xl md:text-6xl font-black tracking-tighter mb-4 leading-tight">NEET Passport Size Photo Maker</h1>
-            <p class="text-slate-500 dark:text-slate-400 text-lg not-italic tracking-tighter">Auto-Resize to 3.5x4.5cm with Name & Date Stamp</p>
+            <h1 class="text-4xl md:text-6xl font-black tracking-tighter mb-4 leading-tight">NEET Postcard Photo Maker</h1>
+            <p class="text-slate-500 dark:text-slate-400 text-lg not-italic tracking-tighter">Resize to Official 4x6 inches with Name & Date Stamp</p>
         </div>
 
         <div class="tool-card p-6 md:p-10 rounded-[2.5rem] shadow-2xl space-y-8 relative">
             <div id="loader" class="absolute inset-0 z-50 bg-slate-950/90 rounded-[2.5rem] flex flex-col items-center justify-center space-y-4 hidden">
                 <div class="spinner"></div>
-                <p class="text-xs font-black text-white uppercase tracking-[0.2em]">Processing Passport Photo...</p>
+                <p class="text-xs font-black text-white uppercase tracking-[0.2em]">Processing Postcard Photo...</p>
             </div>
 
             <!-- Upload Area -->
             <div id="upload-wrapper" class="relative border-2 border-dashed border-slate-300 dark:border-white/10 rounded-[2rem] p-4 text-center bg-white/50 dark:bg-black/20 overflow-hidden">
                 <div id="upload-prompt" class="py-16">
                     <input type="file" id="fileInput" class="absolute inset-0 opacity-0 cursor-pointer" accept="image/*, .heic, .heif">
-                    <i data-lucide="user-check" class="w-12 h-12 mx-auto mb-3 text-blue-500"></i>
-                    <p class="font-black text-sm uppercase tracking-widest">Upload Candidate Photo</p>
-                    <p class="text-[10px] text-slate-500 mt-2 font-bold opacity-60 uppercase tracking-tight">White Background Preferred • JPG/PNG/HEIC</p>
+                    <i data-lucide="image-plus" class="w-12 h-12 mx-auto mb-3 text-blue-500"></i>
+                    <p class="font-black text-sm uppercase tracking-widest">Upload Portrait Photo</p>
+                    <p class="text-[10px] text-slate-500 mt-2 font-bold opacity-60 uppercase tracking-tight">4x6 Ratio Mandatory • JPG/PNG/HEIC</p>
                 </div>
                 
                 <div id="crop-wrapper" class="crop-container">
-                    <div class="face-guide"></div>
-                    <img id="imageToCrop" src="">
+                    <img id="imageToCrop" src="" alt="NEET postcard photo crop preview">
                     <button onclick="resetTool()" class="absolute top-4 right-4 z-20 bg-red-500 text-white p-2 rounded-full shadow-2xl hover:bg-red-600 transition">
                         <i data-lucide="x" class="w-5 h-5"></i>
                     </button>
                 </div>
             </div>
 
-            <!-- Inputs for Name & Date (NTA Requirement) -->
+            <!-- Inputs for Name & Date -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div class="space-y-2">
                     <label class="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-2">Candidate Full Name</label>
@@ -132,106 +133,137 @@
                 </div>
             </div>
 
-            <!-- Size Selection & Compression -->
+            <!-- Compression -->
             <div class="space-y-4 pt-4 border-t border-slate-200 dark:border-white/5">
                 <div class="flex justify-between items-center px-2">
-                    <label class="text-[10px] font-black uppercase tracking-widest text-slate-500">Target File Size (10KB - 200KB)</label>
+                    <label class="text-[10px] font-black uppercase tracking-widest text-slate-500">Compress (10KB - 200KB)</label>
                     <span id="size-estimate" class="text-xs font-black text-blue-600 dark:text-blue-400">Est: -- KB</span>
                 </div>
-                <input type="range" id="qualitySlider" min="10" max="100" value="80" class="w-full h-1.5 bg-slate-200 dark:bg-white/10 rounded-lg appearance-none cursor-pointer accent-blue-600">
-                <div class="flex justify-between text-[8px] font-black uppercase tracking-tighter opacity-50 px-1">
-                    <span>Small Size (Faster)</span>
-                    <span>High Quality</span>
-                </div>
+                <input type="range" id="qualitySlider" min="10" max="100" value="85" class="w-full h-1.5 bg-slate-200 dark:bg-white/10 rounded-lg appearance-none cursor-pointer accent-blue-600">
             </div>
 
             <button id="downloadBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-black py-5 rounded-2xl transition shadow-xl shadow-blue-500/20 uppercase tracking-widest text-xs flex items-center justify-center gap-2">
-                <i data-lucide="camera" class="w-5 h-5"></i> Generate Passport Photo
+                <i data-lucide="download" class="w-5 h-5"></i> DOWNLOAD POSTCARD JPG
             </button>
         </div>
     </main>
 
-     <!-- 2. HOW TO USE SECTION -->
+    <!-- 2. HOW TO USE SECTION -->
     <section class="max-w-7xl mx-auto px-6 py-20 border-t border-slate-200 dark:border-white/5">
         <div class="text-center mb-12">
-            <h2 class="text-2xl md:text-3xl font-black not-italic tracking-tighter">How to Crop and Resize NEET Passport Size Photo?</h2>
+            <h2 class="text-2xl md:text-3xl font-black not-italic tracking-tighter">How to Create NEET Postcard Photo (4x6) Online?</h2>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
             <div class="tool-card p-6 rounded-3xl text-center space-y-3">
                 <div class="w-10 h-10 bg-blue-500/10 text-blue-500 rounded-xl flex items-center justify-center mx-auto"><i data-lucide="upload"></i></div>
                 <h4 class="font-bold text-[10px] uppercase tracking-widest">01. Upload</h4>
-                <p class="text-[9px] text-slate-500">Select any Photo.</p>
+                <p class="text-[9px] text-slate-500">Upload your clear portrait photo</p>
             </div>
             <div class="tool-card p-6 rounded-3xl text-center space-y-3">
                 <div class="w-10 h-10 bg-indigo-500/10 text-indigo-500 rounded-xl flex items-center justify-center mx-auto"><i data-lucide="crop"></i></div>
                 <h4 class="font-bold text-[10px] uppercase tracking-widest">02. Crop</h4>
-                <p class="text-[9px] text-slate-500">Auto-lock to 3.5:4.5 ratio.</p>
+                <p class="text-[9px] text-slate-500">Auto-crop to perfect 4:6 ratio</p>
             </div>
             <div class="tool-card p-6 rounded-3xl text-center space-y-3">
                 <div class="w-10 h-10 bg-purple-500/10 text-purple-500 rounded-xl flex items-center justify-center mx-auto"><i data-lucide="type"></i></div>
                 <h4 class="font-bold text-[10px] uppercase tracking-widest">03. Stamp</h4>
-                <p class="text-[9px] text-slate-500">Add Name & Date of photo.</p>
+                <p class="text-[9px] text-slate-500">Add name and date as per NTA</p>
             </div>
             <div class="tool-card p-6 rounded-3xl text-center space-y-3 border-blue-500/20 bg-blue-500/5">
                 <div class="w-10 h-10 bg-green-500/10 text-green-500 rounded-xl flex items-center justify-center mx-auto"><i data-lucide="maximize"></i></div>
                 <h4 class="font-bold text-[10px] uppercase tracking-widest text-blue-500">04. Resize</h4>
-                <p class="text-[9px] text-slate-500">Slide to compress KB.</p>
+                <p class="text-[9px] text-slate-500">Ensure file is under 200KB</p>
             </div>
             <div class="tool-card p-6 rounded-3xl text-center space-y-3 bg-blue-600 text-white">
                 <div class="w-10 h-10 bg-white/20 text-white rounded-xl flex items-center justify-center mx-auto"><i data-lucide="download"></i></div>
                 <h4 class="font-bold text-[10px] uppercase tracking-widest">05. Save</h4>
-                <p class="text-[9px] text-white/70">Instant Passport JPG download.</p>
+                <p class="text-[9px] text-white/70">Download 4x6 Postcard JPG</p>
             </div>
         </div>
     </section>
 
-  <!-- 3. GUIDELINES SECTION -->
+    <!-- 3. GUIDELINES SECTION -->
     <section class="max-w-7xl mx-auto px-6 py-20 border-t border-slate-200 dark:border-white/5">
         <div class="grid lg:grid-cols-2 gap-16 items-start">
-            <div>
-               <h2 class="text-3xl font-black mb-8 leading-tight not-italic">NTA Guidelines for Passport Size Photo 2026-27</h2>
+            <div class="prose dark:prose-invert">
+               <h2 class="text-3xl font-black mb-8 leading-tight not-italic">NTA NEET Postcard Photo Guidelines 2026-27</h2>
                 <div class="space-y-6">
                     <div class="flex gap-4">
                         <div class="w-10 h-10 shrink-0 bg-blue-500 text-white rounded-full flex items-center justify-center font-black italic">01</div>
                         <div>
-                            <h4 class="font-bold uppercase tracking-tight mb-1">Standard 3.5x4.5cm</h4>
-                            <p class="text-sm text-slate-500">Passport photo must be 3.5cm width x 4.5cm height.</p>
+                            <h4 class="font-bold uppercase tracking-tight mb-1">Exact 4" x 6" Physical Size</h4>
+                            <p class="text-sm text-slate-500">The postcard photograph must be 4 inches wide and 6 inches high. This is much larger than a standard passport photo. Our tool scales this to 1200x1800 pixels at 300 DPI.</p>
                         </div>
                     </div>
                     <div class="flex gap-4">
                         <div class="w-10 h-10 shrink-0 bg-blue-500 text-white rounded-full flex items-center justify-center font-black italic">02</div>
                         <div>
-                            <h4 class="font-bold uppercase tracking-tight mb-1">Background & Face</h4>
-                            <p class="text-sm text-slate-500">White background is mandatory. 80% face coverage with visible ears.</p>
+                            <h4 class="font-bold uppercase tracking-tight mb-1">White Background & Name-Date Stamp</h4>
+                            <p class="text-sm text-slate-500">NTA requires a plain white background. It is mandatory to have the candidate's name and the date of taking the photo printed clearly at the bottom.</p>
                         </div>
                     </div>
                 </div>
             </div>
             
             <div class="tool-card p-8 rounded-[2.5rem] bg-blue-500/5 border-blue-500/20">
-                <h3 class="text-xl font-bold mb-6 italic tracking-tighter">NTA Official Specs</h3>
+                <h3 class="text-xl font-bold mb-6 italic tracking-tighter">Postcard Specifications</h3>
                 <div class="space-y-4 font-black uppercase text-[10px]">
-                    <div class="flex justify-between border-b border-blue-500/10 pb-3"><span>Dimensions</span> <span class="text-blue-500">3.5 cm x 4.5 cm</span></div>
+                    <div class="flex justify-between border-b border-blue-500/10 pb-3"><span>Dimensions</span> <span class="text-blue-500">4 INCH x 6 INCH</span></div>
                     <div class="flex justify-between border-b border-blue-500/10 pb-3"><span>File Format</span> <span class="text-blue-500">JPG / JPEG</span></div>
-                    <div class="flex justify-between border-b border-blue-500/10 pb-3"><span>File Size</span> <span class="text-blue-500">10 KB - 200 KB</span></div>
-                    <div class="flex justify-between border-b border-blue-500/10 pb-3"><span>Face Coverage</span> <span class="text-blue-500">80% MANDATORY</span></div>
-                    <div class="flex justify-between"><span>Background</span> <span class="text-blue-500">WHITE ONLY</span></div>
+                    <div class="flex justify-between border-b border-blue-500/10 pb-3"><span>Size Limit</span> <span class="text-blue-500">10 KB - 200 KB</span></div>
+                    <div class="flex justify-between"><span>Background</span> <span class="text-blue-500">PURE WHITE</span></div>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer class="py-12 border-t border-slate-200 dark:border-white/5 text-center px-6">
-        <p class="text-slate-400 text-[10px] font-bold uppercase tracking-[0.2em]">© 2026 • ExamPhoto Pro • Secure Browser-Side Processing</p>
+    <!-- 4. FAQ SECTION -->
+    <section class="max-w-4xl mx-auto px-6 py-20 border-t border-slate-200 dark:border-white/5">
+        <h2 class="text-3xl font-black mb-10 text-center uppercase italic">Postcard Photo FAQs</h2>
+        <div class="space-y-4">
+            <details class="group tool-card p-6 rounded-2xl cursor-pointer">
+                <summary class="flex justify-between items-center font-bold list-none">
+                    1. What is the postcard photo size for NEET in cm?
+                    <i data-lucide="chevron-down" class="group-open:rotate-180 transition"></i>
+                </summary>
+                <p class="mt-4 text-sm text-slate-500 leading-relaxed">The postcard photo size for NEET is 10.16 cm x 15.24 cm (which is exactly 4 inches x 6 inches). It should be in portrait orientation.</p>
+            </details>
+            <details class="group tool-card p-6 rounded-2xl cursor-pointer">
+                <summary class="flex justify-between items-center font-bold list-none">
+                    2. Can I use the same photo for Passport and Postcard?
+                    <i data-lucide="chevron-down" class="group-open:rotate-180 transition"></i>
+                </summary>
+                <p class="mt-4 text-sm text-slate-500 leading-relaxed">Yes, you should use the same photograph. However, you must resize it to the 4x6 aspect ratio and ensure it meets the 10-200KB file size requirement for the postcard upload.</p>
+            </details>
+            <details class="group tool-card p-6 rounded-2xl cursor-pointer">
+                <summary class="flex justify-between items-center font-bold list-none">
+                    3. How to compress NEET postcard photo to 200KB?
+                    <i data-lucide="chevron-down" class="group-open:rotate-180 transition"></i>
+                </summary>
+                <p class="mt-4 text-sm text-slate-500 leading-relaxed">After cropping your photo to 4x6 using our tool, use the "Quality Slider" to adjust the file size. Check the "Est KB" value and download once it is between 10KB and 200KB.</p>
+            </details>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="py-16 border-t border-slate-200 dark:border-white/10 text-center px-6">
+        <div class="flex flex-wrap justify-center gap-6 text-[11px] font-black uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400 mb-8">
+            <a href="../privacy.html" class="hover:text-blue-500 transition">Privacy Policy</a>
+            <span class="opacity-20">|</span>
+            <a href="../terms.html" class="hover:text-blue-500 transition">Terms of Use</a>
+            <span class="opacity-20">|</span>
+            <a href="../contact.html" class="hover:text-blue-500 transition">Contact Us</a>
+        </div>
+        <p class="text-slate-400 dark:text-slate-500 text-[10px] font-bold uppercase tracking-widest">
+            © 2026 • MyExamPhoto • Optimized for NEET 4x6 Postcard Guidelines
+        </p>
     </footer>
 
     <canvas id="finalCanvas" class="hidden"></canvas>
 
     <script>
-        // Initialize Icons
         lucide.createIcons();
 
-        // Theme Toggle Logic
         function toggleTheme() {
             const html = document.documentElement;
             if (html.classList.contains('dark')) {
@@ -243,11 +275,8 @@
             }
         }
 
-        // Apply saved preference on load
         if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             document.documentElement.classList.add('dark');
-        } else {
-            document.documentElement.classList.remove('dark');
         }
 
         const fileInput = document.getElementById('fileInput');
@@ -264,7 +293,6 @@
 
         let cropper = null;
 
-        // Auto Formatting Date
         dateInput.addEventListener('input', (e) => {
             let v = e.target.value.replace(/\D/g, '');
             if (v.length > 8) v = v.substring(0, 8);
@@ -301,7 +329,7 @@
 
                 if (cropper) cropper.destroy();
                 cropper = new Cropper(imageToCrop, {
-                    aspectRatio: 3.5 / 4.5,
+                    aspectRatio: 4 / 6, // Official Postcard Ratio
                     viewMode: 1,
                     dragMode: 'move',
                     autoCropArea: 0.95,
@@ -315,10 +343,11 @@
         function updateLiveResult() {
             if (!cropper) return;
 
-            const W = 600, H = 772; 
+            // 4x6 Inch at 300 DPI for high-end printing
+            const W = 1200, H = 1800; 
             finalCanvas.width = W; finalCanvas.height = H;
 
-            const croppedCanvas = cropper.getCroppedCanvas({ width: W, height: H });
+            const croppedCanvas = cropper.getCroppedCanvas({ width: W, height: H, imageSmoothingQuality: 'high' });
             
             ctx.fillStyle = "white";
             ctx.fillRect(0, 0, W, H);
@@ -328,20 +357,18 @@
             const date = dateInput.value;
 
             if (name || date) {
-                const plateH = H * 0.18;
+                const plateH = H * 0.15; // Bottom plate
                 ctx.fillStyle = "white";
                 ctx.fillRect(0, H - plateH, W, plateH);
-                
                 ctx.fillStyle = "black";
                 ctx.textAlign = "center";
-                
                 if (name) {
-                    ctx.font = "bold 34px sans-serif";
+                    ctx.font = "bold 80px sans-serif";
                     ctx.fillText(name, W/2, H - (plateH / 1.8));
                 }
                 if (date) {
-                    ctx.font = "28px sans-serif";
-                    ctx.fillText(date, W/2, H - (plateH / 5.5));
+                    ctx.font = "60px sans-serif";
+                    ctx.fillText(date, W/2, H - (plateH / 6));
                 }
             }
 
@@ -359,7 +386,7 @@
             if (!cropper) return alert("Please upload a photo first.");
             const q = qualitySlider.value / 100;
             const link = document.createElement('a');
-            link.download = `NEET_Passport_${Date.now()}.jpg`;
+            link.download = `NEET_Postcard_4x6_Resized.jpg`;
             link.href = finalCanvas.toDataURL('image/jpeg', q);
             link.click();
         });
