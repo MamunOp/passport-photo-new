@@ -242,13 +242,64 @@
         </div>
     </section>
 
-    <footer class="py-12 border-t border-slate-200 dark:border-white/5 text-center px-6">
-        <div class="flex flex-wrap justify-center gap-6 text-[10px] font-black uppercase tracking-widest text-slate-500 mb-6">
-            <a href="../privacy.html">Privacy</a>
-            <a href="../terms.html">Terms</a>
-            <a href="../contact.html">Contact</a>
+   <!-- 4. FAQ SECTION -->
+    <section class="max-w-4xl mx-auto px-6 py-20 border-t border-slate-200 dark:border-white/5">
+        <h2 class="text-3xl font-black mb-10 text-center uppercase italic">Frequently Asked Questions</h2>
+        <div class="space-y-4">
+            <details class="group tool-card p-6 rounded-2xl cursor-pointer">
+                <summary class="flex justify-between items-center font-bold list-none">
+                    1. Is white background mandatory for the postcard photo?
+                    <i data-lucide="chevron-down" class="group-open:rotate-180 transition"></i>
+                </summary>
+                <p class="mt-4 text-sm text-slate-500 leading-relaxed">Yes, NTA rejects photos with any colored background. Our tool ensures your 4x6 output matches official standards.</p>
+            </details>
+            <details class="group tool-card p-6 rounded-2xl cursor-pointer">
+                <summary class="flex justify-between items-center font-bold list-none">
+                    2. Does this tool support high MB photos?
+                    <i data-lucide="chevron-down" class="group-open:rotate-180 transition"></i>
+                </summary>
+                <p class="mt-4 text-sm text-slate-500 leading-relaxed">Yes. You can upload photos up to 15MB. The tool will process them in the background and let you resize them to under 200KB.</p>
+            </details>
         </div>
-        <p class="text-slate-400 text-[10px] font-bold uppercase tracking-[0.2em]">© 2026 • MyExamPhoto • Optimized for NTA NEET Guidelines</p>
+    </section>
+
+    <!-- 5. MORE TOOLS SECTION -->
+    <section class="max-w-7xl mx-auto px-6 py-20 border-t border-slate-200 dark:border-white/5">
+        <h2 class="text-xl font-black mb-10 text-center uppercase tracking-[0.3em] opacity-30">Other Exam Tools</h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <a href="neet-passport.html" class="tool-card p-6 rounded-3xl text-center hover:border-blue-500 transition group">
+                <i data-lucide="user" class="w-6 h-6 mx-auto mb-2 text-indigo-500 group-hover:scale-110 transition"></i>
+                <h4 class="text-[9px] font-black uppercase tracking-widest">NEET Passport</h4>
+            </a>
+            <a href="ssc.html" class="tool-card p-6 rounded-3xl text-center hover:border-blue-500 transition group">
+                <i data-lucide="shield-check" class="w-6 h-6 mx-auto mb-2 text-green-500 group-hover:scale-110 transition"></i>
+                <h4 class="text-[9px] font-black uppercase tracking-widest">SSC CGL</h4>
+            </a>
+            <a href="upsc.html" class="tool-card p-6 rounded-3xl text-center hover:border-blue-500 transition group">
+                <i data-lucide="landmark" class="w-6 h-6 mx-auto mb-2 text-purple-500 group-hover:scale-110 transition"></i>
+                <h4 class="text-[9px] font-black uppercase tracking-widest">UPSC / IAS</h4>
+            </a>
+            <a href="signature.html" class="tool-card p-6 rounded-3xl text-center hover:border-blue-500 transition group">
+                <i data-lucide="pen-tool" class="w-6 h-6 mx-auto mb-2 text-blue-500 group-hover:scale-110 transition"></i>
+                <h4 class="text-[9px] font-black uppercase tracking-widest">Signature</h4>
+            </a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="py-16 border-t border-slate-200 dark:border-white/10 text-center px-6">
+        <div class="flex flex-wrap justify-center gap-6 text-[11px] font-black uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400 mb-8">
+            <a href="privacy.html" class="hover:text-blue-500 transition">Privacy Policy</a>
+            <span class="opacity-20">|</span>
+            <a href="terms.html" class="hover:text-blue-500 transition">Terms of Use</a>
+            <span class="opacity-20">|</span>
+            <a href="contact.html" class="hover:text-blue-500 transition">Contact Us</a>
+            <span class="opacity-20">|</span>
+            <a href="disclaimer.html" class="hover:text-blue-500 transition">Disclaimer</a>
+        </div>
+        <p class="text-slate-400 dark:text-slate-500 text-[10px] font-bold uppercase tracking-widest">
+            © 2026 • MyExamPhoto • Made in India
+        </p>
     </footer>
 
     <canvas id="finalCanvas" class="hidden"></canvas>
