@@ -1,5 +1,0 @@
-User-agent: *
-Allow: /
-
-# Sitemap Location
-Sitemap: https://myexamphoto.com/sitemap.xml
