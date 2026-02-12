@@ -1,0 +1,375 @@
+
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UPSC Photo Resizer | Official Name & Date Stamp (2024-25 Guidelines)</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Professional Processing Libraries -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/heic2any@0.0.4/dist/heic2any.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: { extend: { colors: { brand: { 500: '#3b82f6', 600: '#2563eb' } } } }
+        }
+    </script>
+
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; transition: background-color 0.3s ease; }
+        .mesh-bg {
+            background-color: #f8fafc;
+            background-image: radial-gradient(at 0% 0%, hsla(210, 100%, 93%, 1) 0, transparent 50%), 
+                              radial-gradient(at 100% 0%, hsla(230, 100%, 93%, 1) 0, transparent 50%);
+        }
+        .dark .mesh-bg {
+            background-color: #020617;
+            background-image: radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), 
+                              radial-gradient(at 100% 0%, hsla(225,39%,20%,1) 0, transparent 50%);
+        }
+        .tool-card { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(0, 0, 0, 0.05); }
+        .dark .tool-card { background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.08); }
+        
+        .crop-container { width: 100%; max-height: 500px; border-radius: 1.5rem; display: none; background: #000; position: relative; overflow: hidden; }
+        
+        .face-guide {
+            position: absolute;
+            top: 45%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 70%; height: 70%;
+            border: 2px dashed rgba(59, 130, 246, 0.6);
+            border-radius: 50% 50% 45% 45%;
+            pointer-events: none;
+            z-index: 10;
+        }
+        .face-guide::after {
+            content: "UPSC FACE ALIGN (3/4th)";
+            font-size: 8px;
+            font-weight: 800;
+            color: #3b82f6;
+            background: rgba(255,255,255,0.8);
+            padding: 2px 6px;
+            border-radius: 4px;
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .spinner { border: 3px solid rgba(255,255,255,0.1); border-top: 3px solid #3b82f6; border-radius: 50%; width: 30px; height: 30px; animation: spin 1s linear infinite; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
+</head>
+<body class="mesh-bg text-slate-900 dark:text-slate-100 min-h-screen">
+
+     <!-- THEME TOGGLE BUTTON (Exact match to homepage) -->
+    <button id="themeToggle" onclick="toggleTheme()" class="fixed bottom-6 right-6 z-[100] p-4 bg-white dark:bg-slate-800 rounded-full shadow-2xl border border-slate-200 dark:border-slate-700 hover:scale-110 transition-all active:scale-95" aria-label="Toggle Theme">
+        <i data-lucide="sun" class="hidden dark:block text-yellow-400"></i>
+        <i data-lucide="moon" class="block dark:hidden text-indigo-600"></i>
+    </button>
+
+    <!-- 1. NAVIGATION -->
+    <nav class="fixed top-0 w-full z-[100] border-b border-slate-200 dark:border-white/5 bg-white/80 dark:bg-slate-950/80 backdrop-blur-xl">
+        <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-2 font-bold text-blue-600 dark:text-blue-400 group text-xs uppercase tracking-widest">
+                <i data-lucide="arrow-left" class="w-4 h-4"></i> Home
+            </a>
+            <span class="font-black italic uppercase tracking-tighter">UPSC<span class="text-blue-500">PHOTO</span></span>
+        </div>
+    </nav>
+
+    <!-- 2. MAIN TOOL SECTION -->
+    <main class="pt-24 pb-12 px-6 max-w-4xl mx-auto">
+        <div class="text-center mb-10">
+            <div class="inline-flex items-center gap-2 bg-blue-500/10 border border-blue-500/20 px-4 py-1.5 rounded-full text-blue-600 dark:text-blue-400 text-[10px] font-black mb-4 uppercase tracking-widest">
+                <span class="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></span> UPSC 2024-25 MANDATORY GUIDELINES
+            </div>
+            <h1 class="text-4xl md:text-6xl font-black tracking-tighter mb-4 leading-tight">UPSC Photo Resizer</h1>
+            <p class="text-slate-500 dark:text-slate-400 text-lg not-italic tracking-tighter">Automatic Name & Date Stamp for IAS, NDA, CDS & OTR</p>
+        </div>
+
+        <div class="tool-card p-6 md:p-10 rounded-[2.5rem] shadow-2xl space-y-8 relative">
+            <div id="loader" class="absolute inset-0 z-50 bg-slate-950/90 rounded-[2.5rem] flex flex-col items-center justify-center space-y-4 hidden">
+                <div class="spinner"></div>
+                <p class="text-xs font-black text-white uppercase tracking-[0.2em]">Processing UPSC Photo...</p>
+            </div>
+
+            <!-- Upload Area -->
+            <div id="upload-wrapper" class="relative border-2 border-dashed border-slate-300 dark:border-white/10 rounded-[2rem] p-4 text-center bg-white/50 dark:bg-black/20 overflow-hidden">
+                <div id="upload-prompt" class="py-16">
+                    <input type="file" id="fileInput" class="absolute inset-0 opacity-0 cursor-pointer" accept="image/*, .heic, .heif">
+                    <i data-lucide="camera" class="w-12 h-12 mx-auto mb-3 text-blue-500"></i>
+                    <p class="font-black text-sm uppercase tracking-widest">Upload Photo</p>
+                    <p class="text-[10px] text-slate-500 mt-2 font-bold opacity-60 uppercase tracking-tight">Plain White Background Required</p>
+                </div>
+                
+                <div id="crop-wrapper" class="crop-container">
+                    <div class="face-guide"></div>
+                    <img id="imageToCrop" src="">
+                    <button onclick="resetTool()" class="absolute top-4 right-4 z-20 bg-red-500 text-white p-2 rounded-full shadow-2xl">
+                        <i data-lucide="x" class="w-5 h-5"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mandatory Inputs for UPSC -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="space-y-2">
+                    <label class="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-2">Name of Candidate (Required)</label>
+                    <input type="text" id="nameInput" placeholder="YOUR FULL NAME" class="w-full bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 p-4 rounded-2xl outline-none focus:ring-2 ring-blue-500 font-bold uppercase">
+                </div>
+                <div class="space-y-2">
+                    <label class="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-2">Date of Taking Photo (Required)</label>
+                    <input type="text" id="dateInput" maxlength="10" placeholder="DD/MM/YYYY" class="w-full bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 p-4 rounded-2xl outline-none focus:ring-2 ring-blue-500 font-bold">
+                    <p class="text-[8px] font-bold text-orange-500 uppercase ml-2">Must be within 10 days</p>
+                </div>
+            </div>
+
+            <!-- Compression Control -->
+            <div class="space-y-4 pt-4 border-t border-slate-200 dark:border-white/5">
+                <div class="flex justify-between items-center px-2">
+                    <label class="text-[10px] font-black uppercase tracking-widest text-slate-500">File Size (Target 20KB - 300KB)</label>
+                    <span id="size-estimate" class="text-lg font-black text-blue-600 dark:text-blue-400">-- KB</span>
+                </div>
+                <input type="range" id="qualitySlider" min="10" max="100" value="85" class="w-full h-1.5 bg-slate-200 dark:bg-white/10 rounded-lg appearance-none cursor-pointer accent-blue-600">
+            </div>
+
+            <button id="downloadBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-black py-5 rounded-2xl transition shadow-xl shadow-blue-500/20 uppercase tracking-widest text-xs flex items-center justify-center gap-2">
+                <i data-lucide="download" class="w-5 h-5"></i> Generate UPSC Official Photo
+            </button>
+        </div>
+    </main>
+
+    <!-- 3. HOW TO USE SECTION -->
+    <section class="max-w-7xl mx-auto px-6 py-20 border-t border-slate-200 dark:border-white/5">
+        <div class="text-center mb-12">
+            <h2 class="text-2xl md:text-3xl font-black not-italic tracking-tighter">UPSC 5-Step Photo Process</h2>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
+            <div class="tool-card p-6 rounded-3xl text-center space-y-3">
+                <div class="w-10 h-10 bg-blue-500/10 text-blue-500 rounded-xl flex items-center justify-center mx-auto"><i data-lucide="upload"></i></div>
+                <h4 class="font-bold text-[10px] uppercase tracking-widest">01. Upload</h4>
+                <p class="text-[9px] text-slate-500">Upload a fresh photo.</p>
+            </div>
+            <div class="tool-card p-6 rounded-3xl text-center space-y-3">
+                <div class="w-10 h-10 bg-indigo-500/10 text-indigo-500 rounded-xl flex items-center justify-center mx-auto"><i data-lucide="crop"></i></div>
+                <h4 class="font-bold text-[10px] uppercase tracking-widest">02. Crop</h4>
+                <p class="text-[9px] text-slate-500">Face should cover 3/4th.</p>
+            </div>
+            <div class="tool-card p-6 rounded-3xl text-center space-y-3">
+                <div class="w-10 h-10 bg-purple-500/10 text-purple-500 rounded-xl flex items-center justify-center mx-auto"><i data-lucide="type"></i></div>
+                <h4 class="font-bold text-[10px] uppercase tracking-widest">03. Naming</h4>
+                <p class="text-[9px] text-slate-500">Type Name & Today's Date.</p>
+            </div>
+            <div class="tool-card p-6 rounded-3xl text-center space-y-3 border-blue-500/20 bg-blue-500/5">
+                <div class="w-10 h-10 bg-green-500/10 text-green-500 rounded-xl flex items-center justify-center mx-auto"><i data-lucide="check-circle"></i></div>
+                <h4 class="font-bold text-[10px] uppercase tracking-widest text-blue-500">04. Validate</h4>
+                <p class="text-[9px] text-slate-500">Stay within 20KB-300KB.</p>
+            </div>
+            <div class="tool-card p-6 rounded-3xl text-center space-y-3 bg-blue-600 text-white">
+                <div class="w-10 h-10 bg-white/20 text-white rounded-xl flex items-center justify-center mx-auto"><i data-lucide="save"></i></div>
+                <h4 class="font-bold text-[10px] uppercase tracking-widest">05. Save</h4>
+                <p class="text-[9px] text-white/70">Ready for OTR upload.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. GUIDELINES SECTION -->
+    <section class="max-w-7xl mx-auto px-6 py-20 border-t border-slate-200 dark:border-white/5">
+        <div class="grid lg:grid-cols-2 gap-16 items-start">
+            <div>
+               <h2 class="text-3xl font-black mb-8 leading-tight not-italic">Official UPSC 2024 Guidelines</h2>
+                <div class="space-y-6">
+                    <div class="flex gap-4">
+                        <div class="w-10 h-10 shrink-0 bg-red-500 text-white rounded-full flex items-center justify-center font-black">!</div>
+                        <div>
+                            <h4 class="font-bold uppercase tracking-tight mb-1 text-red-500">The 10-Day Rule</h4>
+                            <p class="text-sm text-slate-500">The photograph should not be more than 10 days old from the start of the online application process.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="w-10 h-10 shrink-0 bg-blue-500 text-white rounded-full flex items-center justify-center font-black">✓</div>
+                        <div>
+                            <h4 class="font-bold uppercase tracking-tight mb-1">Mandatory Stamp</h4>
+                            <p class="text-sm text-slate-500">Name of the candidate and the date on which the photograph was taken must be clearly mentioned on the photograph.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tool-card p-8 rounded-[2.5rem] bg-blue-500/5 border-blue-500/20">
+                <h3 class="text-xl font-bold mb-6 italic tracking-tighter">UPSC Technical Specs</h3>
+                <div class="space-y-4 font-black uppercase text-[10px]">
+                    <div class="flex justify-between border-b border-blue-500/10 pb-3"><span>Dimensions</span> <span class="text-blue-500">350 x 350 to 1000 x 1000 px</span></div>
+                    <div class="flex justify-between border-b border-blue-500/10 pb-3"><span>File Format</span> <span class="text-blue-500">JPG Only</span></div>
+                    <div class="flex justify-between border-b border-blue-500/10 pb-3"><span>File Size</span> <span class="text-blue-500">20 KB - 300 KB</span></div>
+                    <div class="flex justify-between border-b border-blue-500/10 pb-3"><span>Face coverage</span> <span class="text-blue-500">3/4th (75%)</span></div>
+                    <div class="flex justify-between"><span>Beard Style</span> <span class="text-blue-500">Must match exam day look</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. FAQ SECTION -->
+    <section class="max-w-4xl mx-auto px-6 py-20 border-t border-slate-200 dark:border-white/5">
+        <h2 class="text-3xl font-black mb-10 text-center uppercase italic">UPSC OTR FAQ</h2>
+        <div class="space-y-4">
+            <details class="group tool-card p-6 rounded-2xl cursor-pointer">
+                <summary class="flex justify-between items-center font-bold list-none">
+                    1. Is it okay if I don't print my name on the UPSC photo?
+                    <i data-lucide="chevron-down" class="group-open:rotate-180 transition"></i>
+                </summary>
+                <p class="mt-4 text-sm text-slate-500 leading-relaxed">No. UPSC guidelines 2024-25 clearly state that the application will be rejected if the name and date of the photo are not mentioned on the image.</p>
+            </details>
+            <details class="group tool-card p-6 rounded-2xl cursor-pointer">
+                <summary class="flex justify-between items-center font-bold list-none">
+                    2. Can I use a photo from last year for OTR?
+                    <i data-lucide="chevron-down" class="group-open:rotate-180 transition"></i>
+                </summary>
+                <p class="mt-4 text-sm text-slate-500 leading-relaxed">No. UPSC requires the photo to be no more than 10 days old. You must upload a fresh photo for every new notification or OTR update.</p>
+            </details>
+        </div>
+    </section>
+
+    <footer class="py-12 border-t border-slate-200 dark:border-white/5 text-center px-6">
+        <p class="text-slate-400 text-[10px] font-bold uppercase tracking-[0.2em]">© 2026 • ExamPhoto Pro • Optimized for UPSC OTR</p>
+    </footer>
+
+    <canvas id="finalCanvas" class="hidden"></canvas>
+
+    <script>
+        lucide.createIcons();
+
+        const fileInput = document.getElementById('fileInput');
+        const imageToCrop = document.getElementById('imageToCrop');
+        const cropWrapper = document.getElementById('crop-wrapper');
+        const uploadPrompt = document.getElementById('upload-prompt');
+        const loader = document.getElementById('loader');
+        const finalCanvas = document.getElementById('finalCanvas');
+        const ctx = finalCanvas.getContext('2d');
+        const qualitySlider = document.getElementById('qualitySlider');
+        const sizeEstimate = document.getElementById('size-estimate');
+        const nameInput = document.getElementById('nameInput');
+        const dateInput = document.getElementById('dateInput');
+
+        let cropper = null;
+
+        // Auto Formatting Date
+        dateInput.addEventListener('input', (e) => {
+            let v = e.target.value.replace(/\D/g, '');
+            if (v.length > 8) v = v.substring(0, 8);
+            if (v.length > 4) v = v.substring(0, 2) + '/' + v.substring(2, 4) + '/' + v.substring(4);
+            else if (v.length > 2) v = v.substring(0, 2) + '/' + v.substring(2);
+            e.target.value = v;
+            updateLiveResult();
+        });
+
+        function resetTool() {
+            if (cropper) cropper.destroy();
+            fileInput.value = "";
+            cropWrapper.style.display = 'none';
+            uploadPrompt.style.display = 'block';
+        }
+
+        fileInput.addEventListener('change', async (e) => {
+            let file = e.target.files[0];
+            if (!file) return;
+
+            loader.classList.remove('hidden');
+
+            if (file.name.toLowerCase().endsWith(".heic") || file.name.toLowerCase().endsWith(".heif")) {
+                const blob = await heic2any({ blob: file, toType: "image/jpeg" });
+                file = Array.isArray(blob) ? blob[0] : blob;
+            }
+
+            const reader = new FileReader();
+            reader.onload = (event) => {
+                imageToCrop.src = event.target.result;
+                uploadPrompt.style.display = 'none';
+                cropWrapper.style.display = 'block';
+                loader.classList.add('hidden');
+
+                if (cropper) cropper.destroy();
+                cropper = new Cropper(imageToCrop, {
+                    aspectRatio: 3.5 / 4.5,
+                    viewMode: 1,
+                    dragMode: 'move',
+                    autoCropArea: 0.95,
+                    crop() { updateLiveResult(); }
+                });
+            };
+            reader.readAsDataURL(file);
+        });
+
+        function updateLiveResult() {
+            if (!cropper) return;
+
+            // UPSC standard aspect ratio in pixels
+            const W = 500, H = 643; 
+            finalCanvas.width = W; finalCanvas.height = H;
+
+            const croppedCanvas = cropper.getCroppedCanvas({ width: W, height: H });
+            
+            ctx.fillStyle = "white";
+            ctx.fillRect(0, 0, W, H);
+            ctx.drawImage(croppedCanvas, 0, 0, W, H);
+
+            const name = nameInput.value.toUpperCase();
+            const date = dateInput.value;
+
+            // UPSC Bottom Plate
+            if (name || date) {
+                const plateH = H * 0.18;
+                ctx.fillStyle = "white";
+                ctx.fillRect(0, H - plateH, W, plateH);
+                
+                // Optional: thin separator line
+                ctx.strokeStyle = "#eeeeee";
+                ctx.lineWidth = 1;
+                ctx.strokeRect(0, H - plateH, W, 1);
+
+                ctx.fillStyle = "black";
+                ctx.textAlign = "center";
+                
+                if (name) {
+                    ctx.font = "bold 24px sans-serif";
+                    ctx.fillText(name, W/2, H - (plateH / 1.7));
+                }
+                if (date) {
+                    ctx.font = "20px sans-serif";
+                    ctx.fillText(date, W/2, H - (plateH / 5.5));
+                }
+            }
+
+            // Estimate Size
+            const q = qualitySlider.value / 100;
+            const dataUrl = finalCanvas.toDataURL('image/jpeg', q);
+            const sizeKB = Math.round((dataUrl.length * (3/4)) / 1024);
+            sizeEstimate.innerText = `${sizeKB} KB`;
+        }
+
+        [nameInput, qualitySlider].forEach(input => {
+            input.addEventListener('input', updateLiveResult);
+        });
+
+        document.getElementById('downloadBtn').addEventListener('click', () => {
+            if (!cropper) return alert("Please upload a photo first.");
+            if (!nameInput.value || !dateInput.value) {
+                if(!confirm("UPSC requires Name and Date on the photo. Are you sure you want to download without them?")) return;
+            }
+            const q = qualitySlider.value / 100;
+            const link = document.createElement('a');
+            link.download = `UPSC_Photo_${Date.now()}.jpg`;
+            link.href = finalCanvas.toDataURL('image/jpeg', q);
+            link.click();
+        });
+    </script>
+</body>
+</html>
