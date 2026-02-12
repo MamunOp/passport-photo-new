@@ -48,40 +48,111 @@
   }
   </script>
 
-  <!-- Schema: FAQ (✅ helps rankings) -->
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"FAQPage",
-    "mainEntity":[
-      {
-        "@type":"Question",
-        "name":"What is the UPSC photo size limit in KB?",
-        "acceptedAnswer":{"@type":"Answer","text":"UPSC OTR photo file size is generally required between 20KB and 300KB in JPG/JPEG format. Use the compression slider to stay within the limit."}
-      },
-      {
-        "@type":"Question",
-        "name":"What is the UPSC photo size in pixels for OTR?",
-        "acceptedAnswer":{"@type":"Answer","text":"UPSC requires a square photo. Minimum dimensions are 550×550 pixels and maximum dimensions are 1000×1000 pixels."}
-      },
-      {
-        "@type":"Question",
-        "name":"Is Name and Date stamp mandatory on UPSC photo?",
-        "acceptedAnswer":{"@type":"Answer","text":"Yes. UPSC requires the candidate name and the date the photograph was taken to be clearly mentioned at the bottom of the photograph."}
-      },
-      {
-        "@type":"Question",
-        "name":"Can I use the same UPSC photo for CSE, CDS and NDA?",
-        "acceptedAnswer":{"@type":"Answer","text":"Usually yes, because UPSC OTR photo specifications are common. Use the same photo only if it meets square size, file size and Name+Date stamp requirements."}
-      },
-      {
-        "@type":"Question",
-        "name":"Does UPSC accept PNG or PDF photos?",
-        "acceptedAnswer":{"@type":"Answer","text":"UPSC usually accepts JPG/JPEG for photo upload. If your image is PNG/HEIC, convert it to JPG using this tool before uploading."}
+ <!-- Schema: FAQ (Match the 12 FAQs on page) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is it okay if I don't print my name on the UPSC photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. UPSC guidelines 2024-25 clearly state that the application will be rejected if the name and date of the photo are not mentioned on the image."
       }
-    ]
-  }
-  </script>
+    },
+    {
+      "@type": "Question",
+      "name": "Can I use a photo from last year for OTR?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. UPSC requires the photo to be no more than 10 days old. You must upload a fresh photo for every new notification or OTR update."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the photo size required for UPSC CSE, CDS, and NDA?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "UPSC requires a square photograph, usually between 350×350 pixels and 1000×1000 pixels. The file size must be between 20KB and 300KB in JPG format."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the file size limit for UPSC photo upload?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The UPSC photo must be between 20KB and 300KB. If the image is outside this size range, the application system may reject it."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is name and date mandatory on UPSC photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. As per UPSC guidelines, the candidate’s name and the date of the photograph must be clearly printed at the bottom of the photo. Applications without this stamp may be rejected."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I use the same photo for UPSC CSE, CDS, and NDA?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. The photo requirements for UPSC CSE, CDS, and NDA are generally the same. You can use the same photo if it meets the size, background, and name-date stamp rules."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How recent should the UPSC photo be?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The UPSC photograph should be taken within the last 10 days from the start of the application process. Older photos may lead to rejection."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What background is required for UPSC photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The background must be plain white or very light colored. Dark, patterned, or shadowed backgrounds are not accepted in UPSC applications."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What should be the face coverage in UPSC photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The face should cover around 70–75% of the photograph. The photo must show a clear frontal view with both ears visible."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I wear spectacles in UPSC photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It is recommended not to wear spectacles in the UPSC photo. The eyes must be clearly visible without reflections or glare."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How to resize UPSC photo to 20KB–300KB online?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "You can use an online UPSC photo resizer. Upload your image, crop it to square dimensions, add the name and date stamp, adjust compression, and download the final JPG within the required size."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I use a mobile photo for UPSC application?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, a mobile photo is acceptable as long as it has a plain background, is clear, recent, square in shape, and follows the UPSC size and name-date requirements."
+      }
+    }
+  ]
+}
+</script>
 
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet" />
