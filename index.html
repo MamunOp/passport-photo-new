@@ -491,7 +491,7 @@
                 const desc = cards[i].getElementsByTagName('p')[0].innerText.toLowerCase();
                 
                 if (title.includes(filter) || desc.includes(filter)) {
-                    cards[i].style.display = "";
+                    cards[i].style.display = "flex";
                     found++;
                 } else {
                     cards[i].style.display = "none";
