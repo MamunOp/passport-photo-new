@@ -474,55 +474,63 @@
         <p class="text-slate-400 text-[10px] font-bold uppercase tracking-[0.3em]">© 2026 • MyExamPhoto.com • Made with ❤ in India</p>
     </footer>
 
-    <script>
-        lucide.createIcons();
+    <script src="https://unpkg.com/lucide@latest"></script>
 
-        // FILTER SEARCH FUNCTION
-        <script>
-function filterTools() {
-    const input = document.getElementById('examSearch');
-    const filter = input.value.toLowerCase();
-    const cards = document.querySelectorAll('#toolsGrid a');
-    const status = document.getElementById('searchStatus');
+<script>
+    // Load icons
+    lucide.createIcons();
 
-    let found = 0;
+    // FILTER SEARCH FUNCTION
+    function filterTools() {
+        const input = document.getElementById('examSearch');
+        const filter = input.value.toLowerCase();
+        const cards = document.querySelectorAll('#toolsGrid a');
+        const status = document.getElementById('searchStatus');
 
-    cards.forEach(card => {
-        // safer: read full card text instead of h3/p
-        const text = card.innerText.toLowerCase();
+        let found = 0;
 
-        if (text.includes(filter)) {
-            card.style.display = "block"; // ✅ works with grid
-            found++;
-        } else {
-            card.style.display = "none";
-        }
-    });
+        cards.forEach(card => {
+            const text = card.innerText.toLowerCase();
 
-    if (found === 0 && filter !== "") {
-        status.innerText = "No tools found matching your search.";
-    } else if (filter === "") {
-        status.innerText = "Select your exam to start cropping and resizing";
-    } else {
-        status.innerText = `Found ${found} matching tools.`;
-    }
-}
-        function toggleTheme() {
-            const html = document.documentElement;
-            if (html.classList.contains('dark')) {
-                html.classList.remove('dark');
-                localStorage.setItem('theme', 'light');
+            if (text.includes(filter)) {
+                card.style.display = "flex"; // ✅ IMPORTANT
+                found++;
             } else {
-                html.classList.add('dark');
-                localStorage.setItem('theme', 'dark');
+                card.style.display = "none";
             }
-        }
+        });
 
-        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            document.documentElement.classList.add('dark');
+        if (found === 0 && filter !== "") {
+            status.innerText = "No tools found matching your search.";
+        } else if (filter === "") {
+            status.innerText = "Select your exam to start cropping and resizing";
         } else {
-            document.documentElement.classList.remove('dark');
+            status.innerText = `Found ${found} matching tools.`;
         }
-    </script>
+    }
+
+    // DARK MODE
+    function toggleTheme() {
+        const html = document.documentElement;
+        if (html.classList.contains('dark')) {
+            html.classList.remove('dark');
+            localStorage.setItem('theme', 'light');
+        } else {
+            html.classList.add('dark');
+            localStorage.setItem('theme', 'dark');
+        }
+    }
+
+    // APPLY SAVED THEME
+    if (
+        localStorage.getItem('theme') === 'dark' ||
+        (!('theme' in localStorage) &&
+            window.matchMedia('(prefers-color-scheme: dark)').matches)
+    ) {
+        document.documentElement.classList.add('dark');
+    } else {
+        document.documentElement.classList.remove('dark');
+    }
+</script>
 </body>
 </html>
