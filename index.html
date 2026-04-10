@@ -168,85 +168,136 @@
     </header>
 
     <!-- THE UNIFIED EXAM GRID -->
-    <section id="tools" class="max-w-7xl mx-auto px-6 py-8 md:py-10">
-        <div class="text-center mb-10">
-            <h2 class="text-3xl md:text-5xl font-black text-slate-900 dark:text-white">Popular Exam Tools</h2>
-            <p id="searchStatus" class="text-slate-500 dark:text-slate-400 mt-4 text-base md:text-lg">Select your exam to start cropping and resizing</p>
-        </div>
+    <section id="tools" class="max-w-7xl mx-auto px-4 py-6">
+    
+    <!-- Heading -->
+    <div class="text-center mb-8">
+        <h2 class="text-2xl md:text-4xl font-extrabold text-slate-900 dark:text-white">
+            Popular Exam Tools
+        </h2>
+        <p class="text-slate-500 dark:text-slate-400 mt-2 text-sm md:text-base">
+            Fast, accurate & ready-to-use tools
+        </p>
+    </div>
 
-        <div id="toolsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6 md:gap-8">
-            <!-- Tool 1 -->
-            <a href="/neet-postcard-resizer/" class="tool-card p-8 md:p-10 rounded-4xl flex flex-col justify-between group">
-                <div>
-                    <div class="w-14 h-14 bg-blue-500/10 text-blue-600 dark:text-blue-500 rounded-2xl flex items-center justify-center mb-8">
-                        <i data-lucide="image" class="w-7 h-7"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-4 dark:text-white">NEET Postcard Photo Resizer (4×6)</h3>
-                    <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Crop and Resize your photo to 4×6 inch postcard size with white background, name & date stamp as required by NTA.</p>
-                </div>
-                <div class="mt-10 flex items-center justify-between font-black text-xs uppercase tracking-widest text-blue-600 dark:text-blue-500">
-                    Resize Now <i data-lucide="arrow-right" class="w-5 h-5 group-hover:translate-x-2 transition-transform"></i>
-                </div>
-            </a>
+    <!-- Grid -->
+    <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
 
-            <!-- Tool 2 -->
-            <a href="/neet-passport-resizer/" class="tool-card p-8 md:p-10 rounded-4xl flex flex-col justify-between group">
-                <div>
-                    <div class="w-14 h-14 bg-indigo-500/10 text-indigo-600 dark:text-indigo-500 rounded-2xl flex items-center justify-center mb-8">
-                        <i data-lucide="user" class="w-7 h-7"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-4 dark:text-white">NEET Passport Photo Resizer (3.5×4.5 cm)</h3>
-                    <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Generate 3.5×4.5 cm passport size photo with proper lighting, white background, and correct face ratio.</p>
+        <!-- NEET Postcard -->
+        <a href="/neet-postcard-resizer/"
+           class="tool-card p-5 rounded-2xl bg-white dark:bg-slate-900 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group">
+            <div>
+                <div class="w-10 h-10 bg-blue-500/10 text-blue-600 rounded-xl flex items-center justify-center mb-4">
+                    <i data-lucide="image" class="w-5 h-5"></i>
                 </div>
-                <div class="mt-10 flex items-center justify-between font-black text-xs uppercase tracking-widest text-indigo-600 dark:text-indigo-500">
-                    Resize Now <i data-lucide="arrow-right" class="w-5 h-5 group-hover:translate-x-2 transition-transform"></i>
-                </div>
-            </a>
+                <h3 class="text-sm font-semibold dark:text-white">NEET Postcard</h3>
+                <p class="text-xs text-slate-500 mt-1 line-clamp-2">
+                    4×6 postcard with name & date.
+                </p>
+            </div>
+            <div class="mt-4 flex items-center justify-between text-[10px] font-bold uppercase text-blue-600">
+                Start <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition"></i>
+            </div>
+        </a>
 
-            <!-- Tool 3 -->
-            <a href="/ssc-photo-resizer/" class="tool-card p-8 md:p-10 rounded-4xl flex flex-col justify-between group">
-                <div>
-                    <div class="w-14 h-14 bg-emerald-500/10 text-emerald-600 dark:text-emerald-500 rounded-2xl flex items-center justify-center mb-8">
-                        <i data-lucide="shield-check" class="w-7 h-7"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-4 dark:text-white">SSC Photo Resizer (20KB–50KB)</h3>
-                    <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Instantly resize and compress photos to 20–50 KB for SSC CGL, CHSL, MTS, GD and all other SSC forms.</p>
+        <!-- NEET Passport -->
+        <a href="/neet-passport-resizer/"
+           class="tool-card p-5 rounded-2xl bg-white dark:bg-slate-900 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group">
+            <div>
+                <div class="w-10 h-10 bg-indigo-500/10 text-indigo-600 rounded-xl flex items-center justify-center mb-4">
+                    <i data-lucide="user" class="w-5 h-5"></i>
                 </div>
-                <div class="mt-10 flex items-center justify-between font-black text-xs uppercase tracking-widest text-emerald-600 dark:text-emerald-500">
-                    Resize Now <i data-lucide="arrow-right" class="w-5 h-5 group-hover:translate-x-2 transition-transform"></i>
-                </div>
-            </a>
+                <h3 class="text-sm font-semibold dark:text-white">NEET Passport</h3>
+                <p class="text-xs text-slate-500 mt-1 line-clamp-2">
+                    3.5×4.5 cm passport photo.
+                </p>
+            </div>
+            <div class="mt-4 flex items-center justify-between text-[10px] font-bold uppercase text-indigo-600">
+                Start <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition"></i>
+            </div>
+        </a>
 
-            <!-- Tool 4 -->
-            <a href="/upsc-photo-resizer/" class="tool-card p-8 md:p-10 rounded-4xl flex flex-col justify-between group">
-                <div>
-                    <div class="w-14 h-14 bg-purple-500/10 text-purple-600 dark:text-purple-500 rounded-2xl flex items-center justify-center mb-8">
-                        <i data-lucide="landmark" class="w-7 h-7"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-4 dark:text-white">UPSC Photo Resizer (550×550 px)</h3>
-                    <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Create 550×550 px square photos with correct framing, name & date stamp for Civil Services like UPSC CSE, CDS, NDA etc.</p>
+        <!-- SSC -->
+        <a href="/ssc-photo-resizer/"
+           class="tool-card p-5 rounded-2xl bg-white dark:bg-slate-900 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group">
+            <div>
+                <div class="w-10 h-10 bg-emerald-500/10 text-emerald-600 rounded-xl flex items-center justify-center mb-4">
+                    <i data-lucide="shield-check" class="w-5 h-5"></i>
                 </div>
-                <div class="mt-10 flex items-center justify-between font-black text-xs uppercase tracking-widest text-purple-600 dark:text-purple-500">
-                    Resize Now <i data-lucide="arrow-right" class="w-5 h-5 group-hover:translate-x-2 transition-transform"></i>
-                </div>
-            </a>
+                <h3 class="text-sm font-semibold dark:text-white">SSC Resize</h3>
+                <p class="text-xs text-slate-500 mt-1 line-clamp-2">
+                    Compress to 20–50KB instantly.
+                </p>
+            </div>
+            <div class="mt-4 flex items-center justify-between text-[10px] font-bold uppercase text-emerald-600">
+                Start <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition"></i>
+            </div>
+        </a>
 
-            <!-- Tool 5 -->
-            <a href="sbi-resize.html" class="tool-card p-8 md:p-10 rounded-4xl flex flex-col justify-between group">
-                <div>
-                    <div class="w-14 h-14 bg-orange-500/10 text-orange-600 dark:text-orange-500 rounded-2xl flex items-center justify-center mb-8">
-                        <i data-lucide="piggy-bank" class="w-7 h-7"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-4 dark:text-white">IBPS/SBI Banking</h3>
-                    <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Resize photos to 4.5×3.5 cm portrait format suitable for all bank recruitment exams.</p>
+        <!-- UPSC -->
+        <a href="/upsc-photo-resizer/"
+           class="tool-card p-5 rounded-2xl bg-white dark:bg-slate-900 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group">
+            <div>
+                <div class="w-10 h-10 bg-purple-500/10 text-purple-600 rounded-xl flex items-center justify-center mb-4">
+                    <i data-lucide="landmark" class="w-5 h-5"></i>
                 </div>
-                <div class="mt-10 flex items-center justify-between font-black text-xs uppercase tracking-widest text-orange-600 dark:text-orange-500">
-                    Resize Now <i data-lucide="arrow-right" class="w-5 h-5 group-hover:translate-x-2 transition-transform"></i>
-                </div>
-            </a>
-        </div>
-    </section>
+                <h3 class="text-sm font-semibold dark:text-white">UPSC Photo</h3>
+                <p class="text-xs text-slate-500 mt-1 line-clamp-2">
+                    550×550 px with correct format.
+                </p>
+            </div>
+            <div class="mt-4 flex items-center justify-between text-[10px] font-bold uppercase text-purple-600">
+                Start <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition"></i>
+            </div>
+        </a>
 
+        <!-- Banking -->
+        <a href="sbi-resize.html"
+           class="tool-card p-5 rounded-2xl bg-white dark:bg-slate-900 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group">
+            <div>
+                <div class="w-10 h-10 bg-orange-500/10 text-orange-600 rounded-xl flex items-center justify-center mb-4">
+                    <i data-lucide="piggy-bank" class="w-5 h-5"></i>
+                </div>
+                <h3 class="text-sm font-semibold dark:text-white">Banking</h3>
+                <p class="text-xs text-slate-500 mt-1 line-clamp-2">
+                    IBPS / SBI format photo resize.
+                </p>
+            </div>
+            <div class="mt-4 flex items-center justify-between text-[10px] font-bold uppercase text-orange-600">
+                Start <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition"></i>
+            </div>
+        </a>
+
+        <!-- PREMIUM CARD -->
+        <a href="/premium-tools/"
+           class="tool-card p-5 rounded-2xl bg-gradient-to-br from-yellow-400 via-orange-500 to-pink-500 text-white shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group relative overflow-hidden">
+
+            <!-- Badge -->
+            <span class="absolute top-2 right-2 text-[10px] bg-white/20 px-2 py-1 rounded-full font-bold">
+                PRO
+            </span>
+
+            <div>
+                <div class="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center mb-4">
+                    <i data-lucide="sparkles" class="w-5 h-5"></i>
+                </div>
+
+                <h3 class="text-sm font-semibold">
+                    Premium Tools
+                </h3>
+
+                <p class="text-xs mt-1 opacity-90 line-clamp-2">
+                    All exams • Auto resize • No watermark
+                </p>
+            </div>
+
+            <div class="mt-4 flex items-center justify-between text-[10px] font-bold uppercase">
+                Unlock <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition"></i>
+            </div>
+        </a>
+
+    </div>
+</section>
  <!-- GUIDELINES SECTION -->
 <section id="guidelines" class="max-w-7xl mx-auto px-6 py-10 md:py-16 border-t border-slate-200 dark:border-white/5">
     <div class="text-center max-w-4xl mx-auto mb-10">
