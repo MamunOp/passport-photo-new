@@ -478,35 +478,35 @@
         lucide.createIcons();
 
         // FILTER SEARCH FUNCTION
-        function filterTools() {
-            const input = document.getElementById('examSearch');
-            const filter = input.value.toLowerCase();
-            const grid = document.getElementById('toolsGrid');
-            const cards = grid.getElementsByTagName('a');
-            const status = document.getElementById('searchStatus');
-            let found = 0;
+        <script>
+function filterTools() {
+    const input = document.getElementById('examSearch');
+    const filter = input.value.toLowerCase();
+    const cards = document.querySelectorAll('#toolsGrid a');
+    const status = document.getElementById('searchStatus');
 
-            for (let i = 0; i < cards.length; i++) {
-                const title = cards[i].getElementsByTagName('h3')[0].innerText.toLowerCase();
-                const desc = cards[i].getElementsByTagName('p')[0].innerText.toLowerCase();
-                
-                if (title.includes(filter) || desc.includes(filter)) {
-                    cards[i].style.display = "flex";
-                    found++;
-                } else {
-                    cards[i].style.display = "none";
-                }
-            }
+    let found = 0;
 
-            if (found === 0 && filter !== "") {
-                status.innerText = "No tools found matching your search.";
-            } else if (filter === "") {
-                status.innerText = "Select your exam to start cropping and resizing";
-            } else {
-                status.innerText = `Found ${found} matching tools.`;
-            }
+    cards.forEach(card => {
+        // safer: read full card text instead of h3/p
+        const text = card.innerText.toLowerCase();
+
+        if (text.includes(filter)) {
+            card.style.display = "block"; // ✅ works with grid
+            found++;
+        } else {
+            card.style.display = "none";
         }
+    });
 
+    if (found === 0 && filter !== "") {
+        status.innerText = "No tools found matching your search.";
+    } else if (filter === "") {
+        status.innerText = "Select your exam to start cropping and resizing";
+    } else {
+        status.innerText = `Found ${found} matching tools.`;
+    }
+}
         function toggleTheme() {
             const html = document.documentElement;
             if (html.classList.contains('dark')) {
