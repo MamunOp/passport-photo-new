@@ -164,6 +164,7 @@
             <button onclick="filterTools()" class="absolute right-2.5 top-2 bg-blue-600 p-2.5 rounded-xl text-white hover:bg-blue-700 transition active:scale-95 shadow-lg shadow-blue-500/20">
                 <i data-lucide="search" class="w-5 h-5"></i>
             </button>
+          <p id="searchStatus" class="mt-4 text-[10px] font-black uppercase tracking-widest text-slate-400 text-center"></p>
         </div>
     </header>
 
@@ -181,7 +182,7 @@
     </div>
 
     <!-- Grid -->
-    <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+    <div id="toolsGrid" class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
 
         <!-- NEET Postcard -->
         <a href="/neet-postcard-resizer/"
@@ -486,8 +487,8 @@
             let found = 0;
 
             for (let i = 0; i < cards.length; i++) {
-                const title = cards[i].getElementsByTagName('h3')[0].innerText.toLowerCase();
-                const desc = cards[i].getElementsByTagName('p')[0].innerText.toLowerCase();
+                const title = cards[i].querySelector('h3').innerText.toLowerCase();
+                const desc = cards[i].querySelector('p').innerText.toLowerCase();
                 
                 if (title.includes(filter) || desc.includes(filter)) {
                     cards[i].style.display = "flex";
@@ -497,15 +498,14 @@
                 }
             }
 
-            if (found === 0 && filter !== "") {
+            if (filter === "") {
+                status.innerText = "";
+            } else if (found === 0) {
                 status.innerText = "No tools found matching your search.";
-            } else if (filter === "") {
-                status.innerText = "Select your exam to start cropping and resizing";
             } else {
-                status.innerText = `Found ${found} matching tools.`;
+                status.innerText = `Found ${found} tools.`;
             }
         }
-
         function toggleTheme() {
             const html = document.documentElement;
             if (html.classList.contains('dark')) {
