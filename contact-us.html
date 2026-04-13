@@ -114,39 +114,48 @@
             </div>
 
             <!-- Form Card -->
-            <div class="content-card p-6 md:p-12 rounded-[2rem] md:rounded-[3rem]">
-                <form class="space-y-6">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div class="space-y-2">
-                            <label class="text-[10px] font-black uppercase tracking-[0.2em] ml-2 text-slate-400">Full Name</label>
-                            <input type="text" placeholder="John Doe" class="input-style w-full p-4 rounded-2xl outline-none focus:border-blue-500 transition-all dark:text-white text-sm">
-                        </div>
-                        <div class="space-y-2">
-                            <label class="text-[10px] font-black uppercase tracking-[0.2em] ml-2 text-slate-400">Email Address</label>
-                            <input type="email" placeholder="john@example.com" class="input-style w-full p-4 rounded-2xl outline-none focus:border-blue-500 transition-all dark:text-white text-sm">
-                        </div>
-                    </div>
+<div class="content-card p-6 md:p-12 rounded-[2rem] md:rounded-[3rem]">
+    <!-- Form pointing to Web3Forms API -->
+    <form action="https://api.web3forms.com/submit" method="POST" class="space-y-6">
+        
+        <!-- YOUR SPECIFIC ACCESS KEY -->
+        <input type="hidden" name="access_key" value="fdf86eb8-f3d8-4ef2-9d7d-eacf972b30b4">
+        
+        <!-- Spam Protection (Hidden from users) -->
+        <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
 
-                    <div class="space-y-2">
-                        <label class="text-[10px] font-black uppercase tracking-[0.2em] ml-2 text-slate-400">Subject</label>
-                        <select class="input-style w-full p-4 rounded-2xl outline-none focus:border-blue-500 transition-all dark:text-white text-sm appearance-none cursor-pointer">
-                            <option>General Inquiry</option>
-                            <option>Report a Bug</option>
-                            <option>Feature Suggestion</option>
-                            <option>Business Collaboration</option>
-                        </select>
-                    </div>
-
-                    <div class="space-y-2">
-                        <label class="text-[10px] font-black uppercase tracking-[0.2em] ml-2 text-slate-400">Your Message</label>
-                        <textarea rows="5" placeholder="How can we help you?" class="input-style w-full p-4 rounded-2xl outline-none focus:border-blue-500 transition-all dark:text-white text-sm"></textarea>
-                    </div>
-
-                    <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-black py-5 rounded-2xl transition-all shadow-xl shadow-blue-500/20 uppercase text-xs tracking-[0.2em] active:scale-95">
-                        Send Message
-                    </button>
-                </form>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="space-y-2">
+                <label class="text-[10px] font-black uppercase tracking-[0.2em] ml-2 text-slate-400">Full Name</label>
+                <input type="text" name="name" required placeholder="John Doe" class="input-style w-full p-4 rounded-2xl outline-none focus:border-blue-500 transition-all dark:text-white text-sm">
             </div>
+            <div class="space-y-2">
+                <label class="text-[10px] font-black uppercase tracking-[0.2em] ml-2 text-slate-400">Email Address</label>
+                <input type="email" name="email" required placeholder="john@example.com" class="input-style w-full p-4 rounded-2xl outline-none focus:border-blue-500 transition-all dark:text-white text-sm">
+            </div>
+        </div>
+
+        <div class="space-y-2">
+            <label class="text-[10px] font-black uppercase tracking-[0.2em] ml-2 text-slate-400">Subject</label>
+            <select name="subject" class="input-style w-full p-4 rounded-2xl outline-none focus:border-blue-500 transition-all dark:text-white text-sm appearance-none cursor-pointer">
+                <option>General Inquiry</option>
+                <option>Report a Bug</option>
+                <option>Feature Suggestion</option>
+                <option>Business Collaboration</option>
+            </select>
+        </div>
+
+        <div class="space-y-2">
+            <label class="text-[10px] font-black uppercase tracking-[0.2em] ml-2 text-slate-400">Your Message</label>
+            <textarea name="message" rows="5" required placeholder="How can we help you?" class="input-style w-full p-4 rounded-2xl outline-none focus:border-blue-500 transition-all dark:text-white text-sm"></textarea>
+        </div>
+
+        <!-- This will show a success page provided by Web3Forms -->
+        <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-black py-5 rounded-2xl transition-all shadow-xl shadow-blue-500/20 uppercase text-xs tracking-[0.2em] active:scale-95">
+            Send Message
+        </button>
+    </form>
+</div>
 
             <!-- Justified Policy Note -->
             <div class="mt-12 text-slate-500 dark:text-slate-500 text-xs md:text-sm text-justify-custom leading-relaxed px-4">
